@@ -10,17 +10,114 @@
 </html><!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta name="google-site-verification" content="nMJ5JAtloYeBkZc1otuPR29dwUwiisKEdMpxsdjNi4Q" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KIRIKOU CRÉATION | Sèvis Carte, PayPal & Rechaj</title>
   <!-- Google Fonts & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* ==================== INTRO ANIMATION STYLES ==================== */
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      background: radial-gradient(circle at center, #1b2838 0%, #0d131d 50%, #05080c 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .intro-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Logo animation */
+    .intro-logo {
+      width: clamp(90px, 20vw, 130px);
+      height: clamp(90px, 20vw, 130px);
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #25D366;
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.5);
+      opacity: 0;
+      transform: scale(0.7);
+      animation: logoIntro 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes logoIntro {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+        box-shadow: 0 0 0px rgba(37, 211, 102, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
+      }
+    }
+
+    /* Text Brand animation */
+    .intro-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 6vw, 3.5rem);
+      font-weight: 900;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      letter-spacing: 1.5px;
+    }
+
+    .intro-title .word-kirikou {
+      color: #FFFFFF;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: textFadeIn 0.8s ease-out 0.6s forwards;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    .intro-title .word-creation {
+      color: #25D366;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: textFadeIn 0.8s ease-out 1.1s forwards;
+      text-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+    }
+
+    @keyframes textFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #intro-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* ==================== RESET & GLOBAL ==================== */
     * {
       box-sizing: border-box;
@@ -52,6 +149,20 @@
       text-align: center;
       margin-bottom: 30px;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo wotonn anlè Kirikou Création */
+    .header-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 3px solid #25D366;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
     }
 
     header h1 {
@@ -378,6 +489,10 @@
     }
 
     @media (max-width: 480px) {
+      .header-logo {
+        width: 80px;
+        height: 80px;
+      }
       header h1 {
         font-size: 1.8rem;
       }
@@ -390,13 +505,29 @@
       .card {
         padding: 20px 15px;
       }
+      .intro-title {
+        gap: 8px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- ================= ANIMATION D'INTRO STREAMING PREMIUM ================= -->
+  <div id="intro-overlay">
+    <div class="intro-content">
+      <img src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg" alt="KIRIKOU CRÉATION Logo" class="intro-logo">
+      <div class="intro-title">
+        <span class="word-kirikou">KIRIKOU</span>
+        <span class="word-creation">CRÉATION</span>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <header>
+      <!-- Logo an wotonn (en rond) anlè Kirikou Création -->
+      <img src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg" alt="KIRIKOU CRÉATION Logo" class="header-logo">
       <h1>KIRIKOU <span>CRÉATION</span></h1>
       <p>CARTE MÉRU, PAYPAL & RECHARGE PAIEMENT</p>
     </header>
@@ -630,4 +761,264 @@
             </div>
 
             <div class="calc-box">
-              <div><span>Montant:</span> <span id="rech
+              <div><span>Montant:</span> <span id="rech-paypal-subtotal">0 HTG</span></div>
+              <div><span>Frais:</span> <span id="rech-paypal-fee">0 HTG</span></div>
+              <div class="total"><span>TOTAL À PAYER:</span> <span id="rech-paypal-total">0 HTG</span></div>
+            </div>
+
+            <div class="natcash-box">
+              <div class="natcash-title">Paiement par NatCash</div>
+              <div class="natcash-number">+509 40414694</div>
+              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>
+            </div>
+
+            <button type="button" class="btn-submit" id="btn-rech-paypal" disabled>
+              <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; KIRIKOU CRÉATION. Tous droits réservés. Vos informations personnelles sont traitées de manière sécurisée et ne sont pas conservées sur le serveur.</p>
+    </footer>
+  </div>
+
+  <script>
+    const WHATSAPP_RECEIVER = "50932694670";
+
+    /* ==================== ANIMATION INTRO LOGIC ==================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      const introOverlay = document.getElementById('intro-overlay');
+
+      // Yon fwa tout animation yo fin parèt (Lògo + Tèks) nan apeprè 1.9 segond, 
+      // nou kite li rete an plas pandan 4 segond konplè anvan fade-out la fèt.
+      setTimeout(() => {
+        introOverlay.classList.add('fade-out');
+        setTimeout(() => {
+          introOverlay.style.display = 'none';
+        }, 1000); // 1 segond pou fade-out a fini nèt
+      }, 5900);
+
+      // Initialisation des services
+      initService('req-meru', 'meru-dob', 'meru-age-msg', 'btn-meru', 'MERU');
+      initService('req-paypal', 'paypal-dob', 'paypal-age-msg', 'btn-paypal', 'PAYPAL');
+      initRechargeService('meru', 145);
+      initRechargeService('paypal', 146);
+    });
+
+    /* ==================== NAVEGASYON ANNDAN DOSYE ==================== */
+    function openFolder(folderId) {
+      document.getElementById('main-grid').style.display = 'none';
+      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));
+      document.getElementById(folderId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBack() {
+      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));
+      document.getElementById('main-grid').style.display = 'grid';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ==================== AGE VERIFICATION ==================== */
+    function verifierAgeExact(strDob) {
+      const regexDob = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+      const match = strDob.match(regexDob);
+      if (!match) return { status: "INVALID_FORMAT" };
+
+      const day = parseInt(match[1], 10);
+      const month = parseInt(match[2], 10) - 1;
+      const year = parseInt(match[3], 10);
+      const birthDate = new Date(year, month, day);
+
+      if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {
+        return { status: "INVALID_DATE" };
+      }
+
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age >= 18 ? { status: "OK", age: age } : { status: "UNDERAGE", age: age };
+    }
+
+    function autoFormatDob(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 8) value = value.substring(0, 8);
+
+      if (value.length > 4) {
+        e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4);
+      } else if (value.length > 2) {
+        e.target.value = value.substring(0, 2) + '/' + value.substring(2);
+      } else {
+        e.target.value = value;
+      }
+    }
+
+    function validerFormulaire(reqClass, dobId, msgId, btnId) {
+      const inputs = document.querySelectorAll('.' + reqClass);
+      const dobInput = document.getElementById(dobId);
+      const msgElem = document.getElementById(msgId);
+      const btn = document.getElementById(btnId);
+
+      let toutRempli = true;
+      inputs.forEach(input => {
+        if (input.value.trim() === '') toutRempli = false;
+      });
+
+      const valDob = dobInput.value.trim();
+      let ageValide = false;
+
+      if (valDob === '') {
+        msgElem.textContent = '';
+        msgElem.className = 'age-msg';
+      } else if (valDob.length < 10) {
+        msgElem.textContent = '❌ Date de naissance incorrecte.';
+        msgElem.className = 'age-msg msg-error';
+      } else {
+        const res = verifierAgeExact(valDob);
+        if (res.status === "OK") {
+          msgElem.textContent = '✅ Âge vérifié — Vous pouvez continuer.';
+          msgElem.className = 'age-msg msg-success';
+          ageValide = true;
+        } else if (res.status === "UNDERAGE") {
+          msgElem.textContent = '❌ Incorrect — Vous devez avoir 18 ans ou plus.';
+          msgElem.className = 'age-msg msg-error';
+        } else {
+          msgElem.textContent = '❌ Date de naissance incorrecte.';
+          msgElem.className = 'age-msg msg-error';
+        }
+      }
+
+      btn.disabled = !(toutRempli && ageValide);
+    }
+
+    function initService(reqClass, dobId, msgId, btnId, serviceType) {
+      const inputs = document.querySelectorAll('.' + reqClass);
+      const dobInput = document.getElementById(dobId);
+
+      dobInput.addEventListener('input', (e) => {
+        autoFormatDob(e);
+        validerFormulaire(reqClass, dobId, msgId, btnId);
+      });
+
+      inputs.forEach(input => {
+        input.addEventListener('input', () => validerFormulaire(reqClass, dobId, msgId, btnId));
+        input.addEventListener('change', () => validerFormulaire(reqClass, dobId, msgId, btnId));
+      });
+
+      document.getElementById(btnId).addEventListener('click', () => {
+        if (document.getElementById(btnId).disabled) return;
+        let prefix = serviceType === 'MERU' ? 'meru-' : 'paypal-';
+        const nom = document.getElementById(prefix + 'nom').value.trim();
+        const prenom = document.getElementById(prefix + 'prenom').value.trim();
+        const email = document.getElementById(prefix + 'email').value.trim();
+        const password = document.getElementById(prefix + 'password').value.trim();
+        const dob = document.getElementById(prefix + 'dob').value.trim();
+        const phone = document.getElementById(prefix + 'phone').value.trim();
+        const doc = document.getElementById(prefix + 'doc').value;
+
+        let message = serviceType === 'MERU' ?
+          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander une Carte MÉRU Visa Virtuelle.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 2 000 HTG\nBonus : 5 $ USD sur la carte\n\nPaiement : NatCash (+509 40414694)` :
+          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander la création d’un compte PayPal.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 1 500 HTG\n\nPaiement : NatCash (+509 40414694)`;
+
+        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');
+      });
+    }
+
+    /* ==================== LOGIQUE RECHARGE (MÉRU / PAYPAL) ==================== */
+    function calculerFraisUsd(amount) {
+      if (amount <= 0) return 0;
+      return Math.ceil(amount / 10);
+    }
+
+    function updateRechargeCalc(type, rate) {
+      const amount = parseFloat(document.getElementById(`rech-${type}-amount`).value) || 0;
+      const subtotalElem = document.getElementById(`rech-${type}-subtotal`);
+      const feeElem = document.getElementById(`rech-${type}-fee`);
+      const totalElem = document.getElementById(`rech-${type}-total`);
+
+      if (amount > 0 && amount <= 1000) {
+        const feeUsd = calculerFraisUsd(amount);
+        const subtotalHtg = amount * rate;
+        const feeHtg = feeUsd * rate;
+        const totalHtg = subtotalHtg + feeHtg;
+
+        subtotalElem.textContent = `${subtotalHtg.toLocaleString('fr-FR')} HTG`;
+        feeElem.textContent = `${feeHtg.toLocaleString('fr-FR')} HTG (${feeUsd}$)`;
+        totalElem.textContent = `${totalHtg.toLocaleString('fr-FR')} HTG`;
+      } else {
+        subtotalElem.textContent = '0 HTG';
+        feeElem.textContent = '0 HTG';
+        totalElem.textContent = '0 HTG';
+      }
+    }
+
+    function initRechargeService(type, rate) {
+      const reqClass = `req-rech-${type}`;
+      const btnId = `btn-rech-${type}`;
+      const inputs = document.querySelectorAll('.' + reqClass);
+      const amountInput = document.getElementById(`rech-${type}-amount`);
+
+      const validate = () => {
+        let ok = true;
+        inputs.forEach(input => {
+          if (input.value.trim() === '') ok = false;
+        });
+        const amt = parseFloat(amountInput.value);
+        if (isNaN(amt) || amt <= 0 || amt > 1000) ok = false;
+
+        document.getElementById(btnId).disabled = !ok;
+        updateRechargeCalc(type, rate);
+      };
+
+      inputs.forEach(input => {
+        input.addEventListener('input', validate);
+        input.addEventListener('change', validate);
+      });
+
+      document.getElementById(btnId).addEventListener('click', () => {
+        if (document.getElementById(btnId).disabled) return;
+        const amount = parseFloat(amountInput.value);
+        const email = document.getElementById(`rech-${type}-email`).value.trim();
+        const phone = document.getElementById(`rech-${type}-phone`).value.trim();
+        const feeUsd = calculerFraisUsd(amount);
+        const totalHtg = (amount + feeUsd) * rate;
+
+        let message = "";
+        if (type === 'meru') {
+          const tag = document.getElementById('rech-meru-tag').value.trim();
+          message = `Bonjour KIRIKOU CRÉATION,\n\n` +
+                    `Je souhaite faire une RECHARGE MÉRU.\n\n` +
+                    `Montant : ${amount} $ USD\n` +
+                    `Email Méru : ${email}\n` +
+                    `$merutag : ${tag}\n` +
+                    `Tel : ${phone}\n\n` +
+                    `Taux : 1$ = ${rate} HTG\n` +
+                    `Frais : ${feeUsd} $ USD (${feeUsd * rate} HTG)\n` +
+                    `Total à payer par NatCash : ${totalHtg.toLocaleString('fr-FR')} HTG\n\n` +
+                    `Paiement : NatCash (+509 40414694)`;
+        } else {
+          message = `Bonjour KIRIKOU CRÉATION,\n\n` +
+                    `Je souhaite faire une RECHARGE PAYPAL.\n\n` +
+                    `Montant : ${amount} $ USD\n` +
+                    `Email PayPal : ${email}\n` +
+                    `Tel : ${phone}\n\n` +
+                    `Taux : 1$ = ${rate} HTG\n` +
+                    `Frais : ${feeUsd} $ USD (${feeUsd * rate} HTG)\n` +
+                    `Total à payer par NatCash : ${totalHtg.toLocaleString('fr-FR')} HTG\n\n` +
+                    `Paiement : NatCash (+509 40414694)`;
+        }
+
+        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');
+      });
+    }
+  </script>
+</body>
+</html>
