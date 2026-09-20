@@ -15,6 +15,7 @@ function parseCookies(cookieHeader = "") {
 
   cookieHeader.split(";").forEach((cookie) => {
     const [name, ...rest] = cookie.trim().split("=");
+
     if (name) {
       cookies[name] = rest.join("=");
     }
@@ -24,22 +25,36 @@ function parseCookies(cookieHeader = "") {
 }
 
 function validSession(req, token) {
-  const cookies = parseCookies(req.headers.cookie);
+  const cookies = parseCookies(
+    req.headers.cookie || ""
+  );
+
   const session = cookies[COOKIE_NAME];
 
-  if (!session) return false;
+  if (!session) {
+    return false;
+  }
 
   const parts = session.split(".");
-  if (parts.length !== 2) return false;
+
+  if (parts.length !== 2) {
+    return false;
+  }
 
   const [timestamp, signature] = parts;
+
   const time = Number(timestamp);
 
-  if (!Number.isFinite(time)) return false;
+  if (!Number.isFinite(time)) {
+    return false;
+  }
 
-  if (Date.now() - time > SESSION_DURATION) return false;
+  if (Date.now() - time > SESSION_DURATION) {
+    return false;
+  }
 
-  const expectedSignature = createSignature(timestamp, token);
+  const expectedSignature =
+    createSignature(timestamp, token);
 
   try {
     return crypto.timingSafeEqual(
@@ -52,41 +67,80 @@ function validSession(req, token) {
 }
 
 module.exports = async (req, res) => {
+
   const token = process.env.ADMIN_TOKEN;
 
   if (!token) {
     return res.status(500).json({
       success: false,
-      message: "ADMIN_TOKEN n'est pas configuré sur Vercel."
+      message:
+        "ADMIN_TOKEN n'est pas configuré sur Vercel."
     });
   }
 
-  // Vérifier la session
+  res.setHeader(
+    "Cache-Control",
+    "no-store"
+  );
+
+
+  // =========================
+  // VÉRIFIER LA SESSION
+  // =========================
+
   if (req.method === "GET") {
-    const authenticated = validSession(req, token);
 
     return res.status(200).json({
-      authenticated
+      authenticated: validSession(req, token)
     });
+
   }
 
-  // Connexion
+
+  // =========================
+  // CONNEXION ADMIN
+  // =========================
+
   if (req.method === "POST") {
+
     try {
-      const { username, password } =
+
+      const body =
         typeof req.body === "string"
           ? JSON.parse(req.body)
           : req.body || {};
 
-      if (username !== "admin" || password !== token) {
+      const username =
+        typeof body.username === "string"
+          ? body.username.trim()
+          : "";
+
+      const password =
+        typeof body.password === "string"
+          ? body.password
+          : "";
+
+      if (
+        username !== "admin" ||
+        password !== token
+      ) {
+
         return res.status(401).json({
           success: false,
-          message: "Identifiant ou mot de passe incorrect."
+          message:
+            "ADMIN_TOKEN incorrect."
         });
+
       }
 
-      const timestamp = Date.now().toString();
-      const signature = createSignature(timestamp, token);
+      const timestamp =
+        Date.now().toString();
+
+      const signature =
+        createSignature(
+          timestamp,
+          token
+        );
 
       const isHttps =
         req.headers["x-forwarded-proto"] === "https" ||
@@ -103,23 +157,41 @@ module.exports = async (req, res) => {
         .filter(Boolean)
         .join("; ");
 
-      res.setHeader("Set-Cookie", cookie);
-      res.setHeader("Cache-Control", "no-store");
+      res.setHeader(
+        "Set-Cookie",
+        cookie
+      );
 
       return res.status(200).json({
         success: true,
-        message: "Connexion réussie."
+        message:
+          "Connexion réussie."
       });
-    } catch {
+
+    } catch (error) {
+
+      console.error(
+        "LOGIN ERROR:",
+        error
+      );
+
       return res.status(400).json({
         success: false,
-        message: "Requête invalide."
+        message:
+          "Requête invalide."
       });
+
     }
+
   }
 
-  // Déconnexion
+
+  // =========================
+  // DÉCONNEXION
+  // =========================
+
   if (req.method === "DELETE") {
+
     res.setHeader(
       "Set-Cookie",
       `${COOKIE_NAME}=; HttpOnly; Path=/; SameSite=Strict; Max-Age=0`
@@ -128,12 +200,19 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       success: true
     });
+
   }
 
-  res.setHeader("Allow", ["GET", "POST", "DELETE"]);
+
+  res.setHeader(
+    "Allow",
+    ["GET", "POST", "DELETE"]
+  );
 
   return res.status(405).json({
     success: false,
-    message: "Méthode non autorisée."
+    message:
+      "Méthode non autorisée."
   });
+
 };
