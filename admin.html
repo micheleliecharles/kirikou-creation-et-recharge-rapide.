@@ -1,391 +1,1065 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Admin Login - KIRIKOU CRÉATION</title>
+<title>Administration - KIRIKOU CRÉATION ET RECHARGE RAPIDE</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#0f1115;
+    --card:#181b20;
+    --hover:#22262e;
+    --border:#2a2e37;
+    --green:#10b981;
+    --green2:#059669;
+    --text:#f3f4f6;
+    --muted:#9ca3af;
+    --red:#ef4444;
+    --orange:#f59e0b;
+    --blue:#3b82f6;
+    --purple:#8b5cf6;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:Poppins,sans-serif;
+}
+
+/* ================= LOGIN ================= */
+
+#login-wrapper{
+    position:fixed;
+    inset:0;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at center,#17251f 0%,#0f1115 65%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    background:#181b20;
+    border:1px solid #2a2e37;
+    border-radius:20px;
+    padding:38px;
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.55),
+        0 0 30px rgba(16,185,129,.12);
+}
+
+.login-logo{
+    width:72px;
+    height:72px;
+    margin:0 auto 15px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#10b981,#059669);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 30px rgba(16,185,129,.25);
+}
+
+.login-logo i{
+    font-size:31px;
+    color:white;
+}
+
+.login-header{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.login-header h1{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.login-header p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.form-group{
+    margin-bottom:19px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#d1d5db;
+    font-size:14px;
+    font-weight:600;
+}
+
+.input-wrapper{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#6b7280;
+}
+
+.form-control{
+    width:100%;
+    background:#0f1115;
+    border:1px solid #2a2e37;
+    color:white;
+    padding:14px 45px;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+}
+
+.form-control:focus{
+    border-color:var(--green);
+    box-shadow:0 0 0 3px rgba(16,185,129,.12);
+}
+
+.toggle-password{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#777;
+    cursor:pointer;
+}
+
+.btn-primary{
+    width:100%;
+    border:none;
+    border-radius:10px;
+    padding:14px;
+    background:linear-gradient(135deg,#10b981,#059669);
+    color:#00150d;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.btn-primary:hover{
+    filter:brightness(1.08);
+}
+
+.btn-primary:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.alert-error{
+    display:none;
+    background:rgba(239,68,68,.1);
+    border:1px solid rgba(239,68,68,.5);
+    color:#fca5a5;
+    padding:12px;
+    border-radius:9px;
+    margin-bottom:18px;
+    text-align:center;
+    font-size:13px;
+}
+
+.security-banner{
+    margin-top:22px;
+    padding:14px;
+    border:1px solid rgba(16,185,129,.2);
+    background:rgba(16,185,129,.07);
+    color:#9dd8c4;
+    border-radius:10px;
+    font-size:12px;
+    line-height:1.6;
+}
+
+/* ================= ADMIN ================= */
+
+#admin-app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:260px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:var(--card);
+    border-right:1px solid var(--border);
+    z-index:1000;
+    transition:.3s;
+}
+
+.sidebar-brand{
+    padding:22px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.sidebar-brand .brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#10b981,#059669);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.sidebar-brand .brand-icon i{
+    color:#fff;
+}
+
+.sidebar-brand h3{
+    font-size:14px;
+    line-height:1.25;
+}
+
+.sidebar-brand span{
+    color:var(--green);
+    font-size:10px;
+}
+
+.sidebar-menu{
+    padding:18px 0;
+}
+
+.menu-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 22px;
+    color:#9ca3af;
+    cursor:pointer;
+    border-left:4px solid transparent;
+    transition:.2s;
+}
+
+.menu-item:hover{
+    background:var(--hover);
+    color:white;
+}
+
+.menu-item.active{
+    background:var(--hover);
+    color:var(--green);
+    border-left-color:var(--green);
+}
+
+.menu-item i{
+    width:20px;
+    text-align:center;
+}
+
+.main-content{
+    margin-left:260px;
+    padding:28px;
+    min-height:100vh;
+}
+
+.top-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--border);
+}
+
+.page-title h1{
+    font-size:25px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.admin-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:7px 13px;
+    border-radius:30px;
+}
+
+.avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--green);
+    color:#00150d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:700;
+}
+
+.logout-btn{
+    border:none;
+    background:transparent;
+    color:#ef4444;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* ================= STATS ================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stat-info h3{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:500;
+}
+
+.stat-info .number{
+    font-size:25px;
+    font-weight:700;
+    margin-top:4px;
+}
+
+.stat-icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.green{
+    background:rgba(16,185,129,.13);
+    color:var(--green);
+}
+
+.orange{
+    background:rgba(245,158,11,.13);
+    color:var(--orange);
+}
+
+.blue{
+    background:rgba(59,130,246,.13);
+    color:var(--blue);
+}
+
+.purple{
+    background:rgba(139,92,246,.13);
+    color:var(--purple);
+}
+
+/* ================= SECTIONS ================= */
+
+.content-section{
+    display:none;
+}
+
+.content-section.active{
+    display:block;
+}
+
+.card-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.box-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.box-header h2{
+    font-size:18px;
+}
+
+.refresh-btn{
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:#ddd;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.table-responsive{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th{
+    color:var(--muted);
+    background:var(--bg);
+    text-align:left;
+    padding:13px;
+    font-size:12px;
+}
+
+td{
+    padding:13px;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+}
+
+.badge{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.badge.pending{
+    background:rgba(245,158,11,.13);
+    color:var(--orange);
+}
+
+.badge.completed{
+    background:rgba(16,185,129,.13);
+    color:var(--green);
+}
+
+.badge.cancelled{
+    background:rgba(239,68,68,.13);
+    color:#ef4444;
+}
+
+.action-btn{
+    border:none;
+    padding:6px 9px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:4px;
+}
+
+.approve{
+    background:rgba(16,185,129,.15);
+    color:var(--green);
+}
+
+.cancel{
+    background:rgba(239,68,68,.15);
+    color:#ef4444;
+}
+
+/* ================= SERVICES ================= */
+
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.service-card{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+}
+
+.service-card h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.service-card p{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.price{
+    margin-top:15px;
+    color:var(--green);
+    font-size:20px;
+    font-weight:700;
+}
+
+/* ================= SETTINGS ================= */
+
+.setting-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:17px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child{
+    border-bottom:none;
+}
+
+.setting-row strong{
+    font-size:14px;
+}
+
+.setting-row span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.status-online{
+    color:var(--green)!important;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+    display:none;
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:900;
+}
+
+@media(max-width:992px){
+
+    .sidebar{
+        transform:translateX(-100%);
     }
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(16,185,129,.15), transparent 35%),
-        #0b0d12;
-      color: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    .sidebar.active{
+        transform:translateX(0);
     }
 
-    .container {
-      width: 100%;
-      max-width: 430px;
+    .overlay.active{
+        display:block;
     }
 
-    .brand {
-      text-align: center;
-      margin-bottom: 25px;
+    .main-content{
+        margin-left:0;
+        padding:18px;
     }
 
-    .logo {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 15px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      font-weight: 700;
-      color: white;
-      box-shadow: 0 0 35px rgba(16,185,129,.25);
+    .mobile-menu{
+        display:block;
     }
 
-    .brand h1 {
-      font-size: 27px;
-      margin-bottom: 5px;
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .brand h1 span {
-      color: #10b981;
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .login-card{
+        padding:25px 20px;
     }
 
-    .brand p {
-      color: #8f96a3;
-      font-size: 14px;
+    .top-header{
+        gap:10px;
     }
 
-    .card {
-      background: rgba(24,27,32,.95);
-      border: 1px solid #292e38;
-      border-radius: 20px;
-      padding: 30px 24px;
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.45),
-        0 0 30px rgba(16,185,129,.05);
+    .page-title h1{
+        font-size:20px;
     }
 
-    .title {
-      text-align: center;
-      margin-bottom: 25px;
+    .admin-profile span{
+        display:none;
     }
 
-    .title .icon {
-      font-size: 38px;
-      margin-bottom: 8px;
+    .stats-grid{
+        grid-template-columns:1fr;
     }
 
-    .title h2 {
-      font-size: 23px;
+    .stat-card{
+        padding:17px;
     }
+}
 
-    .title p {
-      color: #8f96a3;
-      font-size: 13px;
-      margin-top: 5px;
-    }
-
-    .input-box {
-      position: relative;
-      margin-bottom: 18px;
-    }
-
-    .input-box input {
-      width: 100%;
-      height: 58px;
-      padding: 0 48px 0 17px;
-      background: #0e1015;
-      border: 1px solid #2d323c;
-      border-radius: 12px;
-      color: white;
-      font-size: 15px;
-      outline: none;
-      transition: .25s;
-    }
-
-    .input-box input:focus {
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16,185,129,.12);
-    }
-
-    .eye {
-      position: absolute;
-      right: 17px;
-      top: 18px;
-      color: #8f96a3;
-      cursor: pointer;
-      user-select: none;
-      font-size: 20px;
-    }
-
-    button {
-      width: 100%;
-      height: 58px;
-      border: 0;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .25s;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(16,185,129,.20);
-    }
-
-    button:disabled {
-      opacity: .65;
-      cursor: wait;
-      transform: none;
-    }
-
-    .error {
-      display: none;
-      margin-bottom: 18px;
-      padding: 12px;
-      border-radius: 10px;
-      background: rgba(239,68,68,.10);
-      border: 1px solid rgba(239,68,68,.35);
-      color: #fca5a5;
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .success {
-      display: none;
-      margin-bottom: 18px;
-      padding: 12px;
-      border-radius: 10px;
-      background: rgba(16,185,129,.10);
-      border: 1px solid rgba(16,185,129,.35);
-      color: #6ee7b7;
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .security {
-      margin-top: 22px;
-      padding: 14px;
-      border-radius: 12px;
-      background: rgba(16,185,129,.06);
-      border: 1px solid rgba(16,185,129,.15);
-      color: #8fd8bd;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .security strong {
-      color: #10b981;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 18px;
-      color: #606773;
-      font-size: 11px;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
-    <div class="brand">
-      <div class="logo">K</div>
+<div id="login-wrapper">
 
-      <h1>
-        KIRIKOU <span>CRÉATION</span>
-      </h1>
+    <div class="login-card">
 
-      <p>Administration sécurisée</p>
-    </div>
+        <div class="login-header">
 
-    <div class="card">
+            <div class="login-logo">
+                <i class="fa-solid fa-lock"></i>
+            </div>
 
-      <div class="title">
-        <div class="icon">🔐</div>
-        <h2>Admin Login</h2>
-        <p>Entrez votre ADMIN_TOKEN pour continuer</p>
-      </div>
+            <h1>Administration</h1>
 
-      <div id="error" class="error"></div>
-
-      <div id="success" class="success">
-        Connexion réussie. Ouverture du dashboard...
-      </div>
-
-      <form id="loginForm">
-
-        <div class="input-box">
-
-          <input
-            type="password"
-            id="adminToken"
-            placeholder="Entrez votre ADMIN_TOKEN"
-            autocomplete="current-password"
-            required
-          >
-
-          <span
-            class="eye"
-            id="eye"
-            onclick="togglePassword()"
-          >👁️</span>
+            <p>
+                KIRIKOU CRÉATION ET RECHARGE RAPIDE
+            </p>
 
         </div>
 
-        <button type="submit" id="loginButton">
-          ENTRER DANS L'ADMIN
-        </button>
+        <div id="login-error" class="alert-error">
+            Identifiant ou mot de passe incorrect.
+        </div>
 
-      </form>
+        <form id="login-form">
 
-      <div class="security">
-        🔒 <strong>Connexion protégée</strong><br>
-        Votre ADMIN_TOKEN n'est pas enregistré dans cette page.
-        Il est vérifié côté serveur par Vercel.
-      </div>
+            <div class="form-group">
+
+                <label>
+                    Nom d'utilisateur
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-user input-icon"></i>
+
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-control"
+                        value="admin"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Mot de passe
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-key input-icon"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Votre ADMIN_TOKEN"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <i
+                        class="fa-solid fa-eye toggle-password"
+                        id="toggle-password-btn"
+                        onclick="togglePasswordVisibility()">
+                    </i>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn-primary"
+                id="login-btn">
+
+                <span>Se connecter</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+        <div class="security-banner">
+
+            🔐 <strong>Connexion protégée</strong>
+
+            <br><br>
+
+            Le mot de passe n'est pas enregistré
+            dans cette page.
+
+            <br>
+
+            L'accès est vérifié par le serveur
+            avec votre <strong>ADMIN_TOKEN</strong>.
+
+        </div>
 
     </div>
 
-    <div class="footer">
-      © 2026 KIRIKOU CRÉATION ET RECHARGE RAPIDE
-    </div>
-
-  </div>
+</div>
 
 
-<script>
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
 
-  const form = document.getElementById("loginForm");
-  const tokenInput = document.getElementById("adminToken");
-  const button = document.getElementById("loginButton");
-  const errorBox = document.getElementById("error");
-  const successBox = document.getElementById("success");
+<div id="admin-app">
 
-  function togglePassword() {
-    if (tokenInput.type === "password") {
-      tokenInput.type = "text";
-      document.getElementById("eye").textContent = "🙈";
-    } else {
-      tokenInput.type = "password";
-      document.getElementById("eye").textContent = "👁️";
-    }
-  }
+    <div class="overlay" id="overlay"></div>
 
-  function showError(message) {
-    errorBox.textContent = message;
-    errorBox.style.display = "block";
-    successBox.style.display = "none";
-  }
+    <!-- SIDEBAR -->
 
-  form.addEventListener("submit", async function(e) {
+    <aside class="sidebar" id="sidebar">
 
-    e.preventDefault();
+        <div class="sidebar-brand">
 
-    errorBox.style.display = "none";
-    successBox.style.display = "none";
+            <div class="brand-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
 
-    const token = tokenInput.value.trim();
+            <h3>
+                KIRIKOU
+                <br>
+                <span>CRÉATION & RECHARGE</span>
+            </h3>
 
-    if (!token) {
-      showError("Veuillez entrer votre ADMIN_TOKEN.");
-      return;
-    }
+        </div>
 
-    button.disabled = true;
-    button.textContent = "CONNEXION...";
+        <nav class="sidebar-menu">
 
-    try {
+            <div
+                class="menu-item active"
+                onclick="switchTab('dashboard',this)">
 
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          username: "admin",
-          password: token
-        })
-      });
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
 
-      const data = await response.json();
+            </div>
 
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.message || "ADMIN_TOKEN incorrect."
-        );
-      }
+            <div
+                class="menu-item"
+                onclick="switchTab('orders',this)">
 
-      successBox.style.display = "block";
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Commandes</span>
 
-      /*
-        IMPORTANT :
-        Change cette adresse si ton vrai dashboard
-        se trouve dans un autre fichier.
-      */
-      setTimeout(() => {
-        window.location.href = "/admin-dashboard.html";
-      }, 700);
+            </div>
 
-    } catch (error) {
+            <div
+                class="menu-item"
+                onclick="switchTab('clients',this)">
 
-      showError(
-        error.message || "Erreur de connexion."
-      );
+                <i class="fa-solid fa-users"></i>
+                <span>Clients</span>
 
-      button.disabled = false;
-      button.textContent = "ENTRER DANS L'ADMIN";
-    }
+            </div>
 
-  });
+            <div
+                class="menu-item"
+                onclick="switchTab('services',this)">
+
+                <i class="fa-solid fa-tags"></i>
+                <span>Services & Prix</span>
+
+            </div>
+
+            <div
+                class="menu-item"
+                onclick="switchTab('settings',this)">
+
+                <i class="fa-solid fa-gear"></i>
+                <span>Paramètres</span>
+
+            </div>
+
+        </nav>
+
+    </aside>
 
 
-  // Vérifie si une session existe déjà
-  async function checkSession() {
+    <!-- MAIN -->
 
-    try {
+    <main class="main-content">
 
-      const response = await fetch("/api/login", {
-        method: "GET",
-        credentials: "include",
-        cache: "no-store"
-      });
+        <header class="top-header">
 
-      const data = await response.json();
+            <div style="display:flex;align-items:center;gap:15px">
 
-      if (data.authenticated === true) {
-        window.location.href = "/admin-dashboard.html";
-      }
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
 
-    } catch (error) {
-      console.log("Session non disponible.");
-    }
+                    <i class="fa-solid fa-bars"></i>
 
-  }
+                </button>
 
-  checkSession();
+                <div class="page-title">
 
-</script>
+                    <h1 id="page-title">
+                        Dashboard
+                    </h1>
 
-</body>
-</html>
+                    <p>
+                        Administration de votre activité
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="avatar">
+                    A
+                </div>
+
+                <span>Administrateur</span>
+
+                <button
+                    class="logout-btn"
+                    onclick="logoutAdmin()">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================= -->
+
+        <section
+            id="dashboard"
+            class="content-section active">
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <h3>Total Clients</h3>
+
+                        <div
+                            class="number"
+                            id="total-clients">
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <h3>Total Commandes</h3>
+
+                        <div
+                            class="number"
+                            id="total-orders">
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <h3>En attente</h3>
+
+                        <div
+                            class="number"
+                            id="pending-orders">
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-info">
+
+                        <h3>Ventes totales</h3>
+
+                        <div
+                            class="number"
+                            id="total-sales">
+                            0 HTG
+                        </div>
+
+                    </div>
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-box">
+
+                <div class="box-header">
+
+                    <h2>
+                        <i class="fa-solid fa-bell"></i>
+                        Activité récente
+                    </h2>
+
+                    <button
+                        class="refresh-btn"
+                        onclick="loadOrders()">
+
+                        <i class="fa-solid fa-rotate"></i>
+                        Actualiser
+
+                    </button>
+
+                </div>
+
+                <div id="recent-orders">
+
+                    <p style="color:#9ca3af">
+                        Chargement des commandes...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COMMANDES
+        ================================================= -->
+
+        <section
+            id="orders"
+            class="content-section">
+
+            <div class="card-box">
+
+                <div class="box-header">
+
+                    <h2>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Toutes les commandes
+                    </h2>
+
+                    <button
+                        class="refresh-btn"
+                        onclick="loadOrders()">
+
+                        <i class="fa-solid fa-rotate"></i>
+                        Actualiser
+
+                    </button>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Client</th>
+                                <th>Téléphone</th>
+                                <th>Service</th>
+                                <th>Montant</th>
+                                <th>Date</th>
+              
