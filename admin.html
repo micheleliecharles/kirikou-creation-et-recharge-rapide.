@@ -4,1753 +4,387 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Administration - KIRIKOU CRÉATION</title>
+  <title>Admin Login - KIRIKOU CRÉATION</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    :root {
-      --bg: #0d0f13;
-      --card: #171a1f;
-      --card2: #1d2127;
-      --border: #292e36;
-      --text: #f5f7fa;
-      --muted: #969da8;
-      --green: #18c995;
-      --green2: #0d9f77;
-      --blue: #367ff0;
-      --purple: #8757ef;
-      --orange: #f2a900;
-      --red: #ef4650;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
-      font-family: "Poppins", sans-serif;
-      background: var(--bg);
-      color: var(--text);
       min-height: 100vh;
-    }
-
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    /* ================= LOGIN ================= */
-
-    #login-wrapper {
-      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(16,185,129,.15), transparent 35%),
+        #0b0d12;
+      color: #f5f5f5;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background:
-        radial-gradient(circle at top right, rgba(24,201,149,.13), transparent 35%),
-        radial-gradient(circle at bottom left, rgba(54,127,240,.10), transparent 35%),
-        var(--bg);
     }
 
-    .login-card {
+    .container {
       width: 100%;
-      max-width: 420px;
-      background: rgba(23,26,31,.96);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.45);
-    }
-
-    .login-logo {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 18px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #19d39d, #087c60);
-      color: white;
-      font-size: 32px;
-      font-weight: 800;
-      box-shadow: 0 10px 35px rgba(24,201,149,.2);
-    }
-
-    .login-card h1 {
-      text-align: center;
-      font-size: 25px;
-      margin-bottom: 7px;
-    }
-
-    .login-card .subtitle {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 28px;
-    }
-
-    .input-group {
-      margin-bottom: 17px;
-    }
-
-    .input-group label {
-      display: block;
-      color: #c8cdd5;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .input-group input {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: #101216;
-      color: white;
-      padding: 14px 15px;
-      border-radius: 12px;
-      outline: none;
-      transition: .2s;
-    }
-
-    .input-group input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(24,201,149,.08);
-    }
-
-    .login-btn {
-      width: 100%;
-      border: 0;
-      padding: 14px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      transition: .2s;
-    }
-
-    .login-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    .login-btn:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    #login-error {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      background: rgba(239,70,80,.10);
-      border: 1px solid rgba(239,70,80,.3);
-      color: #ff8e95;
-      font-size: 13px;
-      text-align: center;
-    }
-
-    .security-note {
-      margin-top: 20px;
-      padding: 12px;
-      border-radius: 10px;
-      background: rgba(24,201,149,.06);
-      border: 1px solid rgba(24,201,149,.15);
-      color: #9ad9c5;
-      font-size: 11px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    /* ================= ADMIN APP ================= */
-
-    #admin-app {
-      display: none;
-      min-height: 100vh;
-    }
-
-    .topbar {
-      height: 74px;
-      position: fixed;
-      left: 260px;
-      right: 0;
-      top: 0;
-      z-index: 50;
-      background: rgba(13,15,19,.94);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .menu-mobile {
-      display: none;
-      border: 0;
-      background: transparent;
-      color: white;
-      font-size: 28px;
-    }
-
-    .page-title {
-      font-size: 21px;
-      font-weight: 700;
-    }
-
-    .admin-profile {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 7px 13px 7px 7px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: #171a1f;
-    }
-
-    .avatar {
-      width: 39px;
-      height: 39px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #05281e;
-      font-weight: 800;
-    }
-
-    .profile-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .sidebar {
-      position: fixed;
-      width: 260px;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 100;
-      background: #101216;
-      border-right: 1px solid var(--border);
-      padding: 25px 16px;
+      max-width: 430px;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 10px 27px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 22px;
-    }
-
-    .brand-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color: white;
-      font-weight: 800;
-      font-size: 20px;
-    }
-
-    .brand strong {
-      font-size: 15px;
-      line-height: 1.25;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 3px;
-    }
-
-    .nav-label {
-      color: #646b75;
-      font-size: 10px;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin: 20px 11px 8px;
-    }
-
-    .nav-item {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      color: #9ba1aa;
-      text-align: left;
-      padding: 12px 13px;
-      border-radius: 11px;
-      margin-bottom: 4px;
-      font-size: 13px;
-      font-weight: 500;
-      transition: .2s;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-      color: white;
-      background: rgba(24,201,149,.10);
-    }
-
-    .nav-item.active {
-      box-shadow: inset 3px 0 0 var(--green);
-    }
-
-    .logout-btn {
-      color: #ff777f;
-    }
-
-    .logout-btn:hover {
-      background: rgba(239,70,80,.08);
-    }
-
-    .main {
-      margin-left: 260px;
-      padding: 105px 28px 40px;
-      max-width: 1500px;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    /* ================= DASHBOARD ================= */
-
-    .warning {
-      border-left: 4px solid var(--red);
-      background: rgba(239,70,80,.09);
-      padding: 17px 18px;
-      border-radius: 8px;
-      margin-bottom: 35px;
-      color: #ff9da2;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .warning strong {
-      font-size: 14px;
-      color: #ffb0b5;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 23px;
-      min-height: 145px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .stat-card.pending {
-      border-color: rgba(24,201,149,.3);
-    }
-
-    .stat-label {
-      color: #9299a4;
-      font-size: 14px;
-      margin-bottom: 7px;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-    }
-
-    .stat-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-    }
-
-    .blue {
-      color: #4388ff;
-      background: rgba(54,127,240,.17);
-    }
-
-    .purple {
-      color: #9b6cff;
-      background: rgba(135,87,239,.16);
-    }
-
-    .orange {
-      color: #ffb000;
-      background: rgba(242,169,0,.16);
-    }
-
-    .green {
-      color: #17d09a;
-      background: rgba(24,201,149,.14);
-    }
-
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 25px;
+      text-align: center;
       margin-bottom: 25px;
     }
 
-    .panel-header {
+    .logo {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 15px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #10b981, #059669);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .panel-header h2 {
-      font-size: 20px;
-    }
-
-    .view-btn {
-      border: 0;
-      background: rgba(54,127,240,.16);
-      color: #5792ff;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-
-    /* ================= TABLE ================= */
-
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th {
-      text-align: left;
-      padding: 13px 15px;
-      background: #101216;
-      color: #aeb4bd;
-      font-size: 12px;
-    }
-
-    td {
-      padding: 15px;
-      border-bottom: 1px solid var(--border);
-      color: #d7dae0;
-      font-size: 13px;
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 6px 11px;
-      border-radius: 20px;
-      font-size: 11px;
+      justify-content: center;
+      font-size: 34px;
       font-weight: 700;
+      color: white;
+      box-shadow: 0 0 35px rgba(16,185,129,.25);
     }
 
-    .status.pending {
-      color: #ffc22d;
-      background: rgba(242,169,0,.13);
-    }
-
-    .status.done {
-      color: #18cf9c;
-      background: rgba(24,201,149,.13);
-    }
-
-    .status.cancelled {
-      color: #ff737c;
-      background: rgba(239,70,80,.12);
-    }
-
-    /* ================= PAGE HEADER ================= */
-
-    .page-header {
-      margin-bottom: 24px;
-    }
-
-    .page-header h1 {
-      font-size: 25px;
+    .brand h1 {
+      font-size: 27px;
       margin-bottom: 5px;
     }
 
-    .page-header p {
-      color: var(--muted);
+    .brand h1 span {
+      color: #10b981;
+    }
+
+    .brand p {
+      color: #8f96a3;
+      font-size: 14px;
+    }
+
+    .card {
+      background: rgba(24,27,32,.95);
+      border: 1px solid #292e38;
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.45),
+        0 0 30px rgba(16,185,129,.05);
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .title .icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .title h2 {
+      font-size: 23px;
+    }
+
+    .title p {
+      color: #8f96a3;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 58px;
+      padding: 0 48px 0 17px;
+      background: #0e1015;
+      border: 1px solid #2d323c;
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      outline: none;
+      transition: .25s;
+    }
+
+    .input-box input:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,.12);
+    }
+
+    .eye {
+      position: absolute;
+      right: 17px;
+      top: 18px;
+      color: #8f96a3;
+      cursor: pointer;
+      user-select: none;
+      font-size: 20px;
+    }
+
+    button {
+      width: 100%;
+      height: 58px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(16,185,129,.20);
+    }
+
+    button:disabled {
+      opacity: .65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .error {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(239,68,68,.10);
+      border: 1px solid rgba(239,68,68,.35);
+      color: #fca5a5;
+      text-align: center;
       font-size: 13px;
     }
 
-    /* ================= CARDS ================= */
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .success {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(16,185,129,.10);
+      border: 1px solid rgba(16,185,129,.35);
+      color: #6ee7b7;
+      text-align: center;
+      font-size: 13px;
     }
 
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-    }
-
-    .info-card h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .info-card p {
-      color: var(--muted);
+    .security {
+      margin-top: 22px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(16,185,129,.06);
+      border: 1px solid rgba(16,185,129,.15);
+      color: #8fd8bd;
       font-size: 12px;
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
-    /* ================= SETTINGS ================= */
-
-    .settings-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+    .security strong {
+      color: #10b981;
     }
 
-    .setting-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-    }
-
-    .setting-box h3 {
-      margin-bottom: 17px;
-      font-size: 16px;
-    }
-
-    .setting-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    .setting-row:last-child {
-      border-bottom: 0;
-    }
-
-    .setting-value {
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 1000px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .cards-grid,
-      .settings-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: .25s;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .topbar {
-        left: 0;
-        padding: 0 15px;
-      }
-
-      .menu-mobile {
-        display: block;
-      }
-
-      .main {
-        margin-left: 0;
-        padding: 95px 14px 30px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-
-      .stat-card {
-        min-height: 135px;
-      }
-
-      .profile-name {
-        display: none;
-      }
-
-      .panel {
-        padding: 16px;
-      }
-
-      .warning {
-        font-size: 12px;
-      }
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #606773;
+      font-size: 11px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     LOGIN
-========================================================= -->
+  <div class="container">
 
-<div id="login-wrapper">
+    <div class="brand">
+      <div class="logo">K</div>
 
-  <div class="login-card">
+      <h1>
+        KIRIKOU <span>CRÉATION</span>
+      </h1>
 
-    <div class="login-logo">K</div>
+      <p>Administration sécurisée</p>
+    </div>
 
-    <h1>Administration</h1>
+    <div class="card">
 
-    <p class="subtitle">
-      KIRIKOU CRÉATION ET RECHARGE RAPIDE
-    </p>
-
-    <form id="login-form">
-
-      <div class="input-group">
-        <label for="username">Nom d'utilisateur</label>
-
-        <input
-          type="text"
-          id="username"
-          placeholder="admin"
-          autocomplete="username"
-          required
-        >
+      <div class="title">
+        <div class="icon">🔐</div>
+        <h2>Admin Login</h2>
+        <p>Entrez votre ADMIN_TOKEN pour continuer</p>
       </div>
 
-      <div class="input-group">
-        <label for="password">Mot de passe</label>
+      <div id="error" class="error"></div>
 
-        <input
-          type="password"
-          id="password"
-          placeholder="Votre ADMIN_TOKEN"
-          autocomplete="current-password"
-          required
-        >
+      <div id="success" class="success">
+        Connexion réussie. Ouverture du dashboard...
       </div>
 
-      <button
-        type="submit"
-        class="login-btn"
-        id="login-button"
-      >
-        Se connecter
-      </button>
+      <form id="loginForm">
 
-    </form>
+        <div class="input-box">
 
-    <div id="login-error"></div>
+          <input
+            type="password"
+            id="adminToken"
+            placeholder="Entrez votre ADMIN_TOKEN"
+            autocomplete="current-password"
+            required
+          >
 
-    <div class="security-note">
-      🔐 Connexion protégée par une Serverless Function Vercel.
-      Votre mot de passe n'est pas enregistré dans cette page.
+          <span
+            class="eye"
+            id="eye"
+            onclick="togglePassword()"
+          >👁️</span>
+
+        </div>
+
+        <button type="submit" id="loginButton">
+          ENTRER DANS L'ADMIN
+        </button>
+
+      </form>
+
+      <div class="security">
+        🔒 <strong>Connexion protégée</strong><br>
+        Votre ADMIN_TOKEN n'est pas enregistré dans cette page.
+        Il est vérifié côté serveur par Vercel.
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 KIRIKOU CRÉATION ET RECHARGE RAPIDE
     </div>
 
   </div>
 
-</div>
-
-
-<!-- =========================================================
-     ADMIN APP
-========================================================= -->
-
-<div id="admin-app">
-
-  <!-- SIDEBAR -->
-
-  <aside class="sidebar" id="sidebar">
-
-    <div class="brand">
-      <div class="brand-icon">K</div>
-
-      <div>
-        <strong>KIRIKOU CRÉATION</strong>
-        <small>Administration</small>
-      </div>
-    </div>
-
-    <div class="nav-label">Menu principal</div>
-
-    <button class="nav-item active" data-section="dashboard">
-      🏠 &nbsp; Dashboard
-    </button>
-
-    <button class="nav-item" data-section="commandes">
-      🛒 &nbsp; Commandes
-    </button>
-
-    <button class="nav-item" data-section="clients">
-      👥 &nbsp; Clients
-    </button>
-
-    <button class="nav-item" data-section="services">
-      💳 &nbsp; Services
-    </button>
-
-    <div class="nav-label">Configuration</div>
-
-    <button class="nav-item" data-section="settings">
-      ⚙️ &nbsp; Paramètres
-    </button>
-
-    <button class="nav-item logout-btn" id="logout-button">
-      🚪 &nbsp; Déconnexion
-    </button>
-
-  </aside>
-
-
-  <!-- TOP BAR -->
-
-  <header class="topbar">
-
-    <div class="topbar-left">
-
-      <button
-        class="menu-mobile"
-        id="mobile-menu"
-        aria-label="Menu"
-      >
-        ☰
-      </button>
-
-      <div class="page-title" id="page-title">
-        Dashboard
-      </div>
-
-    </div>
-
-    <div class="admin-profile">
-
-      <div class="avatar">A</div>
-
-      <div class="profile-name">
-        Admin Kirikou
-      </div>
-
-    </div>
-
-  </header>
-
-
-  <!-- MAIN -->
-
-  <main class="main">
-
-
-    <!-- =====================================================
-         DASHBOARD
-    ====================================================== -->
-
-    <section
-      id="section-dashboard"
-      class="section active"
-    >
-
-      <div class="warning">
-        🛡️ <strong>Sécurité active :</strong>
-        La connexion administrateur est vérifiée côté serveur
-        avec Vercel Serverless et la variable sécurisée
-        <strong>ADMIN_TOKEN</strong>.
-      </div>
-
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              Total Clients
-            </div>
-
-            <div class="stat-value">
-              4
-            </div>
-          </div>
-
-          <div class="stat-icon blue">
-            👥
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              Total Commandes
-            </div>
-
-            <div class="stat-value">
-              4
-            </div>
-          </div>
-
-          <div class="stat-icon purple">
-            🛒
-          </div>
-
-        </div>
-
-
-        <div class="stat-card pending">
-
-          <div>
-            <div class="stat-label">
-              En Attente
-            </div>
-
-            <div class="stat-value">
-              1
-            </div>
-          </div>
-
-          <div class="stat-icon orange">
-            🕐
-          </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-          <div>
-            <div class="stat-label">
-              Ventes Totales
-            </div>
-
-            <div class="stat-value">
-              4,250 HTG
-            </div>
-          </div>
-
-          <div class="stat-icon green">
-            💰
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ACTIVITÉS -->
-
-      <div class="panel">
-
-        <div class="panel-header">
-
-          <h2>
-            Activités Récentes
-          </h2>
-
-          <button
-            class="view-btn"
-            data-section-button="commandes"
-          >
-            Voir tout
-          </button>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Client</th>
-                <th>Service</th>
-                <th>Montant</th>
-                <th>Statut</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-
-                <td>
-                  Jean Baptiste
-                </td>
-
-                <td>
-                  Création Carte Méru Visa Virtuelle
-                </td>
-
-                <td>
-                  <strong>1500 HTG</strong>
-                </td>
-
-                <td>
-                  <span class="status pending">
-                    En attente
-                  </span>
-                </td>
-
-              </tr>
-
-
-              <tr>
-
-                <td>
-                  Marie Pierre
-                </td>
-
-                <td>
-                  Recharge PayPal
-                </td>
-
-                <td>
-                  <strong>3000 HTG</strong>
-                </td>
-
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-
-              </tr>
-
-
-              <tr>
-
-                <td>
-                  David Joseph
-                </td>
-
-                <td>
-                  Recharge Méru
-                </td>
-
-                <td>
-                  <strong>500 HTG</strong>
-                </td>
-
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-
-              </tr>
-
-
-              <tr>
-
-                <td>
-                  Sarah Louis
-                </td>
-
-                <td>
-                  Création PayPal
-                </td>
-
-                <td>
-                  <strong>1500 HTG</strong>
-                </td>
-
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         COMMANDES
-    ====================================================== -->
-
-    <section
-      id="section-commandes"
-      class="section"
-    >
-
-      <div class="page-header">
-
-        <h1>Commandes</h1>
-
-        <p>
-          Consultez les commandes enregistrées.
-        </p>
-
-      </div>
-
-
-      <div class="panel">
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Client</th>
-                <th>Service</th>
-                <th>Montant</th>
-                <th>Date</th>
-                <th>Statut</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Jean Baptiste</td>
-                <td>Création Carte Méru Visa Virtuelle</td>
-                <td>1500 HTG</td>
-                <td>18/09/2026</td>
-                <td>
-                  <span class="status pending">
-                    En attente
-                  </span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Marie Pierre</td>
-                <td>Recharge PayPal</td>
-                <td>3000 HTG</td>
-                <td>18/09/2026</td>
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>David Joseph</td>
-                <td>Recharge Méru</td>
-                <td>500 HTG</td>
-                <td>17/09/2026</td>
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Sarah Louis</td>
-                <td>Création PayPal</td>
-                <td>1500 HTG</td>
-                <td>16/09/2026</td>
-                <td>
-                  <span class="status done">
-                    Terminé
-                  </span>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CLIENTS
-    ====================================================== -->
-
-    <section
-      id="section-clients"
-      class="section"
-    >
-
-      <div class="page-header">
-
-        <h1>Clients</h1>
-
-        <p>
-          Liste des clients de KIRIKOU CRÉATION.
-        </p>
-
-      </div>
-
-
-      <div class="panel">
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Commandes</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Jean Baptiste</td>
-                <td>jean@example.com</td>
-                <td>+509 0000 0000</td>
-                <td>1</td>
-              </tr>
-
-              <tr>
-                <td>Marie Pierre</td>
-                <td>marie@example.com</td>
-                <td>+509 0000 0001</td>
-                <td>1</td>
-              </tr>
-
-              <tr>
-                <td>David Joseph</td>
-                <td>david@example.com</td>
-                <td>+509 0000 0002</td>
-                <td>1</td>
-              </tr>
-
-              <tr>
-                <td>Sarah Louis</td>
-                <td>sarah@example.com</td>
-                <td>+509 0000 0003</td>
-                <td>1</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         SERVICES
-    ====================================================== -->
-
-    <section
-      id="section-services"
-      class="section"
-    >
-
-      <div class="page-header">
-
-        <h1>Services</h1>
-
-        <p>
-          Services actuellement proposés.
-        </p>
-
-      </div>
-
-
-      <div class="cards-grid">
-
-        <div class="info-card">
-
-          <h3>💳 Création Méru</h3>
-
-          <p>
-            Création d'une carte Méru Visa virtuelle.
-          </p>
-
-          <br>
-
-          <strong>
-            2,000 HTG
-          </strong>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <h3>💰 Recharge Méru</h3>
-
-          <p>
-            Recharge Méru selon le montant demandé.
-          </p>
-
-          <br>
-
-          <strong>
-            1 USD = 145 HTG
-          </strong>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <h3>💳 Création PayPal</h3>
-
-          <p>
-            Service de création de compte PayPal.
-          </p>
-
-          <br>
-
-          <strong>
-            1,500 HTG
-          </strong>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <h3>💵 Recharge PayPal</h3>
-
-          <p>
-            Service de recharge de compte PayPal.
-          </p>
-
-          <br>
-
-          <strong>
-            1 USD = 146 HTG
-          </strong>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         SETTINGS
-    ====================================================== -->
-
-    <section
-      id="section-settings"
-      class="section"
-    >
-
-      <div class="page-header">
-
-        <h1>Paramètres</h1>
-
-        <p>
-          Informations générales du système.
-        </p>
-
-      </div>
-
-
-      <div class="settings-grid">
-
-        <div class="setting-box">
-
-          <h3>⚙️ Configuration</h3>
-
-          <div class="setting-row">
-
-            <span>
-              Nom du site
-            </span>
-
-            <span class="setting-value">
-              KIRIKOU CRÉATION
-            </span>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <span>
-              Statut
-            </span>
-
-            <span class="setting-value">
-              Actif
-            </span>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <span>
-              Disponibilité
-            </span>
-
-            <span class="setting-value">
-              24/24
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="setting-box">
-
-          <h3>🔐 Sécurité</h3>
-
-          <div class="setting-row">
-
-            <span>
-              Authentification
-            </span>
-
-            <span class="setting-value">
-              Vercel Serverless
-            </span>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <span>
-              Session
-            </span>
-
-            <span class="setting-value">
-              HttpOnly
-            </span>
-
-          </div>
-
-
-          <div class="setting-row">
-
-            <span>
-              Variable secrète
-            </span>
-
-            <span class="setting-value">
-              ADMIN_TOKEN
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-</div>
-
 
 <script>
-/* =========================================================
-   AUTHENTIFICATION
-========================================================= */
 
-const loginWrapper = document.getElementById("login-wrapper");
-const adminApp = document.getElementById("admin-app");
-const loginForm = document.getElementById("login-form");
-const loginError = document.getElementById("login-error");
-const loginButton = document.getElementById("login-button");
+  const form = document.getElementById("loginForm");
+  const tokenInput = document.getElementById("adminToken");
+  const button = document.getElementById("loginButton");
+  const errorBox = document.getElementById("error");
+  const successBox = document.getElementById("success");
 
-
-function showAdmin() {
-  loginWrapper.style.display = "none";
-  adminApp.style.display = "block";
-}
-
-
-function showLogin() {
-  adminApp.style.display = "none";
-  loginWrapper.style.display = "flex";
-}
-
-
-/*
-   Vérifie si une session administrateur existe déjà.
-*/
-async function checkSession() {
-
-  try {
-
-    const response = await fetch("/api/login", {
-      method: "GET",
-      credentials: "same-origin",
-      cache: "no-store"
-    });
-
-    const data = await response.json();
-
-    if (response.ok && data.authenticated === true) {
-      showAdmin();
+  function togglePassword() {
+    if (tokenInput.type === "password") {
+      tokenInput.type = "text";
+      document.getElementById("eye").textContent = "🙈";
     } else {
-      showLogin();
+      tokenInput.type = "password";
+      document.getElementById("eye").textContent = "👁️";
+    }
+  }
+
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+    successBox.style.display = "none";
+  }
+
+  form.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    const token = tokenInput.value.trim();
+
+    if (!token) {
+      showError("Veuillez entrer votre ADMIN_TOKEN.");
+      return;
     }
 
-  } catch (error) {
-
-    console.error("Erreur session :", error);
-
-    showLogin();
-
-  }
-}
-
-
-/*
-   Connexion
-*/
-loginForm.addEventListener("submit", async function(event) {
-
-  event.preventDefault();
-
-  const username =
-    document.getElementById("username").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-  loginError.style.display = "none";
-
-  if (!username || !password) {
-
-    loginError.textContent =
-      "Veuillez remplir tous les champs.";
-
-    loginError.style.display = "block";
-
-    return;
-  }
-
-
-  loginButton.disabled = true;
-
-  loginButton.textContent = "Connexion...";
-
-
-  try {
-
-    const response = await fetch("/api/login", {
-
-      method: "POST",
-
-      credentials: "same-origin",
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-
-    });
-
-
-    const data = await response.json();
-
-
-    if (response.ok && data.success === true) {
-
-      document.getElementById("password").value = "";
-
-      showAdmin();
-
-    } else {
-
-      loginError.textContent =
-        data.message ||
-        "Identifiant ou mot de passe incorrect.";
-
-      loginError.style.display = "block";
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-    loginError.textContent =
-      "Impossible de contacter le serveur.";
-
-    loginError.style.display = "block";
-
-  }
-
-
-  loginButton.disabled = false;
-
-  loginButton.textContent = "Se connecter";
-
-});
-
-
-/*
-   Déconnexion
-*/
-async function logout() {
-
-  try {
-
-    await fetch("/api/login", {
-
-      method: "DELETE",
-
-      credentials: "same-origin"
-
-    });
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-
-
-  document.getElementById("password").value = "";
-
-  loginError.style.display = "none";
-
-  showLogin();
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const navItems =
-  document.querySelectorAll(".nav-item[data-section]");
-
-const sections =
-  document.querySelectorAll(".section");
-
-const pageTitle =
-  document.getElementById("page-title");
-
-
-const titles = {
-
-  dashboard: "Dashboard",
-
-  commandes: "Commandes",
-
-  clients: "Clients",
-
-  services: "Services",
-
-  settings: "Paramètres"
-
-};
-
-
-function openSection(sectionName) {
-
-  sections.forEach(function(section) {
-
-    section.classList.remove("active");
-
-  });
-
-
-  navItems.forEach(function(item) {
-
-    item.classList.remove("active");
-
-  });
-
-
-  const target =
-    document.getElementById(
-      "section-" + sectionName
-    );
-
-
-  const nav =
-    document.querySelector(
-      '.nav-item[data-section="' +
-      sectionName +
-      '"]'
-    );
-
-
-  if (target) {
-
-    target.classList.add("active");
-
-  }
-
-
-  if (nav) {
-
-    nav.classList.add("active");
-
-  }
-
-
-  pageTitle.textContent =
-    titles[sectionName] || "Dashboard";
-
-
-  document
-    .getElementById("sidebar")
-    .classList.remove("open");
-
-}
-
-
-navItems.forEach(function(item) {
-
-  item.addEventListener("click", function() {
-
-    openSection(
-      item.getAttribute("data-section")
-    );
-
-  });
-
-});
-
-
-/* Bouton "Voir tout" */
-
-document
-  .querySelectorAll("[data-section-button]")
-  .forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-      openSection(
-        button.getAttribute("data-section-button")
+    button.disabled = true;
+    button.textContent = "CONNEXION...";
+
+    try {
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: "admin",
+          password: token
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || "ADMIN_TOKEN incorrect."
+        );
+      }
+
+      successBox.style.display = "block";
+
+      /*
+        IMPORTANT :
+        Change cette adresse si ton vrai dashboard
+        se trouve dans un autre fichier.
+      */
+      setTimeout(() => {
+        window.location.href = "/admin-dashboard.html";
+      }, 700);
+
+    } catch (error) {
+
+      showError(
+        error.message || "Erreur de connexion."
       );
 
-    });
+      button.disabled = false;
+      button.textContent = "ENTRER DANS L'ADMIN";
+    }
 
   });
 
 
-/* Déconnexion */
+  // Vérifie si une session existe déjà
+  async function checkSession() {
 
-document
-  .getElementById("logout-button")
-  .addEventListener("click", logout);
+    try {
 
+      const response = await fetch("/api/login", {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store"
+      });
 
-/* Menu mobile */
+      const data = await response.json();
 
-document
-  .getElementById("mobile-menu")
-  .addEventListener("click", function() {
+      if (data.authenticated === true) {
+        window.location.href = "/admin-dashboard.html";
+      }
 
-    document
-      .getElementById("sidebar")
-      .classList.toggle("open");
+    } catch (error) {
+      console.log("Session non disponible.");
+    }
 
-  });
-
-
-/* =========================================================
-   INITIALISATION
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function() {
+  }
 
   checkSession();
 
-});
 </script>
 
 </body>
