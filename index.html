@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   
-<meta name="google-site-verification" content="ZhC908EQ_fnKJqaojlwbqFmAYs-VsxbMLuLBCD_Zufw" />
+  <meta name="google-site-verification" content="ZhC908EQ_fnKJqaojlwbqFmAYs-VsxbMLuLBCD_Zufw" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Kirikou Création</title>
@@ -327,6 +327,25 @@
       font-size: 22px;
     }
 
+    .btn-return-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-return-menu:hover {
+      background: rgba(37,211,102,0.2);
+      border-color: #25D366;
+    }
+
     .close-form {
       width: 38px;
       height: 38px;
@@ -376,6 +395,29 @@
       border-color: #25D366;
     }
 
+    .phone-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: #151515;
+      border: 1px solid #333;
+      border-radius: 11px;
+      overflow: hidden;
+    }
+
+    .phone-prefix {
+      padding: 13px 0 13px 14px;
+      color: #25D366;
+      font-weight: 700;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .phone-input-wrapper input {
+      border: none !important;
+      padding-left: 6px !important;
+      background: transparent !important;
+    }
+
     .payment-box {
       margin-top: 20px;
       padding: 17px;
@@ -386,6 +428,13 @@
 
     .payment-box strong {
       color: #25D366;
+    }
+
+    .moncash-badge {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #ff9800;
+      display: block;
     }
 
     .total-box {
@@ -525,6 +574,10 @@
       .intro-title {
         font-size: 45px;
       }
+
+      .form-header {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
@@ -562,7 +615,7 @@
 
   <div class="container">
 
-    <header>
+    <header id="main-header">
 
       <img
         class="main-logo"
@@ -586,12 +639,12 @@
 
 
     <!-- =========================
-         SERVICES
+         SERVICES (LAYOUT 2x2)
     ========================== -->
 
-    <section class="services">
+    <section class="services" id="services-grid">
 
-      <!-- MÉRU CREATION -->
+      <!-- LIGNE 1 / GAUCHE : MÉRU CREATION -->
 
       <div class="service-card" onclick="openForm('meru-create')">
 
@@ -623,39 +676,7 @@
       </div>
 
 
-      <!-- MÉRU RECHARGE -->
-
-      <div class="service-card" onclick="openForm('meru-recharge')">
-
-        <img
-          class="service-image"
-          src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg"
-          alt="Recharge Méru">
-
-        <div class="service-content">
-
-          <h2>
-            Recharge Méru
-          </h2>
-
-          <div class="price">
-            1$ = 145 HTG
-          </div>
-
-          <p>
-            Recharge rapide de votre compte Méru.
-          </p>
-
-          <div class="service-button">
-            <i class="fa-solid fa-arrow-right"></i>
-            Recharger
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- PAYPAL CREATION -->
+      <!-- LIGNE 1 / DROITE : PAYPAL CREATION -->
 
       <div class="service-card" onclick="openForm('paypal-create')">
 
@@ -687,7 +708,39 @@
       </div>
 
 
-      <!-- PAYPAL RECHARGE -->
+      <!-- LIGNE 2 / GAUCHE : MÉRU RECHARGE -->
+
+      <div class="service-card" onclick="openForm('meru-recharge')">
+
+        <img
+          class="service-image"
+          src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg"
+          alt="Recharge Méru">
+
+        <div class="service-content">
+
+          <h2>
+            Recharge Méru
+          </h2>
+
+          <div class="price">
+            1$ = 145 HTG
+          </div>
+
+          <p>
+            Recharge rapide de votre compte Méru.
+          </p>
+
+          <div class="service-button">
+            <i class="fa-solid fa-arrow-right"></i>
+            Recharger
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- LIGNE 2 / DROITE : PAYPAL RECHARGE -->
 
       <div class="service-card" onclick="openForm('paypal-recharge')">
 
@@ -733,11 +786,17 @@
           Création Carte Méru
         </h2>
 
-        <button
-          class="close-form"
-          onclick="closeForms()">
-          ×
-        </button>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button type="button" class="btn-return-menu" onclick="closeForms()">
+            <i class="fa-solid fa-arrow-left"></i> Retour au menu
+          </button>
+
+          <button
+            class="close-form"
+            onclick="closeForms()">
+            ×
+          </button>
+        </div>
 
       </div>
 
@@ -788,10 +847,14 @@
 
           <div class="field">
             <label>Téléphone</label>
-            <input
-              type="tel"
-              id="meruPhone"
-              required>
+            <div class="phone-input-wrapper">
+              <span class="phone-prefix">+509</span>
+              <input
+                type="tel"
+                id="meruPhone"
+                placeholder="XXXXXXXX"
+                required>
+            </div>
           </div>
 
           <div class="field">
@@ -819,13 +882,16 @@
         <div class="payment-box">
 
           <strong>
-            Paiement NatCash
+            💳 Paiement NatCash : +509 40414694
           </strong>
 
-          <p>
-            Envoyez 2 000 HTG au :
-            <strong>+509 40414694</strong>
+          <p style="margin-top: 5px;">
+            Envoyez 2 000 HTG au numéro ci-dessus.
           </p>
+
+          <span class="moncash-badge">
+            🟠 Paiement MonCash : bientôt disponible
+          </span>
 
         </div>
 
@@ -868,1009 +934,6 @@
           Recharge Méru
         </h2>
 
-        <button
-          class="close-form"
-          onclick="closeForms()">
-          ×
-        </button>
-
-      </div>
-
-      <form onsubmit="sendRechargeMeru(event)">
-
-        <div class="form-grid">
-
-          <div class="field full">
-
-            <label>
-              Montant en USD
-            </label>
-
-            <input
-              type="number"
-              id="meruAmount"
-              min="1"
-              max="1000"
-              step="0.01"
-              oninput="calculateMeru()"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Email Méru
-            </label>
-
-            <input
-              type="email"
-              id="meruRechargeEmail"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              $merutag
-            </label>
-
-            <input
-              type="text"
-              id="meruTag"
-              placeholder="$merutag"
-              required>
-
-          </div>
-
-          <div class="field full">
-
-            <label>
-              Téléphone
-            </label>
-
-            <input
-              type="tel"
-              id="meruRechargePhone"
-              required>
-
-          </div>
-
-        </div>
-
-        <div class="total-box">
-
-          <div class="total-row">
-
-            <span>
-              Montant
-            </span>
-
-            <span id="meruBase">
-              0 HTG
-            </span>
-
-          </div>
-
-          <div class="total-row">
-
-            <span>
-              Frais
-            </span>
-
-            <span id="meruFees">
-              0 HTG
-            </span>
-
-          </div>
-
-          <div class="total-row total">
-
-            <span>
-              Total
-            </span>
-
-            <span id="meruTotal">
-              0 HTG
-            </span>
-
-          </div>
-
-        </div>
-
-        <div class="payment-box">
-
-          <strong>
-            Paiement NatCash
-          </strong>
-
-          <p>
-            Envoyez le montant total au :
-            <strong>+509 40414694</strong>
-          </p>
-
-        </div>
-
-        <button
-          type="submit"
-          class="submit-btn">
-
-          <i class="fa-brands fa-whatsapp"></i>
-          Continuer via WhatsApp
-
-        </button>
-
-      </form>
-
-    </section>
-
-
-    <!-- =========================
-         FORMULAIRE PAYPAL CREATION
-    ========================== -->
-
-    <section class="form-section" id="paypal-create">
-
-      <div class="form-header">
-
-        <h2>
-          Création PayPal
-        </h2>
-
-        <button
-          class="close-form"
-          onclick="closeForms()">
-          ×
-        </button>
-
-      </div>
-
-      <form onsubmit="sendCreationPaypal(event)">
-
-        <div class="form-grid">
-
-          <div class="field">
-
-            <label>
-              Nom
-            </label>
-
-            <input
-              type="text"
-              id="paypalNom"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Prénom
-            </label>
-
-            <input
-              type="text"
-              id="paypalPrenom"
-              required>
-
-          </div>
-
-          <div class="field full">
-
-            <label>
-              Email
-            </label>
-
-            <input
-              type="email"
-              id="paypalEmail"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Mot de passe
-            </label>
-
-            <input
-              type="password"
-              id="paypalPassword"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Date de naissance
-            </label>
-
-            <input
-              type="text"
-              id="paypalDob"
-              placeholder="JJ/MM/AAAA"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Téléphone
-            </label>
-
-            <input
-              type="tel"
-              id="paypalPhone"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Document
-            </label>
-
-            <select
-              id="paypalDocument"
-              required>
-
-              <option value="">
-                Sélectionner
-              </option>
-
-              <option value="Passeport">
-                Passeport
-              </option>
-
-              <option value="Carte électorale">
-                Carte électorale
-              </option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-        <div class="payment-box">
-
-          <strong>
-            Paiement NatCash
-          </strong>
-
-          <p>
-            Envoyez 1 500 HTG au :
-            <strong>+509 40414694</strong>
-          </p>
-
-        </div>
-
-        <label class="checkbox">
-
-          <input
-            type="checkbox"
-            id="paypalAge"
-            required>
-
-          <span>
-            Je confirme avoir 18 ans ou plus et avoir fourni des informations exactes.
-          </span>
-
-        </label>
-
-        <button
-          type="submit"
-          class="submit-btn">
-
-          <i class="fa-brands fa-whatsapp"></i>
-          Commander via WhatsApp
-
-        </button>
-
-      </form>
-
-    </section>
-
-
-    <!-- =========================
-         FORMULAIRE RECHARGE PAYPAL
-    ========================== -->
-
-    <section class="form-section" id="paypal-recharge">
-
-      <div class="form-header">
-
-        <h2>
-          Recharge PayPal
-        </h2>
-
-        <button
-          class="close-form"
-          onclick="closeForms()">
-          ×
-        </button>
-
-      </div>
-
-      <form onsubmit="sendRechargePaypal(event)">
-
-        <div class="form-grid">
-
-          <div class="field full">
-
-            <label>
-              Montant en USD
-            </label>
-
-            <input
-              type="number"
-              id="paypalAmount"
-              min="1"
-              max="1000"
-              step="0.01"
-              oninput="calculatePaypal()"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Email PayPal
-            </label>
-
-            <input
-              type="email"
-              id="paypalRechargeEmail"
-              required>
-
-          </div>
-
-          <div class="field">
-
-            <label>
-              Téléphone
-            </label>
-
-            <input
-              type="tel"
-              id="paypalRechargePhone"
-              required>
-
-          </div>
-
-        </div>
-
-        <div class="total-box">
-
-          <div class="total-row">
-
-            <span>
-              Montant
-            </span>
-
-            <span id="paypalBase">
-              0 HTG
-            </span>
-
-          </div>
-
-          <div class="total-row">
-
-            <span>
-              Frais
-            </span>
-
-            <span id="paypalFees">
-              0 HTG
-            </span>
-
-          </div>
-
-          <div class="total-row total">
-
-            <span>
-              Total
-            </span>
-
-            <span id="paypalTotal">
-              0 HTG
-            </span>
-
-          </div>
-
-        </div>
-
-        <div class="payment-box">
-
-          <strong>
-            Paiement NatCash
-          </strong>
-
-          <p>
-            Envoyez le montant total au :
-            <strong>+509 40414694</strong>
-          </p>
-
-        </div>
-
-        <button
-          type="submit"
-          class="submit-btn">
-
-          <i class="fa-brands fa-whatsapp"></i>
-          Continuer via WhatsApp
-
-        </button>
-
-      </form>
-
-    </section>
-
-  </div>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
-  <footer>
-
-    <div class="footer-social">
-
-      <a
-        href="https://wa.me/50932694670"
-        target="_blank"
-        aria-label="WhatsApp">
-
-        <i class="fa-brands fa-whatsapp"></i>
-
-      </a>
-
-    </div>
-
-    <p>
-      © 2026 <strong>Kirikou Création</strong>
-      — Tous droits réservés.
-    </p>
-
-    <p style="margin-top:8px;">
-      Carte Méru • PayPal • Recharge Paiement
-    </p>
-
-  </footer>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
-  <script>
-
-    /* =========================
-       INTRO
-    ========================== */
-
-    window.addEventListener("load", function() {
-
-      setTimeout(function() {
-
-        document
-          .getElementById("intro")
-          .classList.add("hide");
-
-      }, 5900);
-
-    });
-
-
-    /* =========================
-       FORM OPEN / CLOSE
-    ========================== */
-
-    function openForm(id) {
-
-      closeForms();
-
-      const form = document.getElementById(id);
-
-      if (form) {
-
-        form.classList.add("active");
-
-        setTimeout(function() {
-
-          form.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-        }, 100);
-
-      }
-
-    }
-
-
-    function closeForms() {
-
-      document
-        .querySelectorAll(".form-section")
-        .forEach(function(form) {
-
-          form.classList.remove("active");
-
-        });
-
-    }
-
-
-    /* =========================
-       DATE VALIDATION
-    ========================== */
-
-    function checkAge(dateString) {
-
-      const parts = dateString.split("/");
-
-      if (parts.length !== 3) {
-        return false;
-      }
-
-      const day = parseInt(parts[0]);
-      const month = parseInt(parts[1]);
-      const year = parseInt(parts[2]);
-
-      if (
-        isNaN(day) ||
-        isNaN(month) ||
-        isNaN(year)
-      ) {
-        return false;
-      }
-
-      const birthDate = new Date(
-        year,
-        month - 1,
-        day
-      );
-
-      if (
-        birthDate.getFullYear() !== year ||
-        birthDate.getMonth() !== month - 1 ||
-        birthDate.getDate() !== day
-      ) {
-        return false;
-      }
-
-      const today = new Date();
-
-      let age =
-        today.getFullYear() - year;
-
-      const monthDifference =
-        today.getMonth() - (month - 1);
-
-      if (
-        monthDifference < 0 ||
-        (
-          monthDifference === 0 &&
-          today.getDate() < day
-        )
-      ) {
-        age--;
-      }
-
-      return age >= 18;
-
-    }
-
-
-    /* =========================
-       WHATSAPP
-    ========================== */
-
-    const whatsappNumber = "50932694670";
-
-
-    function sendWhatsApp(message) {
-
-      const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
-
-      window.open(url, "_blank");
-
-    }
-
-
-    /* =========================
-       CRÉATION MÉRU
-    ========================== */
-
-    function sendCreationMeru(event) {
-
-      event.preventDefault();
-
-      const nom =
-        document.getElementById("meruNom").value.trim();
-
-      const prenom =
-        document.getElementById("meruPrenom").value.trim();
-
-      const email =
-        document.getElementById("meruEmail").value.trim();
-
-      const password =
-        document.getElementById("meruPassword").value;
-
-      const dob =
-        document.getElementById("meruDob").value.trim();
-
-      const phone =
-        document.getElementById("meruPhone").value.trim();
-
-      const documentType =
-        document.getElementById("meruDocument").value;
-
-      const age =
-        document.getElementById("meruAge").checked;
-
-
-      if (!checkAge(dob)) {
-
-        alert(
-          "La date de naissance est invalide ou vous devez avoir 18 ans ou plus."
-        );
-
-        return;
-
-      }
-
-
-      if (!age) {
-
-        alert(
-          "Vous devez confirmer avoir 18 ans ou plus."
-        );
-
-        return;
-
-      }
-
-
-      const message =
-`🟢 *KIRIKOU CRÉATION — CRÉATION MÉRU*
-
-👤 Nom : ${nom}
-👤 Prénom : ${prenom}
-📧 Email : ${email}
-🔐 Mot de passe : ${password}
-🎂 Date de naissance : ${dob}
-📱 Téléphone : ${phone}
-🪪 Document : ${documentType}
-
-💳 Service : Création Carte Méru
-💰 Prix : 2 000 HTG
-
-💵 Paiement :
-NatCash : +509 40414694
-
-Bonjour, je souhaite commander la création de ma Carte Méru.`;
-
-      sendWhatsApp(message);
-
-    }
-
-
-    /* =========================
-       CALCUL MÉRU
-    ========================== */
-
-    function calculateMeru() {
-
-      const amount =
-        parseFloat(
-          document.getElementById("meruAmount").value
-        ) || 0;
-
-      const base =
-        amount * 145;
-
-      const fees =
-        amount > 0
-          ? Math.ceil(amount / 10)
-          : 0;
-
-      const total =
-        base + fees;
-
-
-      document.getElementById("meruBase").textContent =
-        base.toLocaleString("fr-FR") + " HTG";
-
-      document.getElementById("meruFees").textContent =
-        fees.toLocaleString("fr-FR") + " HTG";
-
-      document.getElementById("meruTotal").textContent =
-        total.toLocaleString("fr-FR") + " HTG";
-
-    }
-
-
-    /* =========================
-       RECHARGE MÉRU
-    ========================== */
-
-    function sendRechargeMeru(event) {
-
-      event.preventDefault();
-
-      const amount =
-        parseFloat(
-          document.getElementById("meruAmount").value
-        ) || 0;
-
-      if (
-        amount <= 0 ||
-        amount > 1000
-      ) {
-
-        alert(
-          "Le montant doit être compris entre 1$ et 1000$."
-        );
-
-        return;
-
-      }
-
-
-      const email =
-        document.getElementById(
-          "meruRechargeEmail"
-        ).value.trim();
-
-      const tag =
-        document.getElementById(
-          "meruTag"
-        ).value.trim();
-
-      const phone =
-        document.getElementById(
-          "meruRechargePhone"
-        ).value.trim();
-
-
-      const base =
-        amount * 145;
-
-      const fees =
-        Math.ceil(amount / 10);
-
-      const total =
-        base + fees;
-
-
-      const message =
-`🟢 *KIRIKOU CRÉATION — RECHARGE MÉRU*
-
-💵 Montant : ${amount}$
-
-📧 Email Méru : ${email}
-
-💳 $merutag : ${tag}
-
-📱 Téléphone : ${phone}
-
-💰 Taux : 1$ = 145 HTG
-💵 Montant : ${base.toLocaleString("fr-FR")} HTG
-💸 Frais : ${fees.toLocaleString("fr-FR")} HTG
-💰 TOTAL : ${total.toLocaleString("fr-FR")} HTG
-
-💳 Paiement NatCash :
-+509 40414694
-
-Bonjour, je souhaite effectuer cette recharge Méru.`;
-
-      sendWhatsApp(message);
-
-    }
-
-
-    /* =========================
-       CRÉATION PAYPAL
-    ========================== */
-
-    function sendCreationPaypal(event) {
-
-      event.preventDefault();
-
-      const nom =
-        document.getElementById("paypalNom").value.trim();
-
-      const prenom =
-        document.getElementById("paypalPrenom").value.trim();
-
-      const email =
-        document.getElementById("paypalEmail").value.trim();
-
-      const password =
-        document.getElementById("paypalPassword").value;
-
-      const dob =
-        document.getElementById("paypalDob").value.trim();
-
-      const phone =
-        document.getElementById("paypalPhone").value.trim();
-
-      const documentType =
-        document.getElementById("paypalDocument").value;
-
-      const age =
-        document.getElementById("paypalAge").checked;
-
-
-      if (!checkAge(dob)) {
-
-        alert(
-          "La date de naissance est invalide ou vous devez avoir 18 ans ou plus."
-        );
-
-        return;
-
-      }
-
-
-      if (!age) {
-
-        alert(
-          "Vous devez confirmer avoir 18 ans ou plus."
-        );
-
-        return;
-
-      }
-
-
-      const message =
-`🟢 *KIRIKOU CRÉATION — CRÉATION PAYPAL*
-
-👤 Nom : ${nom}
-👤 Prénom : ${prenom}
-📧 Email : ${email}
-🔐 Mot de passe : ${password}
-🎂 Date de naissance : ${dob}
-📱 Téléphone : ${phone}
-🪪 Document : ${documentType}
-
-💳 Service : Création PayPal
-💰 Prix : 1 500 HTG
-
-💵 Paiement :
-NatCash : +509 40414694
-
-Bonjour, je souhaite commander la création de mon compte PayPal.`;
-
-      sendWhatsApp(message);
-
-    }
-
-
-    /* =========================
-       CALCUL PAYPAL
-    ========================== */
-
-    function calculatePaypal() {
-
-      const amount =
-        parseFloat(
-          document.getElementById("paypalAmount").value
-        ) || 0;
-
-      const base =
-        amount * 146;
-
-      const fees =
-        amount > 0
-          ? Math.ceil(amount / 10)
-          : 0;
-
-      const total =
-        base + fees;
-
-
-      document.getElementById("paypalBase").textContent =
-        base.toLocaleString("fr-FR") + " HTG";
-
-      document.getElementById("paypalFees").textContent =
-        fees.toLocaleString("fr-FR") + " HTG";
-
-      document.getElementById("paypalTotal").textContent =
-        total.toLocaleString("fr-FR") + " HTG";
-
-    }
-
-
-    /* =========================
-       RECHARGE PAYPAL
-    ========================== */
-
-    function sendRechargePaypal(event) {
-
-      event.preventDefault();
-
-      const amount =
-        parseFloat(
-          document.getElementById("paypalAmount").value
-        ) || 0;
-
-
-      if (
-        amount <= 0 ||
-        amount > 1000
-      ) {
-
-        alert(
-          "Le montant doit être compris entre 1$ et 1000$."
-        );
-
-        return;
-
-      }
-
-
-      const email =
-        document.getElementById(
-          "paypalRechargeEmail"
-        ).value.trim();
-
-      const phone =
-        document.getElementById(
-          "paypalRechargePhone"
-        ).value.trim();
-
-
-      const base =
-        amount * 146;
-
-      const fees =
-        Math.ceil(amount / 10);
-
-      const total =
-        base + fees;
-
-
-      const message =
-`🟢 *KIRIKOU CRÉATION — RECHARGE PAYPAL*
-
-💵 Montant : ${amount}$
-
-📧 Email PayPal : ${email}
-
-📱 Téléphone : ${phone}
-
-💰 Taux : 1$ = 146 HTG
-💵 Montant : ${base.toLocaleString("fr-FR")} HTG
-💸 Frais : ${fees.toLocaleString("fr-FR")} HTG
-💰 TOTAL : ${total.toLocaleString("fr-FR")} HTG
-
-💳 Paiement NatCash :
-+509 40414694
-
-Bonjour, je souhaite effectuer cette recharge PayPal.`;
-
-      sendWhatsApp(message);
-
-    }
-
-  </script>
-
-</body>
-</html>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button type="button" class="btn-return-menu" onclick="closeForms()">
+            <i class="fa-solid fa-arrow-lef
