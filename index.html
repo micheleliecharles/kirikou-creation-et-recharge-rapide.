@@ -1,939 +1,1172 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
+<!DOCTYPE html>  
+<html lang="fr">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>KIRIKOU CRÉATION | Sèvis Carte, PayPal & Rechaj</title>    <!-- SEO & Social Meta Tags -->    <meta name="description" content="KIRIKOU CRÉATION - Sèvis Création Carte Méru Visa, Compte PayPal, Recharge Méru ak Recharge PayPal an Ayiti rapid e an sekirite.">  
+  <meta name="keywords" content="Kirikou Creation, Meru Visa, Recharge Meru, PayPal Haiti, Recharge PayPal, NatCash, MonCash">  
+  <meta name="robots" content="index, follow">    <!-- Schema.org Structured Data -->    <script type="application/ld+json">  
+  {  
+    "@context": "https://schema.org",  
+    "@type": "FinancialService",  
+    "name": "KIRIKOU CRÉATION",  
+    "description": "Sèvis Carte Méru Visa Virtuelle, Compte PayPal, Rechaj Méru ak PayPal",  
+    "telephone": "+50932694670",  
+    "paymentAccepted": "NatCash, MonCash",  
+    "priceRange": "HTG"  
+  }  
+  </script>    <!-- Google Fonts: Bebas Neue & Poppins -->    <link rel="preconnect" href="https://fonts.googleapis.com">  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <style>  
+    /* ==================== NETFLIX STYLE INTRO ANIMATION ==================== */  
+    #intro-overlay {  
+      position: fixed;  
+      top: 0;  
+      left: 0;  
+      width: 100%;  
+      height: 100%;  
+      z-index: 99999;  
+      background: #000000;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      overflow: hidden;  
+      opacity: 1;  
+      transition: opacity 0.8s ease-in-out;  
+    }  
   
-  <meta name="google-site-verification" content="ZhC908EQ_fnKJqaojlwbqFmAYs-VsxbMLuLBCD_Zufw" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Kirikou Création</title>
-
-  <meta name="description" content="Kirikou Création — Carte Méru Visa virtuelle, création et recharge Méru, création et recharge PayPal. Service rapide en Haïti.">
-
-  <meta name="robots" content="index, follow">
-
-  <meta name="author" content="Kirikou Création">
-
-  <link rel="canonical" href="https://kirikou-creation-et-recharge-rapide.vercel.app/">
-
-  <!-- Google / Search -->
-  <meta name="application-name" content="Kirikou Création">
-  <meta name="apple-mobile-web-app-title" content="Kirikou Création">
-
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="Kirikou Création">
-  <meta property="og:title" content="Kirikou Création">
-  <meta property="og:description" content="Carte Méru Visa virtuelle, PayPal et services de recharge rapide.">
-  <meta property="og:url" content="https://kirikou-creation-et-recharge-rapide.vercel.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg">
-  <link rel="apple-touch-icon" href="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg">
-
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Kirikou Création",
-    "alternateName": "KIRIKOU CRÉATION",
-    "url": "https://kirikou-creation-et-recharge-rapide.vercel.app/"
-  }
-  </script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background:
-        linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.90)),
-        url('https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg') center/cover fixed;
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    /* =========================
-       INTRO
-    ========================== */
-
-    #intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(circle at center, #300000 0%, #120000 45%, #050505 100%);
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-
-    #intro.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .intro-content {
-      text-align: center;
-      animation: introZoom 2.5s ease forwards;
-    }
-
-    .intro-logo {
-      width: 130px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 25px;
-      box-shadow:
-        0 0 20px rgba(255,0,0,.5),
-        0 0 50px rgba(255,0,0,.25);
-    }
-
-    .intro-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(42px, 10vw, 90px);
-      font-weight: 900;
-      letter-spacing: 3px;
-      line-height: 1;
-      text-shadow: 0 0 25px rgba(255,0,0,.45);
-    }
-
-    .intro-title .white {
-      color: #fff;
-    }
-
-    .intro-title .green {
-      color: #25D366;
-    }
-
-    .intro-subtitle {
-      margin-top: 15px;
-      font-size: 13px;
-      letter-spacing: 4px;
-      color: #ddd;
-    }
-
-    @keyframes introZoom {
-      0% {
-        opacity: 0;
-        transform: scale(.65);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.05);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* =========================
-       CONTAINER
-    ========================== */
-
-    .container {
-      width: min(1100px, 92%);
-      margin: auto;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    header {
-      text-align: center;
-      padding: 55px 0 35px;
-    }
-
-    .main-logo {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #25D366;
-      box-shadow: 0 0 30px rgba(37,211,102,.25);
-      margin-bottom: 20px;
-    }
-
-    header h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(32px, 8vw, 58px);
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    header h1 span {
-      color: #25D366;
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      color: #ddd;
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-
-    .availability {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      padding: 9px 17px;
-      border-radius: 30px;
-      background: rgba(37,211,102,.1);
-      border: 1px solid rgba(37,211,102,.35);
-      color: #25D366;
-      font-size: 13px;
-    }
-
-    .availability i {
-      font-size: 9px;
-    }
-
-    /* =========================
-       SERVICES
-    ========================== */
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding-bottom: 40px;
-    }
-
-    .service-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 300px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(15,15,15,.78);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 15px 40px rgba(0,0,0,.35);
-      cursor: pointer;
-      transition: transform .3s ease, border-color .3s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(37,211,102,.5);
-    }
-
-    .service-image {
-      width: 100%;
-      height: 175px;
-      object-fit: cover;
-      display: block;
-      opacity: .8;
-    }
-
-    .service-content {
-      padding: 20px;
-    }
-
-    .service-content h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      color: #25D366;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .service-content p {
-      color: #bbb;
-      font-size: 13px;
-      margin-top: 7px;
-    }
-
-    .service-button {
-      margin-top: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #25D366;
-      color: #000;
-      padding: 10px 17px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    /* =========================
-       FORMS
-    ========================== */
-
-    .form-section {
-      display: none;
-      background: rgba(10,10,10,.9);
-      border: 1px solid rgba(37,211,102,.25);
-      border-radius: 22px;
-      padding: 25px;
-      margin-bottom: 35px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.4);
-    }
-
-    .form-section.active {
-      display: block;
-      animation: formIn .35s ease;
-    }
-
-    @keyframes formIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .form-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .form-header h2 {
-      font-size: 22px;
-    }
-
-    .btn-return-menu {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .btn-return-menu:hover {
-      background: rgba(37,211,102,0.2);
-      border-color: #25D366;
-    }
-
-    .close-form {
-      width: 38px;
-      height: 38px;
-      border: 0;
-      border-radius: 50%;
-      background: #222;
-      color: #fff;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      font-size: 12px;
-      color: #ccc;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 11px;
-      border: 1px solid #333;
-      background: #151515;
-      color: #fff;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .field input:focus,
-    .field select:focus {
-      border-color: #25D366;
-    }
-
-    .phone-input-wrapper {
-      display: flex;
-      align-items: center;
-      background: #151515;
-      border: 1px solid #333;
-      border-radius: 11px;
-      overflow: hidden;
-    }
-
-    .phone-prefix {
-      padding: 13px 0 13px 14px;
-      color: #25D366;
-      font-weight: 700;
-      font-size: 14px;
-      user-select: none;
-    }
-
-    .phone-input-wrapper input {
-      border: none !important;
-      padding-left: 6px !important;
-      background: transparent !important;
-    }
-
-    .payment-box {
-      margin-top: 20px;
-      padding: 17px;
-      border-radius: 14px;
-      background: rgba(37,211,102,.07);
-      border: 1px solid rgba(37,211,102,.2);
-    }
-
-    .payment-box strong {
-      color: #25D366;
-    }
-
-    .moncash-badge {
-      margin-top: 6px;
-      font-size: 13px;
-      color: #ff9800;
-      display: block;
-    }
-
-    .total-box {
-      margin-top: 15px;
-      padding: 17px;
-      border-radius: 12px;
-      background: #151515;
-      border: 1px solid #292929;
-    }
-
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      color: #bbb;
-    }
-
-    .total-row.total {
-      color: #25D366;
-      font-size: 18px;
-      font-weight: 700;
-      border-top: 1px solid #333;
-      margin-top: 8px;
-      padding-top: 12px;
-    }
-
-    .checkbox {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin-top: 18px;
-      color: #bbb;
-      font-size: 12px;
-    }
-
-    .checkbox input {
-      margin-top: 3px;
-      accent-color: #25D366;
-    }
-
-    .submit-btn {
-      width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      background: #25D366;
-      color: #000;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 15px;
-      transition: .25s;
-    }
-
-    .submit-btn:hover {
-      background: #20bd5a;
-      transform: translateY(-2px);
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-      border-top: 1px solid rgba(255,255,255,.08);
-      text-align: center;
-      padding: 30px 15px;
-      color: #888;
-      font-size: 12px;
-    }
-
-    footer strong {
-      color: #25D366;
-    }
-
-    .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .footer-social a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #151515;
-      color: #fff;
-      text-decoration: none;
-      transition: .25s;
-    }
-
-    .footer-social a:hover {
-      background: #25D366;
-      color: #000;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 700px) {
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
-      }
-
-      header {
-        padding-top: 40px;
-      }
-
-      .service-card {
-        min-height: auto;
-      }
-
-      .form-section {
-        padding: 18px;
-      }
-
-      .intro-logo {
-        width: 100px;
-        height: 100px;
-      }
-
-      .intro-title {
-        font-size: 45px;
-      }
-
-      .form-header {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- =========================
-       INTRO
-  ========================== -->
-
-  <div id="intro">
-    <div class="intro-content">
-
-      <img
-        class="intro-logo"
-        src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg"
-        alt="Kirikou Création">
-
-      <div class="intro-title">
-        <span class="white">KIRIKOU</span>
-        <span class="green">CRÉATION</span>
-      </div>
-
-      <div class="intro-subtitle">
-        CARTE MÉRU • PAYPAL • RECHARGE
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- =========================
-       MAIN
-  ========================== -->
-
-  <div class="container">
-
-    <header id="main-header">
-
-      <img
-        class="main-logo"
-        src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg"
-        alt="Logo Kirikou Création">
-
-      <h1>
-        KIRIKOU <span>CRÉATION</span>
-      </h1>
-
-      <div class="subtitle">
-        CARTE MÉRU, PAYPAL & RECHARGE PAIEMENT
-      </div>
-
-      <div class="availability">
-        <i class="fa-solid fa-circle"></i>
-        Disponible 24/24
-      </div>
-
-    </header>
-
-
-    <!-- =========================
-         SERVICES (LAYOUT 2x2)
-    ========================== -->
-
-    <section class="services" id="services-grid">
-
-      <!-- LIGNE 1 / GAUCHE : MÉRU CREATION -->
-
-      <div class="service-card" onclick="openForm('meru-create')">
-
-        <img
-          class="service-image"
-          src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg"
-          alt="Création Carte Méru">
-
-        <div class="service-content">
-
-          <h2>
-            Création Méru
-          </h2>
-
-          <div class="price">
-            2 000 HTG
-          </div>
-
-          <p>
-            Création de votre Carte Méru Visa virtuelle.
-          </p>
-
-          <div class="service-button">
-            <i class="fa-solid fa-arrow-right"></i>
-            Commander
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- LIGNE 1 / DROITE : PAYPAL CREATION -->
-
-      <div class="service-card" onclick="openForm('paypal-create')">
-
-        <img
-          class="service-image"
-          src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg"
-          alt="Création PayPal">
-
-        <div class="service-content">
-
-          <h2>
-            Création PayPal
-          </h2>
-
-          <div class="price">
-            1 500 HTG
-          </div>
-
-          <p>
-            Création de votre compte PayPal.
-          </p>
-
-          <div class="service-button">
-            <i class="fa-solid fa-arrow-right"></i>
-            Commander
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- LIGNE 2 / GAUCHE : MÉRU RECHARGE -->
-
-      <div class="service-card" onclick="openForm('meru-recharge')">
-
-        <img
-          class="service-image"
-          src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg"
-          alt="Recharge Méru">
-
-        <div class="service-content">
-
-          <h2>
-            Recharge Méru
-          </h2>
-
-          <div class="price">
-            1$ = 145 HTG
-          </div>
-
-          <p>
-            Recharge rapide de votre compte Méru.
-          </p>
-
-          <div class="service-button">
-            <i class="fa-solid fa-arrow-right"></i>
-            Recharger
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- LIGNE 2 / DROITE : PAYPAL RECHARGE -->
-
-      <div class="service-card" onclick="openForm('paypal-recharge')">
-
-        <img
-          class="service-image"
-          src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg"
-          alt="Recharge PayPal">
-
-        <div class="service-content">
-
-          <h2>
-            Recharge PayPal
-          </h2>
-
-          <div class="price">
-            1$ = 146 HTG
-          </div>
-
-          <p>
-            Recharge rapide de votre compte PayPal.
-          </p>
-
-          <div class="service-button">
-            <i class="fa-solid fa-arrow-right"></i>
-            Recharger
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         FORMULAIRE CRÉATION MÉRU
-    ========================== -->
-
-    <section class="form-section" id="meru-create">
-
-      <div class="form-header">
-
-        <h2>
-          Création Carte Méru
-        </h2>
-
-        <div style="display: flex; gap: 10px; align-items: center;">
-          <button type="button" class="btn-return-menu" onclick="closeForms()">
-            <i class="fa-solid fa-arrow-left"></i> Retour au menu
-          </button>
-
-          <button
-            class="close-form"
-            onclick="closeForms()">
-            ×
-          </button>
-        </div>
-
-      </div>
-
-      <form onsubmit="sendCreationMeru(event)">
-
-        <div class="form-grid">
-
-          <div class="field">
-            <label>Nom</label>
-            <input
-              type="text"
-              id="meruNom"
-              required>
-          </div>
-
-          <div class="field">
-            <label>Prénom</label>
-            <input
-              type="text"
-              id="meruPrenom"
-              required>
-          </div>
-
-          <div class="field full">
-            <label>Email</label>
-            <input
-              type="email"
-              id="meruEmail"
-              required>
-          </div>
-
-          <div class="field">
-            <label>Mot de passe</label>
-            <input
-              type="password"
-              id="meruPassword"
-              required>
-          </div>
-
-          <div class="field">
-            <label>Date de naissance</label>
-            <input
-              type="text"
-              id="meruDob"
-              placeholder="JJ/MM/AAAA"
-              required>
-          </div>
-
-          <div class="field">
-            <label>Téléphone</label>
-            <div class="phone-input-wrapper">
-              <span class="phone-prefix">+509</span>
-              <input
-                type="tel"
-                id="meruPhone"
-                placeholder="XXXXXXXX"
-                required>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Document</label>
-
-            <select id="meruDocument" required>
-
-              <option value="">
-                Sélectionner
-              </option>
-
-              <option value="Passeport">
-                Passeport
-              </option>
-
-              <option value="Carte électorale">
-                Carte électorale
-              </option>
-
-            </select>
-          </div>
-
-        </div>
-
-        <div class="payment-box">
-
-          <strong>
-            💳 Paiement NatCash : +509 40414694
-          </strong>
-
-          <p style="margin-top: 5px;">
-            Envoyez 2 000 HTG au numéro ci-dessus.
-          </p>
-
-          <span class="moncash-badge">
-            🟠 Paiement MonCash : bientôt disponible
-          </span>
-
-        </div>
-
-        <label class="checkbox">
-
-          <input
-            type="checkbox"
-            id="meruAge"
-            required>
-
-          <span>
-            Je confirme avoir 18 ans ou plus et avoir fourni des informations exactes.
-          </span>
-
-        </label>
-
-        <button
-          type="submit"
-          class="submit-btn">
-
-          <i class="fa-brands fa-whatsapp"></i>
-          Commander via WhatsApp
-
-        </button>
-
-      </form>
-
-    </section>
-
-
-    <!-- =========================
-         FORMULAIRE RECHARGE MÉRU
-    ========================== -->
-
-    <section class="form-section" id="meru-recharge">
-
-      <div class="form-header">
-
-        <h2>
-          Recharge Méru
-        </h2>
-
-        <div style="display: flex; gap: 10px; align-items: center;">
-          <button type="button" class="btn-return-menu" onclick="closeForms()">
-            <i class="fa-solid fa-arrow-lef
+    .intro-content {  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+      justify-content: center;  
+      text-align: center;  
+      width: 100%;  
+    }  
+  
+    .netflix-brand {  
+      font-family: 'Bebas Neue', sans-serif;  
+      font-size: clamp(3.5rem, 12vw, 7.5rem);  
+      letter-spacing: 4px;  
+      text-transform: uppercase;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      gap: 15px;  
+      position: relative;  
+      transform: perspective(300px) rotateX(10deg);  
+      animation: netflixZoom 3.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;  
+    }  
+  
+    .word-kirikou {  
+      color: #FFFFFF;  
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);  
+    }  
+  
+    .word-creation {  
+      color: #25D366;  
+      text-shadow: 0 0 25px rgba(37, 211, 102, 0.6);  
+    }  
+  
+    @keyframes netflixZoom {  
+      0% {  
+        transform: perspective(300px) rotateX(10deg) scale(0.6);  
+        opacity: 0;  
+        filter: blur(12px);  
+      }  
+      15% {  
+        opacity: 1;  
+        filter: blur(0px);  
+      }  
+      80% {  
+        transform: perspective(300px) rotateX(10deg) scale(1.15);  
+        opacity: 1;  
+        filter: blur(0px);  
+      }  
+      100% {  
+        transform: perspective(300px) rotateX(10deg) scale(1.4);  
+        opacity: 0;  
+        filter: blur(8px);  
+      }  
+    }  
+  
+    #intro-overlay.fade-out {  
+      opacity: 0;  
+      pointer-events: none;  
+    }  
+  
+    /* ==================== RESET & GLOBAL ==================== */  
+    * {  
+      box-sizing: border-box;  
+      margin: 0;  
+      padding: 0;  
+      font-family: 'Poppins', sans-serif;  
+    }  
+  
+    body {  
+      min-height: 100vh;  
+      color: #ffffff;  
+      background: linear-gradient(rgba(10, 15, 20, 0.85), rgba(10, 15, 20, 0.85)),   
+                  url('https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg') no-repeat center center fixed;  
+      background-size: cover;  
+      padding: 20px 15px 40px;  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+    }  
+  
+    .container {  
+      width: 100%;  
+      max-width: 700px;  
+      margin: 0 auto;  
+    }  
+  
+    /* ==================== HEADER ==================== */  
+    header {  
+      text-align: center;  
+      margin-bottom: 30px;  
+      padding: 10px;  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+    }  
+  
+    .header-logo {  
+      width: 90px;  
+      height: 90px;  
+      border-radius: 50%;  
+      object-fit: cover;  
+      margin-bottom: 12px;  
+      border: 3px solid #25D366;  
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);  
+    }  
+  
+    header h1 {  
+      font-size: 2.2rem;  
+      font-weight: 700;  
+      letter-spacing: 2px;  
+      color: #ffffff;  
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);  
+      margin-bottom: 8px;  
+      text-transform: uppercase;  
+    }  
+  
+    header h1 span {  
+      color: #25D366;  
+    }  
+  
+    header p {  
+      font-size: 0.95rem;  
+      color: #e0e0e0;  
+      font-weight: 300;  
+      letter-spacing: 1px;  
+    }  
+  
+    /* ==================== GRID DOSSIERS (2x2 LAYOUT) ==================== */  
+    .folder-grid {  
+      display: grid;  
+      grid-template-columns: 1fr 1fr;  
+      gap: 20px;  
+      margin-bottom: 30px;  
+    }  
+  
+    .folder-card {  
+      background: rgba(255, 255, 255, 0.08);  
+      backdrop-filter: blur(12px);  
+      border: 1px solid rgba(255, 255, 255, 0.15);  
+      border-radius: 16px;  
+      overflow: hidden;  
+      cursor: pointer;  
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;  
+      text-align: center;  
+    }  
+  
+    .folder-card:hover {  
+      transform: translateY(-5px);  
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);  
+      border-color: #25D366;  
+    }  
+  
+    .folder-image {  
+      width: 100%;  
+      height: 130px;  
+      background: rgba(0, 0, 0, 0.3);  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      overflow: hidden;  
+    }  
+  
+    .folder-image img {  
+      width: 100%;  
+      height: 100%;  
+      object-fit: cover;  
+    }  
+  
+    .folder-info {  
+      padding: 12px;  
+    }  
+  
+    .folder-info h3 {  
+      font-size: 0.95rem;  
+      font-weight: 700;  
+      color: #ffffff;  
+      margin-bottom: 4px;  
+    }  
+  
+    .folder-info p {  
+      font-size: 0.8rem;  
+      color: #25D366;  
+      font-weight: 600;  
+    }  
+  
+    /* ==================== ZÒN FÒM (SWAP CONTAINER) ==================== */  
+    .view-area {  
+      display: none;  
+    }  
+  
+    .view-area.active {  
+      display: block;  
+    }  
+  
+    .form-header-bar {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      margin-bottom: 20px;  
+    }  
+  
+    .btn-back {  
+      display: inline-flex;  
+      align-items: center;  
+      gap: 8px;  
+      color: #25D366;  
+      font-weight: 600;  
+      font-size: 0.95rem;  
+      cursor: pointer;  
+      padding: 8px 15px;  
+      background: rgba(37, 211, 102, 0.1);  
+      border: 1px solid rgba(37, 211, 102, 0.3);  
+      border-radius: 8px;  
+      transition: 0.3s;  
+    }  
+  
+    .btn-back:hover {  
+      background: rgba(37, 211, 102, 0.25);  
+    }  
+  
+    .btn-close-x {  
+      font-size: 1.5rem;  
+      color: #ff4d4d;  
+      cursor: pointer;  
+      padding: 5px 12px;  
+      background: rgba(255, 77, 77, 0.1);  
+      border: 1px solid rgba(255, 77, 77, 0.3);  
+      border-radius: 8px;  
+      transition: 0.3s;  
+    }  
+  
+    .btn-close-x:hover {  
+      background: rgba(255, 77, 77, 0.25);  
+    }  
+  
+    /* GLASSMORPHISM CARDS */  
+    .card {  
+      background: rgba(255, 255, 255, 0.07);  
+      backdrop-filter: blur(16px);  
+      -webkit-backdrop-filter: blur(16px);  
+      border: 1px solid rgba(255, 255, 255, 0.15);  
+      border-radius: 20px;  
+      padding: 30px 25px;  
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);  
+    }  
+  
+    .card-title {  
+      font-size: 1.2rem;  
+      font-weight: 700;  
+      text-align: center;  
+      margin-bottom: 15px;  
+      color: #ffffff;  
+      text-transform: uppercase;  
+      border-bottom: 2px solid rgba(37, 211, 102, 0.5);  
+      padding-bottom: 10px;  
+    }  
+  
+    .price-badge {  
+      background: linear-gradient(135deg, #11998e, #38ef7d);  
+      color: #000;  
+      font-weight: 700;  
+      font-size: 1.1rem;  
+      text-align: center;  
+      padding: 8px 12px;  
+      border-radius: 50px;  
+      margin-bottom: 15px;  
+      box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);  
+    }  
+  
+    .bonus-tag {  
+      background: rgba(255, 193, 7, 0.2);  
+      border: 1px solid #ffc107;  
+      color: #ffc107;  
+      font-size: 0.9rem;  
+      font-weight: 600;  
+      text-align: center;  
+      padding: 8px;  
+      border-radius: 10px;  
+      margin-bottom: 20px;  
+    }  
+  
+    /* ==================== FORMULAIRES ==================== */  
+    .form-group {  
+      margin-bottom: 18px;  
+    }  
+  
+    .form-group label {  
+      display: block;  
+      font-size: 0.88rem;  
+      margin-bottom: 6px;  
+      color: #d1d5db;  
+      font-weight: 500;  
+    }  
+  
+    .form-group input,   
+    .form-group select {  
+      width: 100%;  
+      padding: 12px 15px;  
+      background: rgba(0, 0, 0, 0.4);  
+      border: 1px solid rgba(255, 255, 255, 0.2);  
+      border-radius: 10px;  
+      color: #ffffff;  
+      font-size: 0.95rem;  
+      outline: none;  
+      transition: border-color 0.3s ease, background 0.3s ease;  
+    }  
+  
+    .form-group input::placeholder {  
+      color: #888;  
+    }  
+  
+    .form-group input:focus,   
+    .form-group select:focus {  
+      border-color: #25D366;  
+      background: rgba(0, 0, 0, 0.6);  
+    }  
+  
+    .form-group select option {  
+      background-color: #12181f;  
+      color: #ffffff;  
+    }  
+  
+    .calc-box {  
+      background: rgba(37, 211, 102, 0.1);  
+      border: 1px dashed rgba(37, 211, 102, 0.4);  
+      border-radius: 10px;  
+      padding: 12px;  
+      margin-bottom: 15px;  
+      font-size: 0.88rem;  
+      color: #e0e0e0;  
+    }  
+  
+    .calc-box div {  
+      display: flex;  
+      justify-content: space-between;  
+      margin-bottom: 6px;  
+    }  
+  
+    .calc-box .total {  
+      border-top: 1px solid rgba(255, 255, 255, 0.2);  
+      padding-top: 6px;  
+      margin-top: 6px;  
+      font-weight: 700;  
+      color: #38ef7d;  
+      font-size: 1.05rem;  
+    }  
+  
+    .age-msg {  
+      font-size: 0.85rem;  
+      font-weight: 600;  
+      margin-top: 6px;  
+      min-height: 20px;  
+    }  
+  
+    .msg-success {  
+      color: #25D366;  
+    }  
+  
+    .msg-error {  
+      color: #ff4d4d;  
+    }  
+  
+    /* ==================== BOÎTE PAIEMENT NATCASH & MONCASH ==================== */  
+    .natcash-box {  
+      background: rgba(0, 0, 0, 0.3);  
+      border: 1px dashed rgba(37, 211, 102, 0.6);  
+      border-radius: 12px;  
+      padding: 15px;  
+      text-align: center;  
+      margin: 20px 0;  
+    }  
+  
+    .natcash-title {  
+      font-size: 0.85rem;  
+      color: #a1a1aa;  
+      margin-bottom: 5px;  
+      text-transform: uppercase;  
+      letter-spacing: 0.5px;  
+    }  
+  
+    .natcash-number {  
+      font-size: 1.2rem;  
+      font-weight: 700;  
+      color: #25D366;  
+      margin-bottom: 8px;  
+    }  
+  
+    .moncash-coming {  
+      font-size: 0.88rem;  
+      font-weight: 600;  
+      color: #ff9800;  
+      margin-top: 8px;  
+      padding-top: 8px;  
+      border-top: 1px rgba(255, 255, 255, 0.1) solid;  
+    }  
+  
+    .btn-natcash {  
+      display: inline-block;  
+      width: 100%;  
+      padding: 8px;  
+      background: rgba(37, 211, 102, 0.15);  
+      color: #25D366;  
+      border: 1px solid #25D366;  
+      border-radius: 8px;  
+      font-size: 0.85rem;  
+      font-weight: 600;  
+      text-transform: uppercase;  
+      letter-spacing: 1px;  
+    }  
+  
+    /* ==================== BOUTON D'ACTION ==================== */  
+    .btn-submit {  
+      width: 100%;  
+      padding: 15px;  
+      border: none;  
+      border-radius: 12px;  
+      font-size: 0.95rem;  
+      font-weight: 700;  
+      text-transform: uppercase;  
+      letter-spacing: 1px;  
+      color: #ffffff;  
+      background: linear-gradient(135deg, #25D366, #128C7E);  
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);  
+      cursor: pointer;  
+      transition: all 0.3s ease;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      gap: 10px;  
+    }  
+  
+    .btn-submit:hover:not(:disabled) {  
+      background: linear-gradient(135deg, #1fbe5a, #0e7065);  
+      transform: translateY(-2px);  
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);  
+    }  
+  
+    .btn-submit:disabled {  
+      background: #4a5568 !important;  
+      color: #a0aec0 !important;  
+      box-shadow: none !important;  
+      cursor: not-allowed !important;  
+      opacity: 0.6;  
+      transform: none !important;  
+    }  
+  
+    /* ==================== FOOTER ==================== */  
+    footer {  
+      text-align: center;  
+      margin-top: 40px;  
+      color: #9ca3af;  
+      font-size: 0.8rem;  
+      border-top: 1px solid rgba(255, 255, 255, 0.1);  
+      padding-top: 20px;  
+      width: 100%;  
+    }  
+  
+    @media (max-width: 480px) {  
+      .header-logo {  
+        width: 80px;  
+        height: 80px;  
+      }  
+      header h1 {  
+        font-size: 1.8rem;  
+      }  
+      .folder-grid {  
+        gap: 12px;  
+      }  
+      .folder-image {  
+        height: 100px;  
+      }  
+      .card {  
+        padding: 20px 15px;  
+      }  
+      .netflix-brand {  
+        gap: 8px;  
+      }  
+    }  
+  </style>  </head>  
+<body>    <!-- ================= ANIMATION INTRO STYLE NETFLIX ================= -->    <div id="intro-overlay">  
+    <div class="intro-content">  
+      <div class="netflix-brand">  
+        <span class="word-kirikou">KIRIKOU</span>  
+        <span class="word-creation">CRÉATION</span>  
+      </div>  
+    </div>  
+  </div>    <div class="container">  
+    <header>  
+      <img src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg" alt="KIRIKOU CRÉATION Logo" class="header-logo">  
+      <h1>KIRIKOU <span>CRÉATION</span></h1>  
+      <p>CARTE MÉRU, PAYPAL & RECHARGE PAIEMENT</p>  
+    </header>  <!-- ================= 4 DOSSIERS (GRID 2x2 LAYOUT) ================= -->  
+<div class="folder-grid" id="main-grid">  
+  <!-- Ligne 1 Gòch: Création Méru -->  
+  <div class="folder-card" onclick="openFolder('view-meru-create')">  
+    <div class="folder-image">  
+      <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Création Méru">  
+    </div>  
+    <div class="folder-info">  
+      <h3>Création Méru</h3>  
+      <p>2 000 HTG</p>  
+    </div>  
+  </div>  
+
+  <!-- Ligne 1 Dwat: Création PayPal -->  
+  <div class="folder-card" onclick="openFolder('view-paypal-create')">  
+    <div class="folder-image">  
+      <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Création PayPal">  
+    </div>  
+    <div class="folder-info">  
+      <h3>Création PayPal</h3>  
+      <p>1 500 HTG</p>  
+    </div>  
+  </div>  
+
+  <!-- Ligne 2 Gòch: Recharge Méru -->  
+  <div class="folder-card" onclick="openFolder('view-meru-rech')">  
+    <div class="folder-image">  
+      <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Recharge Méru">  
+    </div>  
+    <div class="folder-info">  
+      <h3>Recharge Méru</h3>  
+      <p>1$ = 145 HTG</p>  
+    </div>  
+  </div>  
+
+  <!-- Ligne 2 Dwat: Recharge PayPal -->  
+  <div class="folder-card" onclick="openFolder('view-paypal-rech')">  
+    <div class="folder-image">  
+      <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Recharge PayPal">  
+    </div>  
+    <div class="folder-info">  
+      <h3>Recharge PayPal</h3>  
+      <p>1$ = 146 HTG</p>  
+    </div>  
+  </div>  
+</div>  
+
+<!-- ================= ZÒN FÒM YO ================= -->  
+<div id="forms-wrapper">  
+
+  <!-- ================= SERVICE 1: CRÉATION MÉRU ================= -->  
+  <div class="view-area" id="view-meru-create">  
+    <div class="form-header-bar">  
+      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+      <div class="btn-close-x" onclick="goBack()">&times;</div>  
+    </div>  
+    <div class="card">  
+      <h2 class="card-title">CRÉATION CARTE MÉRU VISA VIRTUELLE</h2>  
+      <div class="price-badge">2 000 HTG</div>  
+      <div class="bonus-tag"><i class="fa-solid fa-gift"></i> Bonus : 5 $ USD sur la carte</div>  
+
+      <form autocomplete="off">  
+        <div class="form-group">  
+          <label>Nom</label>  
+          <input type="text" class="req-meru" id="meru-nom" placeholder="Entrez votre nom">  
+        </div>  
+        <div class="form-group">  
+          <label>Prénom</label>  
+          <input type="text" class="req-meru" id="meru-prenom" placeholder="Entrez votre prénom">  
+        </div>  
+        <div class="form-group">  
+          <label>Email</label>  
+          <input type="email" class="req-meru" id="meru-email" placeholder="exemple@mail.com">  
+        </div>  
+        <div class="form-group">  
+          <label>Mot de passe</label>  
+          <input type="password" class="req-meru" id="meru-password" placeholder="Entrez votre mot de passe">  
+        </div>  
+        <div class="form-group">  
+          <label>Date de naissance (JJ/MM/AAAA)</label>  
+          <input type="text" class="req-meru" id="meru-dob" placeholder="13/08/2008" maxlength="10">  
+          <div class="age-msg" id="meru-age-msg"></div>  
+        </div>  
+        <div class="form-group">  
+          <label>Numéro de téléphone</label>  
+          <input type="tel" class="req-meru phone-input" id="meru-phone" value="+509 " placeholder="+509 XXXX XXXX">  
+        </div>  
+        <div class="form-group">  
+          <label>Choix du document</label>  
+          <select class="req-meru" id="meru-doc">  
+            <option value="">-- Sélectionnez un document --</option>  
+            <option value="Passeport">Passeport</option>  
+            <option value="Carte électorale">Carte électorale</option>  
+          </select>  
+        </div>  
+
+        <div class="natcash-box">  
+          <div class="natcash-title">Mode de paiement</div>  
+          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+        </div>  
+
+        <button type="button" class="btn-submit" id="btn-meru" disabled>  
+          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+        </button>  
+      </form>  
+    </div>  
+  </div>  
+
+  <!-- ================= SERVICE 2: RECHARGE MÉRU ================= -->  
+  <div class="view-area" id="view-meru-rech">  
+    <div class="form-header-bar">  
+      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+      <div class="btn-close-x" onclick="goBack()">&times;</div>  
+    </div>  
+    <div class="card">  
+      <h2 class="card-title">KIRIKOU RECHAJE MÉRU</h2>  
+      <div class="price-badge">1$ = 145 HTG</div>  
+
+      <form autocomplete="off">  
+        <div class="form-group">  
+          <label>Mode de saisie du montant</label>  
+          <select id="rech-meru-mode" onchange="switchRechargeMode('meru', 145)">  
+            <option value="USD">Montant en USD ($)</option>  
+            <option value="HTG">Montant en HTG (Gourdes)</option>  
+          </select>  
+        </div>  
+
+        <div class="form-group">  
+          <label id="lbl-meru-amt">Montant en USD ($) [Max 1000$]</label>  
+          <input type="number" class="req-rech-meru" id="rech-meru-amount" placeholder="Ex: 50" min="1" step="any">  
+        </div>  
+
+        <div class="form-group">  
+          <label>Email Méru</label>  
+          <input type="email" class="req-rech-meru" id="rech-meru-email" placeholder="exemple@mail.com">  
+        </div>  
+        <div class="form-group">  
+          <label>$merutag</label>  
+          <input type="text" class="req-rech-meru" id="rech-meru-tag" placeholder="$votre_tag">  
+        </div>  
+        <div class="form-group">  
+          <label>Tel</label>  
+          <input type="tel" class="req-rech-meru phone-input" id="rech-meru-phone" value="+509 " placeholder="+509 XXXX XXXX">  
+        </div>  
+
+        <div class="calc-box">  
+          <div><span>Montant recharge:</span> <span id="rech-meru-subtotal">0 HTG</span></div>  
+          <div><span>Frais:</span> <span id="rech-meru-fee">0 HTG</span></div>  
+          <div><span>Valeur reçue (USD):</span> <span id="rech-meru-received">0 $ USD</span></div>  
+          <div class="total"><span>TOTAL À PAYER:</span> <span id="rech-meru-total">0 HTG</span></div>  
+        </div>  
+
+        <div class="natcash-box">  
+          <div class="natcash-title">Mode de paiement</div>  
+          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+        </div>  
+
+        <button type="button" class="btn-submit" id="btn-rech-meru" disabled>  
+          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+        </button>  
+      </form>  
+    </div>  
+  </div>  
+
+  <!-- ================= SERVICE 3: CRÉATION PAYPAL ================= -->  
+  <div class="view-area" id="view-paypal-create">  
+    <div class="form-header-bar">  
+      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+      <div class="btn-close-x" onclick="goBack()">&times;</div>  
+    </div>  
+    <div class="card">  
+      <h2 class="card-title">CRÉATION DE COMPTE PAYPAL</h2>  
+      <div class="price-badge">1 500 HTG</div>  
+
+      <form autocomplete="off">  
+        <div class="form-group">  
+          <label>Nom</label>  
+          <input type="text" class="req-paypal" id="paypal-nom" placeholder="Entrez votre nom">  
+        </div>  
+        <div class="form-group">  
+          <label>Prénom</label>  
+          <input type="text" class="req-paypal" id="paypal-prenom" placeholder="Entrez votre prénom">  
+        </div>  
+        <div class="form-group">  
+          <label>Email</label>  
+          <input type="email" class="req-paypal" id="paypal-email" placeholder="exemple@mail.com">  
+        </div>  
+        <div class="form-group">  
+          <label>Mot de passe</label>  
+          <input type="password" class="req-paypal" id="paypal-password" placeholder="Entrez votre mot de passe">  
+        </div>  
+        <div class="form-group">  
+          <label>Date de naissance (JJ/MM/AAAA)</label>  
+          <input type="text" class="req-paypal" id="paypal-dob" placeholder="13/08/2008" maxlength="10">  
+          <div class="age-msg" id="paypal-age-msg"></div>  
+        </div>  
+        <div class="form-group">  
+          <label>Numéro de téléphone</label>  
+          <input type="tel" class="req-paypal phone-input" id="paypal-phone" value="+509 " placeholder="+509 XXXX XXXX">  
+        </div>  
+        <div class="form-group">  
+          <label>Choix du document</label>  
+          <select class="req-paypal" id="paypal-doc">  
+            <option value="">-- Sélectionnez un document --</option>  
+            <option value="Passeport">Passeport</option>  
+            <option value="Carte électorale">Carte électorale</option>  
+          </select>  
+        </div>  
+
+        <div class="natcash-box">  
+          <div class="natcash-title">Mode de paiement</div>  
+          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+        </div>  
+
+        <button type="button" class="btn-submit" id="btn-paypal" disabled>  
+          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+        </button>  
+      </form>  
+    </div>  
+  </div>  
+
+  <!-- ================= SERVICE 4: RECHAJE PAYPAL ================= -->  
+  <div class="view-area" id="view-paypal-rech">  
+    <div class="form-header-bar">  
+      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+      <div class="btn-close-x" onclick="goBack()">&times;</div>  
+    </div>  
+    <div class="card">  
+      <h2 class="card-title">KIRIKOU RECHAJE PAYPAL</h2>  
+      <div class="price-badge">1$ = 146 HTG</div>  
+
+      <form autocomplete="off">  
+        <div class="form-group">  
+          <label>Mode de saisie du montant</label>  
+          <select id="rech-paypal-mode" onchange="switchRechargeMode('paypal', 146)">  
+            <option value="USD">Montant en USD ($)</option>  
+            <option value="HTG">Montant en HTG (Gourdes)</option>  
+          </select>  
+        </div>  
+
+        <div class="form-group">  
+          <label id="lbl-paypal-amt">Montant en USD ($) [Max 1000$]</label>  
+          <input type="number" class="req-rech-paypal" id="rech-paypal-amount" placeholder="Ex: 50" min="1" step="any">  
+        </div>  
+
+        <div class="form-group">  
+          <label>Email PayPal</label>  
+          <input type="email" class="req-rech-paypal" id="rech-paypal-email" placeholder="exemple@mail.com">  
+        </div>  
+        <div class="form-group">  
+          <label>Tel</label>  
+          <input type="tel" class="req-rech-paypal phone-input" id="rech-paypal-phone" value="+509 " placeholder="+509 XXXX XXXX">  
+        </div>  
+
+        <div class="calc-box">  
+          <div><span>Montant recharge:</span> <span id="rech-paypal-subtotal">0 HTG</span></div>  
+          <div><span>Frais:</span> <span id="rech-paypal-fee">0 HTG</span></div>  
+          <div><span>Valeur reçue (USD):</span> <span id="rech-paypal-received">0 $ USD</span></div>  
+          <div class="total"><span>TOTAL À PAYER:</span> <span id="rech-paypal-total">0 HTG</span></div>  
+        </div>  
+
+        <div class="natcash-box">  
+          <div class="natcash-title">Mode de paiement</div>  
+          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+        </div>  
+
+        <button type="button" class="btn-submit" id="btn-rech-paypal" disabled>  
+          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+        </button>  
+      </form>  
+    </div>  
+  </div>  
+
+</div>  
+
+<footer>  
+  <p>&copy; KIRIKOU CRÉATION. Tous droits réservés. Vos informations personnelles sont traitées de manière sécurisée et ne sont pas conservées sur le serveur.</p>  
+</footer>
+
+  </div>    <script>  
+    const WHATSAPP_RECEIVER = "50932694670";  
+  
+    /* ==================== ANIMATION INTRO LOGIC ==================== */  
+    document.addEventListener('DOMContentLoaded', () => {  
+      const introOverlay = document.getElementById('intro-overlay');  
+  
+      setTimeout(() => {  
+        introOverlay.classList.add('fade-out');  
+        setTimeout(() => {  
+          introOverlay.style.display = 'none';  
+        }, 800);  
+      }, 3800);  
+  
+      // Gestyon automatik préfixe +509 pou tout chan telefòn  
+      initPhoneInputs();  
+  
+      // Initialisation des services  
+      initService('req-meru', 'meru-dob', 'meru-age-msg', 'btn-meru', 'MERU');  
+      initService('req-paypal', 'paypal-dob', 'paypal-age-msg', 'btn-paypal', 'PAYPAL');  
+      initRechargeService('meru', 145);  
+      initRechargeService('paypal', 146);  
+    });  
+  
+    /* ==================== GESTION PREFIXE +509 ==================== */  
+    function formatPhoneValue(val) {  
+      let cleaned = val.replace(/[^\d+]/g, '');  
+      if (!cleaned.startsWith('+509')) {  
+        let digits = cleaned.replace(/\D/g, '');  
+        if (digits.startsWith('509')) {  
+          digits = digits.substring(3);  
+        }  
+        return '+509 ' + digits;  
+      }  
+      let rest = cleaned.substring(4).replace(/\D/g, '');  
+      return '+509 ' + rest;  
+    }  
+  
+    function initPhoneInputs() {  
+      const phoneInputs = document.querySelectorAll('.phone-input');  
+      phoneInputs.forEach(input => {  
+        if (!input.value || input.value.trim() === '') {  
+          input.value = '+509 ';  
+        }  
+        input.addEventListener('focus', () => {  
+          if (!input.value.startsWith('+509')) {  
+            input.value = '+509 ';  
+          }  
+        });  
+        input.addEventListener('input', (e) => {  
+          let cursor = e.target.selectionStart;  
+          input.value = formatPhoneValue(input.value);  
+        });  
+        input.addEventListener('blur', () => {  
+          if (input.value.trim() === '+509') {  
+            input.value = '+509 ';  
+          }  
+        });  
+      });  
+    }  
+  
+    function cleanFinalPhone(rawVal) {  
+      let digits = rawVal.replace(/\D/g, '');  
+      if (digits.startsWith('509')) {  
+        digits = digits.substring(3);  
+      }  
+      return '+509' + digits;  
+    }  
+  
+    /* ==================== NAVEGASYON ANNDAN DOSYE ==================== */  
+    function openFolder(folderId) {  
+      document.getElementById('main-grid').style.display = 'none';  
+      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));  
+      document.getElementById(folderId).classList.add('active');  
+      window.scrollTo({ top: 0, behavior: 'smooth' });  
+    }  
+  
+    function goBack() {  
+      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));  
+      document.getElementById('main-grid').style.display = 'grid';  
+      window.scrollTo({ top: 0, behavior: 'smooth' });  
+    }  
+  
+    /* ==================== AGE VERIFICATION ==================== */  
+    function verifierAgeExact(strDob) {  
+      const regexDob = /^(\d{2})\/(\d{2})\/(\d{4})$/;  
+      const match = strDob.match(regexDob);  
+      if (!match) return { status: "INVALID_FORMAT" };  
+  
+      const day = parseInt(match[1], 10);  
+      const month = parseInt(match[2], 10) - 1;  
+      const year = parseInt(match[3], 10);  
+      const birthDate = new Date(year, month, day);  
+  
+      if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {  
+        return { status: "INVALID_DATE" };  
+      }  
+  
+      const today = new Date();  
+      let age = today.getFullYear() - birthDate.getFullYear();  
+      const monthDiff = today.getMonth() - birthDate.getMonth();  
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {  
+        age--;  
+      }  
+  
+      return age >= 18 ? { status: "OK", age: age } : { status: "UNDERAGE", age: age };  
+    }  
+  
+    function autoFormatDob(e) {  
+      let value = e.target.value.replace(/\D/g, '');  
+      if (value.length > 8) value = value.substring(0, 8);  
+  
+      if (value.length > 4) {  
+        e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4);  
+      } else if (value.length > 2) {  
+        e.target.value = value.substring(0, 2) + '/' + value.substring(2);  
+      } else {  
+        e.target.value = value;  
+      }  
+    }  
+  
+    function validerFormulaire(reqClass, dobId, msgId, btnId) {  
+      const inputs = document.querySelectorAll('.' + reqClass);  
+      const dobInput = document.getElementById(dobId);  
+      const msgElem = document.getElementById(msgId);  
+      const btn = document.getElementById(btnId);  
+  
+      let toutRempli = true;  
+      inputs.forEach(input => {  
+        let val = input.value.trim();  
+        if (input.classList.contains('phone-input')) {  
+          let digits = val.replace(/\D/g, '');  
+          if (digits.length <= 3) toutRempli = false; // Sèlman 509 san rès num an  
+        } else if (val === '') {  
+          toutRempli = false;  
+        }  
+      });  
+  
+      const valDob = dobInput.value.trim();  
+      let ageValide = false;  
+  
+      if (valDob === '') {  
+        msgElem.textContent = '';  
+        msgElem.className = 'age-msg';  
+      } else if (valDob.length < 10) {  
+        msgElem.textContent = '❌ Date de naissance incorrecte.';  
+        msgElem.className = 'age-msg msg-error';  
+      } else {  
+        const res = verifierAgeExact(valDob);  
+        if (res.status === "OK") {  
+          msgElem.textContent = '✅ Âge vérifié — Vous pouvez continuer.';  
+          msgElem.className = 'age-msg msg-success';  
+          ageValide = true;  
+        } else if (res.status === "UNDERAGE") {  
+          msgElem.textContent = '❌ Incorrect — Vous devez avoir 18 ans ou plus.';  
+          msgElem.className = 'age-msg msg-error';  
+        } else {  
+          msgElem.textContent = '❌ Date de naissance incorrecte.';  
+          msgElem.className = 'age-msg msg-error';  
+        }  
+      }  
+  
+      btn.disabled = !(toutRempli && ageValide);  
+    }  
+  
+    function initService(reqClass, dobId, msgId, btnId, serviceType) {  
+      const inputs = document.querySelectorAll('.' + reqClass);  
+      const dobInput = document.getElementById(dobId);  
+  
+      dobInput.addEventListener('input', (e) => {  
+        autoFormatDob(e);  
+        validerFormulaire(reqClass, dobId, msgId, btnId);  
+      });  
+  
+      inputs.forEach(input => {  
+        input.addEventListener('input', () => validerFormulaire(reqClass, dobId, msgId, btnId));  
+        input.addEventListener('change', () => validerFormulaire(reqClass, dobId, msgId, btnId));  
+      });  
+  
+      document.getElementById(btnId).addEventListener('click', () => {  
+        if (document.getElementById(btnId).disabled) return;  
+        let prefix = serviceType === 'MERU' ? 'meru-' : 'paypal-';  
+        const nom = document.getElementById(prefix + 'nom').value.trim();  
+        const prenom = document.getElementById(prefix + 'prenom').value.trim();  
+        const email = document.getElementById(prefix + 'email').value.trim();  
+        const password = document.getElementById(prefix + 'password').value.trim();  
+        const dob = document.getElementById(prefix + 'dob').value.trim();  
+        const phone = cleanFinalPhone(document.getElementById(prefix + 'phone').value);  
+        const doc = document.getElementById(prefix + 'doc').value;  
+  
+        let message = serviceType === 'MERU' ?  
+          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander une Carte MÉRU Visa Virtuelle.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 2 000 HTG\nBonus : 5 $ USD sur la carte\n\nPaiement : NatCash (+509 40414694)` :  
+          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander la création d’un compte PayPal.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 1 500 HTG\n\nPaiement : NatCash (+509 40414694)`;  
+  
+        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');  
+      });  
+    }  
+  
+    /* ==================== LOGIQUE RECHARGE (MÉRU / PAYPAL) ==================== */  
+    // Frais: Plafond (Montant USD / 10)  
+    function calculerFraisUsd(amountUsd) {  
+      if (amountUsd <= 0) return 0;  
+      return Math.ceil(amountUsd / 10);  
+    }  
+  
+    function switchRechargeMode(type, rate) {  
+      const mode = document.getElementById(`rech-${type}-mode`).value;  
+      const lbl = document.getElementById(`lbl-${type}-amt`);  
+      const input = document.getElementById(`rech-${type}-amount`);  
+      input.value = '';  
+  
+      if (mode === 'USD') {  
+        lbl.textContent = 'Montant en USD ($) [Max 1000$]';  
+        input.placeholder = 'Ex: 50';  
+      } else {  
+        lbl.textContent = `Montant en HTG (Gourdes) [Max ${ (1000 * rate).toLocaleString('fr-FR') } HTG]`;  
+        input.placeholder = `Ex: ${50 * rate}`;  
+      }  
+  
+      updateRechargeCalc(type, rate);  
+    }  
+  
+    function getRechargeData(type, rate) {  
+      const mode = document.getElementById(`rech-${type}-mode`).value;  
+      const inputVal = parseFloat(document.getElementById(`rech-${type}-amount`).value) || 0;  
+  
+      let usdAmount = 0;  
+      let htgSubtotal = 0;  
+  
+      if (mode === 'USD') {  
+        usdAmount = inputVal;  
+        htgSubtotal = usdAmount * rate;  
+      } else {  
+        // Antre nan HTG  
+        htgSubtotal = inputVal;  
+        usdAmount = inputVal / rate;  
+      }  
+  
+      // Format desimal USD  
+      usdAmount = parseFloat(usdAmount.toFixed(2));  
+  
+      let feeUsd = 0;  
+      let feeHtg = 0;  
+      let totalHtg = 0;  
+      let isValid = false;  
+  
+      if (usdAmount > 0 && usdAmount <= 1000) {  
+        feeUsd = calculerFraisUsd(usdAmount);  
+        feeHtg = feeUsd * rate;  
+        totalHtg = htgSubtotal + feeHtg;  
+        isValid = true;  
+      }  
+  
+      return {  
+        mode,  
+        inputVal,  
+        usdAmount,  
+        htgSubtotal,  
+        feeUsd,  
+        feeHtg,  
+        totalHtg,  
+        isValid  
+      };  
+    }  
+  
+    function updateRechargeCalc(type, rate) {  
+      const data = getRechargeData(type, rate);  
+      const subtotalElem = document.getElementById(`rech-${type}-subtotal`);  
+      const feeElem = document.getElementById(`rech-${type}-fee`);  
+      const receivedElem = document.getElementById(`rech-${type}-received`);  
+      const totalElem = document.getElementById(`rech-${type}-total`);  
+  
+      if (data.isValid) {  
+        subtotalElem.textContent = `${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG`;  
+        feeElem.textContent = `${data.feeHtg.toLocaleString('fr-FR')} HTG (${data.feeUsd}$)`;  
+        receivedElem.textContent = `${data.usdAmount} $ USD`;  
+        totalElem.textContent = `${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG`;  
+      } else {  
+        subtotalElem.textContent = '0 HTG';  
+        feeElem.textContent = '0 HTG';  
+        receivedElem.textContent = '0 $ USD';  
+        totalElem.textContent = '0 HTG';  
+      }  
+    }  
+  
+    function initRechargeService(type, rate) {  
+      const reqClass = `req-rech-${type}`;  
+      const btnId = `btn-rech-${type}`;  
+      const inputs = document.querySelectorAll('.' + reqClass);  
+  
+      const validate = () => {  
+        let ok = true;  
+        inputs.forEach(input => {  
+          let val = input.value.trim();  
+          if (input.classList.contains('phone-input')) {  
+            let digits = val.replace(/\D/g, '');  
+            if (digits.length <= 3) ok = false;  
+          } else if (val === '') {  
+            ok = false;  
+          }  
+        });  
+  
+        const data = getRechargeData(type, rate);  
+        if (!data.isValid) ok = false;  
+  
+        document.getElementById(btnId).disabled = !ok;  
+        updateRechargeCalc(type, rate);  
+      };  
+  
+      inputs.forEach(input => {  
+        input.addEventListener('input', validate);  
+        input.addEventListener('change', validate);  
+      });  
+  
+      document.getElementById(btnId).addEventListener('click', () => {  
+        if (document.getElementById(btnId).disabled) return;  
+        const data = getRechargeData(type, rate);  
+        const email = document.getElementById(`rech-${type}-email`).value.trim();  
+        const phone = cleanFinalPhone(document.getElementById(`rech-${type}-phone`).value);  
+  
+        let message = "";  
+        let serviceName = type === 'meru' ? 'RECHARGE MÉRU' : 'RECHARGE PAYPAL';  
+  
+        if (type === 'meru') {  
+          const tag = document.getElementById('rech-meru-tag').value.trim();  
+          message = `Bonjour KIRIKOU CRÉATION,\n\n` +  
+                    `Je souhaite faire une ${serviceName}.\n\n` +  
+                    `Service : MÉRU\n` +  
+                    `Montant Recharge : ${data.usdAmount} $ USD (${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG)\n` +  
+                    `Valeur reçue : ${data.usdAmount} $ USD\n` +  
+                    `Email Méru : ${email}\n` +  
+                    `$merutag : ${tag}\n` +  
+                    `Tel : ${phone}\n\n` +  
+                    `Taux utilisé : 1$ = ${rate} HTG\n` +  
+                    `Frais : ${data.feeUsd} $ USD (${data.feeHtg} HTG)\n` +  
+                    `Total à payer en HTG : ${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG\n\n` +  
+                    `Paiement : NatCash (+509 40414694)`;  
+        } else {  
+          message = `Bonjour KIRIKOU CRÉATION,\n\n` +  
+                    `Je souhaite faire une ${serviceName}.\n\n` +  
+                    `Service : PAYPAL\n` +  
+                    `Montant Recharge : ${data.usdAmount} $ USD (${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG)\n` +  
+                    `Valeur reçue : ${data.usdAmount} $ USD\n` +  
+                    `Email PayPal : ${email}\n` +  
+                    `Tel : ${phone}\n\n` +  
+                    `Taux utilisé : 1$ = ${rate} HTG\n` +  
+                    `Frais : ${data.feeUsd} $ USD (${data.feeHtg} HTG)\n` +  
+                    `Total à payer en HTG : ${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG\n\n` +  
+                    `Paiement : NatCash (+509 40414694)`;  
+        }  
+  
+        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');  
+      });  
+    }  
+  </script>  </body>  
+</html>  
