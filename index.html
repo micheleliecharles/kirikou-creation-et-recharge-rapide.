@@ -3,9 +3,13 @@
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>KIRIKOU CRÉATION | Sèvis Carte, PayPal & Rechaj</title>    <!-- SEO & Social Meta Tags -->    <meta name="description" content="KIRIKOU CRÉATION - Sèvis Création Carte Méru Visa, Compte PayPal, Recharge Méru ak Recharge PayPal an Ayiti rapid e an sekirite.">  
+  <title>KIRIKOU CRÉATION | Sèvis Carte, PayPal & Rechaj</title>    
+  <!-- SEO & Social Meta Tags -->    
+  <meta name="description" content="KIRIKOU CRÉATION - Sèvis Création Carte Méru Visa, Compte PayPal, Recharge Méru ak Recharge PayPal an Ayiti rapid e an sekirite.">  
   <meta name="keywords" content="Kirikou Creation, Meru Visa, Recharge Meru, PayPal Haiti, Recharge PayPal, NatCash, MonCash">  
-  <meta name="robots" content="index, follow">    <!-- Schema.org Structured Data -->    <script type="application/ld+json">  
+  <meta name="robots" content="index, follow">    
+  <!-- Schema.org Structured Data -->    
+  <script type="application/ld+json">  
   {  
     "@context": "https://schema.org",  
     "@type": "FinancialService",  
@@ -15,10 +19,14 @@
     "paymentAccepted": "NatCash, MonCash",  
     "priceRange": "HTG"  
   }  
-  </script>    <!-- Google Fonts: Bebas Neue & Poppins -->    <link rel="preconnect" href="https://fonts.googleapis.com">  
+  </script>    
+  <!-- Google Fonts: Bebas Neue & Poppins -->    
+  <link rel="preconnect" href="https://fonts.googleapis.com">  
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <style>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+  
+  <style>  
     /* ==================== NETFLIX STYLE INTRO ANIMATION ==================== */  
     #intro-overlay {  
       position: fixed;  
@@ -317,7 +325,7 @@
       margin-bottom: 20px;  
     }  
   
-    /* ==================== FORMULAIRES ==================== */  
+    /* ==================== FORMULAIRES & CONVERSION CARD ==================== */  
     .form-group {  
       margin-bottom: 18px;  
     }  
@@ -357,13 +365,100 @@
       background-color: #12181f;  
       color: #ffffff;  
     }  
+
+    /* NEW CONVERSION BOX DESIGN */  
+    .conversion-card {  
+      background: rgba(0, 0, 0, 0.35);  
+      border: 1px solid rgba(255, 255, 255, 0.15);  
+      border-radius: 16px;  
+      padding: 18px;  
+      margin-bottom: 20px;  
+      position: relative;  
+    }  
+
+    .conv-group {  
+      margin-bottom: 12px;  
+    }  
+
+    .conv-group:last-child {  
+      margin-bottom: 0;  
+    }  
+
+    .conv-group label {  
+      display: block;  
+      font-size: 0.85rem;  
+      color: #a1a1aa;  
+      margin-bottom: 5px;  
+      font-weight: 500;  
+    }  
+
+    .conv-input-wrapper {  
+      position: relative;  
+      display: flex;  
+      align-items: center;  
+    }  
+
+    .conv-input-wrapper input {  
+      width: 100%;  
+      padding: 12px 85px 12px 15px;  
+      background: rgba(0, 0, 0, 0.55);  
+      border: 1px solid rgba(255, 255, 255, 0.2);  
+      border-radius: 12px;  
+      color: #ffffff;  
+      font-size: 1.05rem;  
+      font-weight: 600;  
+      outline: none;  
+      transition: border-color 0.3s ease;  
+    }  
+
+    .conv-input-wrapper input:focus {  
+      border-color: #25D366;  
+      background: rgba(0, 0, 0, 0.7);  
+    }  
+
+    .conv-unit {  
+      position: absolute;  
+      right: 15px;  
+      color: #25D366;  
+      font-weight: 700;  
+      font-size: 0.85rem;  
+      pointer-events: none;  
+      letter-spacing: 0.5px;  
+    }  
+
+    .swap-container {  
+      display: flex;  
+      justify-content: center;  
+      margin: 10px 0;  
+      position: relative;  
+      z-index: 2;  
+    }  
+
+    .swap-circle-btn {  
+      width: 42px;  
+      height: 42px;  
+      background: linear-gradient(135deg, #1f51ff, #7928ca);  
+      color: #ffffff;  
+      border-radius: 50%;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      cursor: pointer;  
+      box-shadow: 0 4px 15px rgba(31, 81, 255, 0.4);  
+      transition: transform 0.3s ease, background 0.3s ease;  
+      border: 1px solid rgba(255, 255, 255, 0.2);  
+    }  
+
+    .swap-circle-btn:hover {  
+      transform: scale(1.1) rotate(180deg);  
+    }  
   
     .calc-box {  
       background: rgba(37, 211, 102, 0.1);  
       border: 1px dashed rgba(37, 211, 102, 0.4);  
-      border-radius: 10px;  
-      padding: 12px;  
-      margin-bottom: 15px;  
+      border-radius: 12px;  
+      padding: 14px;  
+      margin-bottom: 20px;  
       font-size: 0.88rem;  
       color: #e0e0e0;  
     }  
@@ -371,16 +466,42 @@
     .calc-box div {  
       display: flex;  
       justify-content: space-between;  
-      margin-bottom: 6px;  
+      align-items: center;  
+      margin-bottom: 8px;  
     }  
   
     .calc-box .total {  
       border-top: 1px solid rgba(255, 255, 255, 0.2);  
-      padding-top: 6px;  
-      margin-top: 6px;  
+      padding-top: 8px;  
+      margin-top: 8px;  
       font-weight: 700;  
       color: #38ef7d;  
       font-size: 1.05rem;  
+    }  
+
+    .fee-info-link {  
+      color: #38ef7d;  
+      cursor: pointer;  
+      text-decoration: underline;  
+      font-weight: 600;  
+      font-size: 0.85rem;  
+      display: inline-flex;  
+      align-items: center;  
+      gap: 4px;  
+      transition: 0.3s;  
+    }  
+
+    .fee-info-link:hover {  
+      color: #25D366;  
+    }  
+
+    .fee-explaining-text {  
+      font-size: 0.78rem;  
+      color: #a1a1aa;  
+      font-style: italic;  
+      margin-top: 8px;  
+      line-height: 1.4;  
+      text-align: center;  
     }  
   
     .age-msg {  
@@ -481,6 +602,106 @@
       opacity: 0.6;  
       transform: none !important;  
     }  
+
+    /* ==================== MODAL GRILLE DES FRAIS ==================== */  
+    .meru-modal-overlay {  
+      position: fixed;  
+      top: 0;  
+      left: 0;  
+      width: 100%;  
+      height: 100%;  
+      background: rgba(0, 0, 0, 0.8);  
+      backdrop-filter: blur(8px);  
+      display: none;  
+      justify-content: center;  
+      align-items: center;  
+      z-index: 10000;  
+      padding: 15px;  
+    }  
+
+    .meru-modal-content {  
+      background: rgba(18, 24, 31, 0.95);  
+      border: 1px solid rgba(37, 211, 102, 0.4);  
+      border-radius: 20px;  
+      width: 100%;  
+      max-width: 500px;  
+      max-height: 90vh;  
+      overflow-y: auto;  
+      padding: 25px;  
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);  
+      position: relative;  
+      animation: modalScaleIn 0.3s ease;  
+    }  
+
+    @keyframes modalScaleIn {  
+      from {  
+        transform: scale(0.9);  
+        opacity: 0;  
+      }  
+      to {  
+        transform: scale(1);  
+        opacity: 1;  
+      }  
+    }  
+
+    .meru-modal-header {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      margin-bottom: 20px;  
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);  
+      padding-bottom: 12px;  
+    }  
+
+    .meru-modal-title {  
+      font-size: 1.1rem;  
+      font-weight: 700;  
+      color: #25D366;  
+      text-transform: uppercase;  
+      letter-spacing: 1px;  
+    }  
+
+    .meru-modal-close {  
+      font-size: 1.3rem;  
+      color: #ff4d4d;  
+      background: rgba(255, 77, 77, 0.1);  
+      border: 1px solid rgba(255, 77, 77, 0.3);  
+      border-radius: 8px;  
+      width: 35px;  
+      height: 35px;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      cursor: pointer;  
+      transition: 0.3s;  
+    }  
+
+    .meru-modal-close:hover {  
+      background: rgba(255, 77, 77, 0.25);  
+    }  
+
+    .fee-table {  
+      width: 100%;  
+      border-collapse: collapse;  
+      margin-bottom: 15px;  
+    }  
+
+    .fee-table th, .fee-table td {  
+      padding: 10px 12px;  
+      text-align: left;  
+      font-size: 0.88rem;  
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);  
+    }  
+
+    .fee-table th {  
+      color: #25D366;  
+      font-weight: 600;  
+      background: rgba(37, 211, 102, 0.08);  
+    }  
+
+    .fee-table td {  
+      color: #e0e0e0;  
+    }  
   
     /* ==================== FOOTER ==================== */  
     footer {  
@@ -514,659 +735,649 @@
         gap: 8px;  
       }  
     }  
-  </style>  </head>  
-<body>    <!-- ================= ANIMATION INTRO STYLE NETFLIX ================= -->    <div id="intro-overlay">  
+  </style>  
+</head>  
+<body>    
+  <!-- ================= ANIMATION INTRO STYLE NETFLIX ================= -->    
+  <div id="intro-overlay">  
     <div class="intro-content">  
       <div class="netflix-brand">  
         <span class="word-kirikou">KIRIKOU</span>  
         <span class="word-creation">CRÉATION</span>  
       </div>  
     </div>  
-  </div>    <div class="container">  
+  </div>    
+
+  <div class="container">  
     <header>  
       <img src="https://i.ibb.co/qMTqDdh1/IMG-20260822-WA0140.jpg" alt="KIRIKOU CRÉATION Logo" class="header-logo">  
       <h1>KIRIKOU <span>CRÉATION</span></h1>  
       <p>CARTE MÉRU, PAYPAL & RECHARGE PAIEMENT</p>  
-    </header>  <!-- ================= 4 DOSSIERS (GRID 2x2 LAYOUT) ================= -->  
-<div class="folder-grid" id="main-grid">  
-  <!-- Ligne 1 Gòch: Création Méru -->  
-  <div class="folder-card" onclick="openFolder('view-meru-create')">  
-    <div class="folder-image">  
-      <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Création Méru">  
+    </header>  
+
+    <!-- ================= 4 DOSSIERS (GRID 2x2 LAYOUT) ================= -->  
+    <div class="folder-grid" id="main-grid">  
+      <!-- Ligne 1 Gòch: Création Méru -->  
+      <div class="folder-card" onclick="openFolder('view-meru-create')">  
+        <div class="folder-image">  
+          <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Création Méru">  
+        </div>  
+        <div class="folder-info">  
+          <h3>Création Méru</h3>  
+          <p>2 000 HTG</p>  
+        </div>  
+      </div>  
+
+      <!-- Ligne 1 Dwat: Création PayPal -->  
+      <div class="folder-card" onclick="openFolder('view-paypal-create')">  
+        <div class="folder-image">  
+          <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Création PayPal">  
+        </div>  
+        <div class="folder-info">  
+          <h3>Création PayPal</h3>  
+          <p>1 500 HTG</p>  
+        </div>  
+      </div>  
+
+      <!-- Ligne 2 Gòch: Recharge Méru -->  
+      <div class="folder-card" onclick="openFolder('view-meru-rech')">  
+        <div class="folder-image">  
+          <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Recharge Méru">  
+        </div>  
+        <div class="folder-info">  
+          <h3>Recharge Méru</h3>  
+          <p>1 MÉRU = 150 HTG</p>  
+        </div>  
+      </div>  
+
+      <!-- Ligne 2 Dwat: Recharge PayPal -->  
+      <div class="folder-card" onclick="openFolder('view-paypal-rech')">  
+        <div class="folder-image">  
+          <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Recharge PayPal">  
+        </div>  
+        <div class="folder-info">  
+          <h3>Recharge PayPal</h3>  
+          <p>1 PAYPAL = 145 HTG</p>  
+        </div>  
+      </div>  
     </div>  
-    <div class="folder-info">  
-      <h3>Création Méru</h3>  
-      <p>2 000 HTG</p>  
+
+    <!-- ================= ZÒN FÒM YO ================= -->  
+    <div id="forms-wrapper">  
+
+      <!-- ================= SERVICE 1: CRÉATION MÉRU ================= -->  
+      <div class="view-area" id="view-meru-create">  
+        <div class="form-header-bar">  
+          <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+          <div class="btn-close-x" onclick="goBack()">&times;</div>  
+        </div>  
+        <div class="card">  
+          <h2 class="card-title">CRÉATION CARTE MÉRU VISA VIRTUELLE</h2>  
+          <div class="price-badge">2 000 HTG</div>  
+          <div class="bonus-tag"><i class="fa-solid fa-gift"></i> Bonus : 5 $ USD sur la carte</div>  
+
+          <form autocomplete="off">  
+            <div class="form-group">  
+              <label>Nom</label>  
+              <input type="text" class="req-meru" id="meru-nom" placeholder="Entrez votre nom">  
+            </div>  
+            <div class="form-group">  
+              <label>Prénom</label>  
+              <input type="text" class="req-meru" id="meru-prenom" placeholder="Entrez votre prénom">  
+            </div>  
+            <div class="form-group">  
+              <label>Email</label>  
+              <input type="email" class="req-meru" id="meru-email" placeholder="exemple@mail.com">  
+            </div>  
+            <div class="form-group">  
+              <label>Mot de passe</label>  
+              <input type="password" class="req-meru" id="meru-password" placeholder="Entrez votre mot de passe">  
+            </div>  
+            <div class="form-group">  
+              <label>Date de naissance (JJ/MM/AAAA)</label>  
+              <input type="text" class="req-meru" id="meru-dob" placeholder="13/08/2008" maxlength="10">  
+              <div class="age-msg" id="meru-age-msg"></div>  
+            </div>  
+            <div class="form-group">  
+              <label>Numéro de téléphone</label>  
+              <input type="tel" class="req-meru phone-input" id="meru-phone" value="+509 " placeholder="+509 XXXX XXXX">  
+            </div>  
+            <div class="form-group">  
+              <label>Choix du document</label>  
+              <select class="req-meru" id="meru-doc">  
+                <option value="">-- Sélectionnez un document --</option>  
+                <option value="Passeport">Passeport</option>  
+                <option value="Carte électorale">Carte électorale</option>  
+              </select>  
+            </div>  
+
+            <div class="natcash-box">  
+              <div class="natcash-title">Mode de paiement</div>  
+              <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+            </div>  
+
+            <button type="button" class="btn-submit" id="btn-meru" disabled>  
+              <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+            </button>  
+          </form>  
+        </div>  
+      </div>  
+
+      <!-- ================= SERVICE 2: RECHARGE MÉRU (TO 150 HTG) ================= -->  
+      <div class="view-area" id="view-meru-rech">  
+        <div class="form-header-bar">  
+          <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+          <div class="btn-close-x" onclick="goBack()">&times;</div>  
+        </div>  
+        <div class="card">  
+          <h2 class="card-title">KIRIKOU RECHAJE MÉRU</h2>  
+          <div class="price-badge">1 MÉRU = 150 HTG</div>  
+
+          <form autocomplete="off">  
+            <!-- Conversion UI Model -->  
+            <div class="conversion-card">  
+              <div class="conv-group">  
+                <label>Vous recevez</label>  
+                <div class="conv-input-wrapper">  
+                  <input type="number" id="meru-receive-input" placeholder="Ex: 50" min="1" max="1000" oninput="calculateMeruFromReceive()">  
+                  <span class="conv-unit">MÉRU</span>  
+                </div>  
+              </div>  
+
+              <div class="swap-container">  
+                <div class="swap-circle-btn" onclick="focusMeruPay()" title="Changer le sens">  
+                  <i class="fa-solid fa-arrow-right-arrow-left"></i>  
+                </div>  
+              </div>  
+
+              <div class="conv-group">  
+                <label>Vous payez</label>  
+                <div class="conv-input-wrapper">  
+                  <input type="number" id="meru-pay-input" placeholder="Ex: 7500" min="1" max="150000" oninput="calculateMeruFromPay()">  
+                  <span class="conv-unit">HTG</span>  
+                </div>  
+              </div>  
+            </div>  
+
+            <div class="calc-box">  
+              <div><span>Montant demandé :</span> <strong id="res-meru-base">0.00 MÉRU</strong></div>  
+              <div>  
+                <span>Frais appliqués :</span>   
+                <span>  
+                  <strong id="res-meru-fee">0.00 MÉRU</strong>   
+                  <span class="fee-info-link" onclick="openMeruFeeModal()"><i class="fa-solid fa-circle-info"></i> Voir les frais</span>  
+                </span>  
+              </div>  
+              <div class="total"><span>Total à payer :</span> <strong id="res-meru-total">0.00 HTG</strong></div>  
+              <div class="fee-explaining-text">Ces frais s'ajoutent au montant converti. Ils sont déjà inclus dans le total que vous payez.</div>  
+            </div>  
+
+            <div class="form-group">  
+              <label>Email du compte Méru</label>  
+              <input type="email" class="req-rech-meru" id="rech-meru-email" placeholder="exemple@mail.com" oninput="checkMeruRechForm()">  
+            </div>  
+
+            <div class="form-group">  
+              <label>Numéro de téléphone</label>  
+              <input type="tel" class="req-rech-meru phone-input" id="rech-meru-phone" value="+509 " placeholder="+509 XXXX XXXX" oninput="checkMeruRechForm()">  
+            </div>  
+
+            <div class="natcash-box">  
+              <div class="natcash-title">Mode de paiement</div>  
+              <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+            </div>  
+
+            <button type="button" class="btn-submit" id="btn-rech-meru" onclick="submitMeruRecharge()" disabled>  
+              <i class="fa-brands fa-whatsapp"></i> COMMANDER RECHARGE MÉRU  
+            </button>  
+          </form>  
+        </div>  
+      </div>  
+
+      <!-- ================= SERVICE 3: CRÉATION PAYPAL ================= -->  
+      <div class="view-area" id="view-paypal-create">  
+        <div class="form-header-bar">  
+          <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+          <div class="btn-close-x" onclick="goBack()">&times;</div>  
+        </div>  
+        <div class="card">  
+          <h2 class="card-title">KIRIKOU KREASYON PAYPAL</h2>  
+          <div class="price-badge">1 500 HTG</div>  
+          <div class="form-group">  
+            <label>Non konplè</label>  
+            <input type="text" id="paypal-create-name" placeholder="Antre non ou">  
+          </div>  
+          <div class="form-group">  
+            <label>Imèl PayPal</label>  
+            <input type="email" id="paypal-create-email" placeholder="exemple@mail.com">  
+          </div>  
+          <div class="natcash-box">  
+            <div class="natcash-title">Mode de paiement</div>  
+            <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+          </div>  
+          <button type="button" class="btn-submit" onclick="submitPayPalCreate()">  
+            <i class="fa-brands fa-whatsapp"></i> KREYE PAYPAL  
+          </button>  
+        </div>  
+      </div>  
+
+      <!-- ================= SERVICE 4: RECHARGE PAYPAL ================= -->  
+      <div class="view-area" id="view-paypal-rech">  
+        <div class="form-header-bar">  
+          <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
+          <div class="btn-close-x" onclick="goBack()">&times;</div>  
+        </div>  
+        <div class="card">  
+          <h2 class="card-title">KIRIKOU RECHAJE PAYPAL</h2>  
+          <div class="price-badge">1 PAYPAL = 145 HTG</div>  
+
+          <form autocomplete="off">  
+            <!-- Conversion UI Model -->  
+            <div class="conversion-card">  
+              <div class="conv-group">  
+                <label>Vous recevez</label>  
+                <div class="conv-input-wrapper">  
+                  <input type="number" id="paypal-receive-input" placeholder="Ex: 50" min="1" max="1000" oninput="calculatePayPalFromReceive()">  
+                  <span class="conv-unit">PAYPAL</span>  
+                </div>  
+              </div>  
+
+              <div class="swap-container">  
+                <div class="swap-circle-btn" onclick="focusPayPalPay()" title="Changer le sens">  
+                  <i class="fa-solid fa-arrow-right-arrow-left"></i>  
+                </div>  
+              </div>  
+
+              <div class="conv-group">  
+                <label>Vous payez</label>  
+                <div class="conv-input-wrapper">  
+                  <input type="number" id="paypal-pay-input" placeholder="Ex: 7250" min="1" max="145000" oninput="calculatePayPalFromPay()">  
+                  <span class="conv-unit">HTG</span>  
+                </div>  
+              </div>  
+            </div>  
+
+            <div class="calc-box">  
+              <div><span>Montant demandé :</span> <strong id="res-paypal-base">0.00 PAYPAL</strong></div>  
+              <div>  
+                <span>Frais appliqués :</span>   
+                <span>  
+                  <strong id="res-paypal-fee">0.00 PAYPAL</strong>   
+                  <span class="fee-info-link" onclick="openPayPalFeeModal()"><i class="fa-solid fa-circle-info"></i> Voir les frais</span>  
+                </span>  
+              </div>  
+              <div class="total"><span>Total à payer :</span> <strong id="res-paypal-total">0.00 HTG</strong></div>  
+              <div class="fee-explaining-text">Ces frais s'ajoutent au montant converti. Ils sont déjà inclus dans le total que vous payez.</div>  
+            </div>  
+
+            <div class="form-group">  
+              <label>Email du compte PayPal</label>  
+              <input type="email" class="req-rech-paypal" id="paypal-rech-email" placeholder="exemple@mail.com" oninput="checkPayPalRechForm()">  
+            </div>  
+
+            <div class="form-group">  
+              <label>Numéro de téléphone</label>  
+              <input type="tel" class="req-rech-paypal phone-input" id="paypal-rech-phone" value="+509 " placeholder="+509 XXXX XXXX" oninput="checkPayPalRechForm()">  
+            </div>  
+
+            <div class="natcash-box">  
+              <div class="natcash-title">Mode de paiement</div>  
+              <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+            </div>  
+
+            <button type="button" class="btn-submit" id="btn-rech-paypal" onclick="submitPayPalRecharge()" disabled>  
+              <i class="fa-brands fa-whatsapp"></i> COMMANDER RECHARGE PAYPAL  
+            </button>  
+          </form>  
+        </div>  
+      </div>  
+
+    </div>  <!-- Fin forms-wrapper -->  
+
+    <footer>  
+      <p>&copy; 2026 KIRIKOU CRÉATION. Tous droits réservés.</p>  
+    </footer>  
+  </div>  
+
+  <!-- ================= MODAL GRILLE DES FRAIS MÉRU ================= -->  
+  <div class="meru-modal-overlay" id="meruFeeModal">  
+    <div class="meru-modal-content">  
+      <div class="meru-modal-header">  
+        <div class="meru-modal-title"><i class="fa-solid fa-file-invoice-dollar"></i> Grille des Frais Méru</div>  
+        <div class="meru-modal-close" onclick="closeMeruFeeModal()">&times;</div>  
+      </div>  
+      <table class="fee-table">  
+        <thead>  
+          <tr>  
+            <th>Montant (MÉRU)</th>  
+            <th>Frais (MÉRU)</th>  
+          </tr>  
+        </thead>  
+        <tbody>  
+          <tr><td>1 – 9 MÉRU</td><td>1 MÉRU</td></tr>  
+          <tr><td>9 – 19 MÉRU</td><td>2 MÉRU</td></tr>  
+          <tr><td>19 – 49 MÉRU</td><td>3 MÉRU</td></tr>  
+          <tr><td>49 – 99 MÉRU</td><td>4 MÉRU</td></tr>  
+          <tr><td>99 – 199 MÉRU</td><td>6 MÉRU</td></tr>  
+          <tr><td>199 – 399 MÉRU</td><td>12 MÉRU</td></tr>  
+          <tr><td>399 – 499 MÉRU</td><td>15 MÉRU</td></tr>  
+          <tr><td>499 – 699 MÉRU</td><td>20 MÉRU</td></tr>  
+          <tr><td>699 – 799 MÉRU</td><td>25 MÉRU</td></tr>  
+          <tr><td>799 – 899 MÉRU</td><td>35 MÉRU</td></tr>  
+          <tr><td>899 – 1 000 MÉRU</td><td>50 MÉRU</td></tr>  
+        </tbody>  
+      </table>  
+      <div class="fee-explaining-text">  
+        Ces frais s'ajoutent au montant converti. Ils sont déjà inclus dans le total que vous payez.  
+      </div>  
     </div>  
   </div>  
 
-  <!-- Ligne 1 Dwat: Création PayPal -->  
-  <div class="folder-card" onclick="openFolder('view-paypal-create')">  
-    <div class="folder-image">  
-      <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Création PayPal">  
-    </div>  
-    <div class="folder-info">  
-      <h3>Création PayPal</h3>  
-      <p>1 500 HTG</p>  
-    </div>  
-  </div>  
-
-  <!-- Ligne 2 Gòch: Recharge Méru -->  
-  <div class="folder-card" onclick="openFolder('view-meru-rech')">  
-    <div class="folder-image">  
-      <img src="https://i.ibb.co/7d9jS2VX/Screenshot-20260820-153403-2.jpg" alt="Recharge Méru">  
-    </div>  
-    <div class="folder-info">  
-      <h3>Recharge Méru</h3>  
-      <p>1$ = 145 HTG</p>  
-    </div>  
-  </div>  
-
-  <!-- Ligne 2 Dwat: Recharge PayPal -->  
-  <div class="folder-card" onclick="openFolder('view-paypal-rech')">  
-    <div class="folder-image">  
-      <img src="https://i.ibb.co/4gn7CF6K/7c8152cb8959cd0155c5f8d6cc3c7cd6.jpg" alt="Recharge PayPal">  
-    </div>  
-    <div class="folder-info">  
-      <h3>Recharge PayPal</h3>  
-      <p>1$ = 146 HTG</p>  
-    </div>  
-  </div>  
-</div>  
-
-<!-- ================= ZÒN FÒM YO ================= -->  
-<div id="forms-wrapper">  
-
-  <!-- ================= SERVICE 1: CRÉATION MÉRU ================= -->  
-  <div class="view-area" id="view-meru-create">  
-    <div class="form-header-bar">  
-      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
-      <div class="btn-close-x" onclick="goBack()">&times;</div>  
-    </div>  
-    <div class="card">  
-      <h2 class="card-title">CRÉATION CARTE MÉRU VISA VIRTUELLE</h2>  
-      <div class="price-badge">2 000 HTG</div>  
-      <div class="bonus-tag"><i class="fa-solid fa-gift"></i> Bonus : 5 $ USD sur la carte</div>  
-
-      <form autocomplete="off">  
-        <div class="form-group">  
-          <label>Nom</label>  
-          <input type="text" class="req-meru" id="meru-nom" placeholder="Entrez votre nom">  
-        </div>  
-        <div class="form-group">  
-          <label>Prénom</label>  
-          <input type="text" class="req-meru" id="meru-prenom" placeholder="Entrez votre prénom">  
-        </div>  
-        <div class="form-group">  
-          <label>Email</label>  
-          <input type="email" class="req-meru" id="meru-email" placeholder="exemple@mail.com">  
-        </div>  
-        <div class="form-group">  
-          <label>Mot de passe</label>  
-          <input type="password" class="req-meru" id="meru-password" placeholder="Entrez votre mot de passe">  
-        </div>  
-        <div class="form-group">  
-          <label>Date de naissance (JJ/MM/AAAA)</label>  
-          <input type="text" class="req-meru" id="meru-dob" placeholder="13/08/2008" maxlength="10">  
-          <div class="age-msg" id="meru-age-msg"></div>  
-        </div>  
-        <div class="form-group">  
-          <label>Numéro de téléphone</label>  
-          <input type="tel" class="req-meru phone-input" id="meru-phone" value="+509 " placeholder="+509 XXXX XXXX">  
-        </div>  
-        <div class="form-group">  
-          <label>Choix du document</label>  
-          <select class="req-meru" id="meru-doc">  
-            <option value="">-- Sélectionnez un document --</option>  
-            <option value="Passeport">Passeport</option>  
-            <option value="Carte électorale">Carte électorale</option>  
-          </select>  
-        </div>  
-
-        <div class="natcash-box">  
-          <div class="natcash-title">Mode de paiement</div>  
-          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
-          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
-        </div>  
-
-        <button type="button" class="btn-submit" id="btn-meru" disabled>  
-          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
-        </button>  
-      </form>  
+  <!-- ================= MODAL GRILLE DES FRAIS PAYPAL ================= -->  
+  <div class="meru-modal-overlay" id="paypalFeeModal">  
+    <div class="meru-modal-content">  
+      <div class="meru-modal-header">  
+        <div class="meru-modal-title"><i class="fa-solid fa-file-invoice-dollar"></i> Grille des Frais PayPal</div>  
+        <div class="meru-modal-close" onclick="closePayPalFeeModal()">&times;</div>  
+      </div>  
+      <table class="fee-table">  
+        <thead>  
+          <tr>  
+            <th>Montant (PAYPAL)</th>  
+            <th>Frais (PAYPAL)</th>  
+          </tr>  
+        </thead>  
+        <tbody>  
+          <tr><td>0 – 10 PAYPAL</td><td>1 PAYPAL</td></tr>  
+          <tr><td>10 – 20 PAYPAL</td><td>2 PAYPAL</td></tr>  
+          <tr><td>20 – 40 PAYPAL</td><td>3 PAYPAL</td></tr>  
+          <tr><td>40 – 80 PAYPAL</td><td>4 PAYPAL</td></tr>  
+          <tr><td>80 – 100 PAYPAL</td><td>6 PAYPAL</td></tr>  
+          <tr><td>100 – 200 PAYPAL</td><td>8 PAYPAL</td></tr>  
+          <tr><td>200 – 400 PAYPAL</td><td>10 PAYPAL</td></tr>  
+          <tr><td>400 – 600 PAYPAL</td><td>12 PAYPAL</td></tr>  
+          <tr><td>600 – 1 000 PAYPAL</td><td>20 PAYPAL</td></tr>  
+        </tbody>  
+      </table>  
+      <div class="fee-explaining-text">  
+        Ces frais s'ajoutent au montant converti. Ils sont déjà inclus dans le total que vous payez.  
+      </div>  
     </div>  
   </div>  
 
-  <!-- ================= SERVICE 2: RECHARGE MÉRU ================= -->  
-  <div class="view-area" id="view-meru-rech">  
-    <div class="form-header-bar">  
-      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
-      <div class="btn-close-x" onclick="goBack()">&times;</div>  
-    </div>  
-    <div class="card">  
-      <h2 class="card-title">KIRIKOU RECHAJE MÉRU</h2>  
-      <div class="price-badge">1$ = 145 HTG</div>  
-
-      <form autocomplete="off">  
-        <div class="form-group">  
-          <label>Mode de saisie du montant</label>  
-          <select id="rech-meru-mode" onchange="switchRechargeMode('meru', 145)">  
-            <option value="USD">Montant en USD ($)</option>  
-            <option value="HTG">Montant en HTG (Gourdes)</option>  
-          </select>  
-        </div>  
-
-        <div class="form-group">  
-          <label id="lbl-meru-amt">Montant en USD ($) [Max 1000$]</label>  
-          <input type="number" class="req-rech-meru" id="rech-meru-amount" placeholder="Ex: 50" min="1" step="any">  
-        </div>  
-
-        <div class="form-group">  
-          <label>Email Méru</label>  
-          <input type="email" class="req-rech-meru" id="rech-meru-email" placeholder="exemple@mail.com">  
-        </div>  
-        <div class="form-group">  
-          <label>$merutag</label>  
-          <input type="text" class="req-rech-meru" id="rech-meru-tag" placeholder="$votre_tag">  
-        </div>  
-        <div class="form-group">  
-          <label>Tel</label>  
-          <input type="tel" class="req-rech-meru phone-input" id="rech-meru-phone" value="+509 " placeholder="+509 XXXX XXXX">  
-        </div>  
-
-        <div class="calc-box">  
-          <div><span>Montant recharge:</span> <span id="rech-meru-subtotal">0 HTG</span></div>  
-          <div><span>Frais:</span> <span id="rech-meru-fee">0 HTG</span></div>  
-          <div><span>Valeur reçue (USD):</span> <span id="rech-meru-received">0 $ USD</span></div>  
-          <div class="total"><span>TOTAL À PAYER:</span> <span id="rech-meru-total">0 HTG</span></div>  
-        </div>  
-
-        <div class="natcash-box">  
-          <div class="natcash-title">Mode de paiement</div>  
-          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
-          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
-        </div>  
-
-        <button type="button" class="btn-submit" id="btn-rech-meru" disabled>  
-          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
-        </button>  
-      </form>  
-    </div>  
-  </div>  
-
-  <!-- ================= SERVICE 3: CRÉATION PAYPAL ================= -->  
-  <div class="view-area" id="view-paypal-create">  
-    <div class="form-header-bar">  
-      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
-      <div class="btn-close-x" onclick="goBack()">&times;</div>  
-    </div>  
-    <div class="card">  
-      <h2 class="card-title">CRÉATION DE COMPTE PAYPAL</h2>  
-      <div class="price-badge">1 500 HTG</div>  
-
-      <form autocomplete="off">  
-        <div class="form-group">  
-          <label>Nom</label>  
-          <input type="text" class="req-paypal" id="paypal-nom" placeholder="Entrez votre nom">  
-        </div>  
-        <div class="form-group">  
-          <label>Prénom</label>  
-          <input type="text" class="req-paypal" id="paypal-prenom" placeholder="Entrez votre prénom">  
-        </div>  
-        <div class="form-group">  
-          <label>Email</label>  
-          <input type="email" class="req-paypal" id="paypal-email" placeholder="exemple@mail.com">  
-        </div>  
-        <div class="form-group">  
-          <label>Mot de passe</label>  
-          <input type="password" class="req-paypal" id="paypal-password" placeholder="Entrez votre mot de passe">  
-        </div>  
-        <div class="form-group">  
-          <label>Date de naissance (JJ/MM/AAAA)</label>  
-          <input type="text" class="req-paypal" id="paypal-dob" placeholder="13/08/2008" maxlength="10">  
-          <div class="age-msg" id="paypal-age-msg"></div>  
-        </div>  
-        <div class="form-group">  
-          <label>Numéro de téléphone</label>  
-          <input type="tel" class="req-paypal phone-input" id="paypal-phone" value="+509 " placeholder="+509 XXXX XXXX">  
-        </div>  
-        <div class="form-group">  
-          <label>Choix du document</label>  
-          <select class="req-paypal" id="paypal-doc">  
-            <option value="">-- Sélectionnez un document --</option>  
-            <option value="Passeport">Passeport</option>  
-            <option value="Carte électorale">Carte électorale</option>  
-          </select>  
-        </div>  
-
-        <div class="natcash-box">  
-          <div class="natcash-title">Mode de paiement</div>  
-          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
-          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
-        </div>  
-
-        <button type="button" class="btn-submit" id="btn-paypal" disabled>  
-          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
-        </button>  
-      </form>  
-    </div>  
-  </div>  
-
-  <!-- ================= SERVICE 4: RECHAJE PAYPAL ================= -->  
-  <div class="view-area" id="view-paypal-rech">  
-    <div class="form-header-bar">  
-      <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
-      <div class="btn-close-x" onclick="goBack()">&times;</div>  
-    </div>  
-    <div class="card">  
-      <h2 class="card-title">KIRIKOU RECHAJE PAYPAL</h2>  
-      <div class="price-badge">1$ = 146 HTG</div>  
-
-      <form autocomplete="off">  
-        <div class="form-group">  
-          <label>Mode de saisie du montant</label>  
-          <select id="rech-paypal-mode" onchange="switchRechargeMode('paypal', 146)">  
-            <option value="USD">Montant en USD ($)</option>  
-            <option value="HTG">Montant en HTG (Gourdes)</option>  
-          </select>  
-        </div>  
-
-        <div class="form-group">  
-          <label id="lbl-paypal-amt">Montant en USD ($) [Max 1000$]</label>  
-          <input type="number" class="req-rech-paypal" id="rech-paypal-amount" placeholder="Ex: 50" min="1" step="any">  
-        </div>  
-
-        <div class="form-group">  
-          <label>Email PayPal</label>  
-          <input type="email" class="req-rech-paypal" id="rech-paypal-email" placeholder="exemple@mail.com">  
-        </div>  
-        <div class="form-group">  
-          <label>Tel</label>  
-          <input type="tel" class="req-rech-paypal phone-input" id="rech-paypal-phone" value="+509 " placeholder="+509 XXXX XXXX">  
-        </div>  
-
-        <div class="calc-box">  
-          <div><span>Montant recharge:</span> <span id="rech-paypal-subtotal">0 HTG</span></div>  
-          <div><span>Frais:</span> <span id="rech-paypal-fee">0 HTG</span></div>  
-          <div><span>Valeur reçue (USD):</span> <span id="rech-paypal-received">0 $ USD</span></div>  
-          <div class="total"><span>TOTAL À PAYER:</span> <span id="rech-paypal-total">0 HTG</span></div>  
-        </div>  
-
-        <div class="natcash-box">  
-          <div class="natcash-title">Mode de paiement</div>  
-          <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-          <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
-          <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
-        </div>  
-
-        <button type="button" class="btn-submit" id="btn-rech-paypal" disabled>  
-          <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
-        </button>  
-      </form>  
-    </div>  
-  </div>  
-
-</div>  
-
-<footer>  
-  <p>&copy; KIRIKOU CRÉATION. Tous droits réservés. Vos informations personnelles sont traitées de manière sécurisée et ne sont pas conservées sur le serveur.</p>  
-</footer>
-
-  </div>    <script>  
-    const WHATSAPP_RECEIVER = "50932694670";  
-  
-    /* ==================== ANIMATION INTRO LOGIC ==================== */  
-    document.addEventListener('DOMContentLoaded', () => {  
-      const introOverlay = document.getElementById('intro-overlay');  
-  
+  <!-- ================= SCRIPT JAVASCRIPT ================= -->  
+  <script>  
+    // Intro Animation Timeout  
+    window.addEventListener('load', () => {  
       setTimeout(() => {  
-        introOverlay.classList.add('fade-out');  
-        setTimeout(() => {  
-          introOverlay.style.display = 'none';  
-        }, 800);  
-      }, 3800);  
-  
-      // Gestyon automatik préfixe +509 pou tout chan telefòn  
-      initPhoneInputs();  
-  
-      // Initialisation des services  
-      initService('req-meru', 'meru-dob', 'meru-age-msg', 'btn-meru', 'MERU');  
-      initService('req-paypal', 'paypal-dob', 'paypal-age-msg', 'btn-paypal', 'PAYPAL');  
-      initRechargeService('meru', 145);  
-      initRechargeService('paypal', 146);  
+        const intro = document.getElementById('intro-overlay');  
+        if (intro) {  
+          intro.classList.add('fade-out');  
+          setTimeout(() => intro.remove(), 800);  
+        }  
+      }, 3500);  
     });  
-  
-    /* ==================== GESTION PREFIXE +509 ==================== */  
-    function formatPhoneValue(val) {  
-      let cleaned = val.replace(/[^\d+]/g, '');  
-      if (!cleaned.startsWith('+509')) {  
-        let digits = cleaned.replace(/\D/g, '');  
-        if (digits.startsWith('509')) {  
-          digits = digits.substring(3);  
-        }  
-        return '+509 ' + digits;  
-      }  
-      let rest = cleaned.substring(4).replace(/\D/g, '');  
-      return '+509 ' + rest;  
-    }  
-  
-    function initPhoneInputs() {  
-      const phoneInputs = document.querySelectorAll('.phone-input');  
-      phoneInputs.forEach(input => {  
-        if (!input.value || input.value.trim() === '') {  
-          input.value = '+509 ';  
-        }  
-        input.addEventListener('focus', () => {  
-          if (!input.value.startsWith('+509')) {  
-            input.value = '+509 ';  
-          }  
-        });  
-        input.addEventListener('input', (e) => {  
-          let cursor = e.target.selectionStart;  
-          input.value = formatPhoneValue(input.value);  
-        });  
-        input.addEventListener('blur', () => {  
-          if (input.value.trim() === '+509') {  
-            input.value = '+509 ';  
-          }  
-        });  
-      });  
-    }  
-  
-    function cleanFinalPhone(rawVal) {  
-      let digits = rawVal.replace(/\D/g, '');  
-      if (digits.startsWith('509')) {  
-        digits = digits.substring(3);  
-      }  
-      return '+509' + digits;  
-    }  
-  
-    /* ==================== NAVEGASYON ANNDAN DOSYE ==================== */  
-    function openFolder(folderId) {  
+
+    // Navigation Folder Switcher  
+    function openFolder(viewId) {  
       document.getElementById('main-grid').style.display = 'none';  
-      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));  
-      document.getElementById(folderId).classList.add('active');  
+      document.querySelectorAll('.view-area').forEach(el => el.classList.remove('active'));  
+      document.getElementById(viewId).classList.add('active');  
       window.scrollTo({ top: 0, behavior: 'smooth' });  
     }  
-  
+
     function goBack() {  
-      document.querySelectorAll('.view-area').forEach(v => v.classList.remove('active'));  
+      document.querySelectorAll('.view-area').forEach(el => el.classList.remove('active'));  
       document.getElementById('main-grid').style.display = 'grid';  
       window.scrollTo({ top: 0, behavior: 'smooth' });  
     }  
-  
-    /* ==================== AGE VERIFICATION ==================== */  
-    function verifierAgeExact(strDob) {  
-      const regexDob = /^(\d{2})\/(\d{2})\/(\d{4})$/;  
-      const match = strDob.match(regexDob);  
-      if (!match) return { status: "INVALID_FORMAT" };  
-  
-      const day = parseInt(match[1], 10);  
-      const month = parseInt(match[2], 10) - 1;  
-      const year = parseInt(match[3], 10);  
-      const birthDate = new Date(year, month, day);  
-  
-      if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {  
-        return { status: "INVALID_DATE" };  
-      }  
-  
-      const today = new Date();  
-      let age = today.getFullYear() - birthDate.getFullYear();  
-      const monthDiff = today.getMonth() - birthDate.getMonth();  
-      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {  
-        age--;  
-      }  
-  
-      return age >= 18 ? { status: "OK", age: age } : { status: "UNDERAGE", age: age };  
+
+    // Modal Controls  
+    function openMeruFeeModal() {  
+      document.getElementById('meruFeeModal').style.display = 'flex';  
     }  
-  
-    function autoFormatDob(e) {  
-      let value = e.target.value.replace(/\D/g, '');  
-      if (value.length > 8) value = value.substring(0, 8);  
-  
-      if (value.length > 4) {  
-        e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4);  
-      } else if (value.length > 2) {  
-        e.target.value = value.substring(0, 2) + '/' + value.substring(2);  
-      } else {  
-        e.target.value = value;  
-      }  
+    function closeMeruFeeModal() {  
+      document.getElementById('meruFeeModal').style.display = 'none';  
     }  
-  
-    function validerFormulaire(reqClass, dobId, msgId, btnId) {  
-      const inputs = document.querySelectorAll('.' + reqClass);  
-      const dobInput = document.getElementById(dobId);  
-      const msgElem = document.getElementById(msgId);  
-      const btn = document.getElementById(btnId);  
-  
-      let toutRempli = true;  
-      inputs.forEach(input => {  
-        let val = input.value.trim();  
-        if (input.classList.contains('phone-input')) {  
-          let digits = val.replace(/\D/g, '');  
-          if (digits.length <= 3) toutRempli = false; // Sèlman 509 san rès num an  
-        } else if (val === '') {  
-          toutRempli = false;  
-        }  
-      });  
-  
-      const valDob = dobInput.value.trim();  
-      let ageValide = false;  
-  
-      if (valDob === '') {  
-        msgElem.textContent = '';  
-        msgElem.className = 'age-msg';  
-      } else if (valDob.length < 10) {  
-        msgElem.textContent = '❌ Date de naissance incorrecte.';  
-        msgElem.className = 'age-msg msg-error';  
-      } else {  
-        const res = verifierAgeExact(valDob);  
-        if (res.status === "OK") {  
-          msgElem.textContent = '✅ Âge vérifié — Vous pouvez continuer.';  
-          msgElem.className = 'age-msg msg-success';  
-          ageValide = true;  
-        } else if (res.status === "UNDERAGE") {  
-          msgElem.textContent = '❌ Incorrect — Vous devez avoir 18 ans ou plus.';  
-          msgElem.className = 'age-msg msg-error';  
+
+    function openPayPalFeeModal() {  
+      document.getElementById('paypalFeeModal').style.display = 'flex';  
+    }  
+    function closePayPalFeeModal() {  
+      document.getElementById('paypalFeeModal').style.display = 'none';  
+    }  
+
+    window.addEventListener('click', function(event) {  
+      let meruModal = document.getElementById('meruFeeModal');  
+      let paypalModal = document.getElementById('paypalFeeModal');  
+      if (event.target === meruModal) meruModal.style.display = 'none';  
+      if (event.target === paypalModal) paypalModal.style.display = 'none';  
+    });  
+
+    // Fee calculations  
+    function getMeruFee(amount) {  
+      if (amount <= 0) return 0;  
+      if (amount <= 9) return 1;  
+      if (amount <= 19) return 2;  
+      if (amount <= 49) return 3;  
+      if (amount <= 99) return 4;  
+      if (amount <= 199) return 6;  
+      if (amount <= 399) return 12;  
+      if (amount <= 499) return 15;  
+      if (amount <= 699) return 20;  
+      if (amount <= 799) return 25;  
+      if (amount <= 899) return 35;  
+      if (amount <= 1000) return 50;  
+      return 50;  
+    }  
+
+    function getPayPalFee(amount) {  
+      if (amount <= 0) return 0;  
+      if (amount <= 10) return 1;  
+      if (amount <= 20) return 2;  
+      if (amount <= 40) return 3;  
+      if (amount <= 80) return 4;  
+      if (amount <= 100) return 6;  
+      if (amount <= 200) return 8;  
+      if (amount <= 400) return 10;  
+      if (amount <= 600) return 12;  
+      if (amount <= 1000) return 20;  
+      return 20;  
+    }  
+
+    // Reverse calculation from HTG to Currency (Rate: 150 for Méru, 145 for PayPal)  
+    function getMeruFromHtg(htgVal) {  
+      if (htgVal <= 0) return { meru: 0, fee: 0, totalHtg: 0 };  
+      let targetTotalC = htgVal / 150;  
+      let low = 0, high = 1000, bestC = 0;  
+      for (let i = 0; i < 30; i++) {  
+        let mid = (low + high) / 2;  
+        let totalC = mid + getMeruFee(mid);  
+        if (totalC <= targetTotalC) {  
+          bestC = mid;  
+          low = mid;  
         } else {  
-          msgElem.textContent = '❌ Date de naissance incorrecte.';  
-          msgElem.className = 'age-msg msg-error';  
+          high = mid;  
         }  
       }  
-  
-      btn.disabled = !(toutRempli && ageValide);  
+      let fee = getMeruFee(bestC);  
+      return { meru: bestC, fee: fee, totalHtg: htgVal };  
     }  
-  
-    function initService(reqClass, dobId, msgId, btnId, serviceType) {  
-      const inputs = document.querySelectorAll('.' + reqClass);  
-      const dobInput = document.getElementById(dobId);  
-  
-      dobInput.addEventListener('input', (e) => {  
-        autoFormatDob(e);  
-        validerFormulaire(reqClass, dobId, msgId, btnId);  
-      });  
-  
-      inputs.forEach(input => {  
-        input.addEventListener('input', () => validerFormulaire(reqClass, dobId, msgId, btnId));  
-        input.addEventListener('change', () => validerFormulaire(reqClass, dobId, msgId, btnId));  
-      });  
-  
-      document.getElementById(btnId).addEventListener('click', () => {  
-        if (document.getElementById(btnId).disabled) return;  
-        let prefix = serviceType === 'MERU' ? 'meru-' : 'paypal-';  
-        const nom = document.getElementById(prefix + 'nom').value.trim();  
-        const prenom = document.getElementById(prefix + 'prenom').value.trim();  
-        const email = document.getElementById(prefix + 'email').value.trim();  
-        const password = document.getElementById(prefix + 'password').value.trim();  
-        const dob = document.getElementById(prefix + 'dob').value.trim();  
-        const phone = cleanFinalPhone(document.getElementById(prefix + 'phone').value);  
-        const doc = document.getElementById(prefix + 'doc').value;  
-  
-        let message = serviceType === 'MERU' ?  
-          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander une Carte MÉRU Visa Virtuelle.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 2 000 HTG\nBonus : 5 $ USD sur la carte\n\nPaiement : NatCash (+509 40414694)` :  
-          `Bonjour KIRIKOU CRÉATION,\n\nJe souhaite commander la création d’un compte PayPal.\n\nNom : ${nom}\nPrénom : ${prenom}\nEmail : ${email}\nMot de passe : ${password}\nDate de naissance : ${dob}\nNuméro de téléphone : ${phone}\nDocument choisi : ${doc}\n\nPrix : 1 500 HTG\n\nPaiement : NatCash (+509 40414694)`;  
-  
-        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');  
-      });  
-    }  
-  
-    /* ==================== LOGIQUE RECHARGE (MÉRU / PAYPAL) ==================== */  
-    // Frais: Plafond (Montant USD / 10)  
-    function calculerFraisUsd(amountUsd) {  
-      if (amountUsd <= 0) return 0;  
-      return Math.ceil(amountUsd / 10);  
-    }  
-  
-    function switchRechargeMode(type, rate) {  
-      const mode = document.getElementById(`rech-${type}-mode`).value;  
-      const lbl = document.getElementById(`lbl-${type}-amt`);  
-      const input = document.getElementById(`rech-${type}-amount`);  
-      input.value = '';  
-  
-      if (mode === 'USD') {  
-        lbl.textContent = 'Montant en USD ($) [Max 1000$]';  
-        input.placeholder = 'Ex: 50';  
-      } else {  
-        lbl.textContent = `Montant en HTG (Gourdes) [Max ${ (1000 * rate).toLocaleString('fr-FR') } HTG]`;  
-        input.placeholder = `Ex: ${50 * rate}`;  
-      }  
-  
-      updateRechargeCalc(type, rate);  
-    }  
-  
-    function getRechargeData(type, rate) {  
-      const mode = document.getElementById(`rech-${type}-mode`).value;  
-      const inputVal = parseFloat(document.getElementById(`rech-${type}-amount`).value) || 0;  
-  
-      let usdAmount = 0;  
-      let htgSubtotal = 0;  
-  
-      if (mode === 'USD') {  
-        usdAmount = inputVal;  
-        htgSubtotal = usdAmount * rate;  
-      } else {  
-        // Antre nan HTG  
-        htgSubtotal = inputVal;  
-        usdAmount = inputVal / rate;  
-      }  
-  
-      // Format desimal USD  
-      usdAmount = parseFloat(usdAmount.toFixed(2));  
-  
-      let feeUsd = 0;  
-      let feeHtg = 0;  
-      let totalHtg = 0;  
-      let isValid = false;  
-  
-      if (usdAmount > 0 && usdAmount <= 1000) {  
-        feeUsd = calculerFraisUsd(usdAmount);  
-        feeHtg = feeUsd * rate;  
-        totalHtg = htgSubtotal + feeHtg;  
-        isValid = true;  
-      }  
-  
-      return {  
-        mode,  
-        inputVal,  
-        usdAmount,  
-        htgSubtotal,  
-        feeUsd,  
-        feeHtg,  
-        totalHtg,  
-        isValid  
-      };  
-    }  
-  
-    function updateRechargeCalc(type, rate) {  
-      const data = getRechargeData(type, rate);  
-      const subtotalElem = document.getElementById(`rech-${type}-subtotal`);  
-      const feeElem = document.getElementById(`rech-${type}-fee`);  
-      const receivedElem = document.getElementById(`rech-${type}-received`);  
-      const totalElem = document.getElementById(`rech-${type}-total`);  
-  
-      if (data.isValid) {  
-        subtotalElem.textContent = `${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG`;  
-        feeElem.textContent = `${data.feeHtg.toLocaleString('fr-FR')} HTG (${data.feeUsd}$)`;  
-        receivedElem.textContent = `${data.usdAmount} $ USD`;  
-        totalElem.textContent = `${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG`;  
-      } else {  
-        subtotalElem.textContent = '0 HTG';  
-        feeElem.textContent = '0 HTG';  
-        receivedElem.textContent = '0 $ USD';  
-        totalElem.textContent = '0 HTG';  
-      }  
-    }  
-  
-    function initRechargeService(type, rate) {  
-      const reqClass = `req-rech-${type}`;  
-      const btnId = `btn-rech-${type}`;  
-      const inputs = document.querySelectorAll('.' + reqClass);  
-  
-      const validate = () => {  
-        let ok = true;  
-        inputs.forEach(input => {  
-          let val = input.value.trim();  
-          if (input.classList.contains('phone-input')) {  
-            let digits = val.replace(/\D/g, '');  
-            if (digits.length <= 3) ok = false;  
-          } else if (val === '') {  
-            ok = false;  
-          }  
-        });  
-  
-        const data = getRechargeData(type, rate);  
-        if (!data.isValid) ok = false;  
-  
-        document.getElementById(btnId).disabled = !ok;  
-        updateRechargeCalc(type, rate);  
-      };  
-  
-      inputs.forEach(input => {  
-        input.addEventListener('input', validate);  
-        input.addEventListener('change', validate);  
-      });  
-  
-      document.getElementById(btnId).addEventListener('click', () => {  
-        if (document.getElementById(btnId).disabled) return;  
-        const data = getRechargeData(type, rate);  
-        const email = document.getElementById(`rech-${type}-email`).value.trim();  
-        const phone = cleanFinalPhone(document.getElementById(`rech-${type}-phone`).value);  
-  
-        let message = "";  
-        let serviceName = type === 'meru' ? 'RECHARGE MÉRU' : 'RECHARGE PAYPAL';  
-  
-        if (type === 'meru') {  
-          const tag = document.getElementById('rech-meru-tag').value.trim();  
-          message = `Bonjour KIRIKOU CRÉATION,\n\n` +  
-                    `Je souhaite faire une ${serviceName}.\n\n` +  
-                    `Service : MÉRU\n` +  
-                    `Montant Recharge : ${data.usdAmount} $ USD (${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG)\n` +  
-                    `Valeur reçue : ${data.usdAmount} $ USD\n` +  
-                    `Email Méru : ${email}\n` +  
-                    `$merutag : ${tag}\n` +  
-                    `Tel : ${phone}\n\n` +  
-                    `Taux utilisé : 1$ = ${rate} HTG\n` +  
-                    `Frais : ${data.feeUsd} $ USD (${data.feeHtg} HTG)\n` +  
-                    `Total à payer en HTG : ${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG\n\n` +  
-                    `Paiement : NatCash (+509 40414694)`;  
+
+    function getPayPalFromHtg(htgVal) {  
+      if (htgVal <= 0) return { paypal: 0, fee: 0, totalHtg: 0 };  
+      let targetTotalC = htgVal / 145;  
+      let low = 0, high = 1000, bestC = 0;  
+      for (let i = 0; i < 30; i++) {  
+        let mid = (low + high) / 2;  
+        let totalC = mid + getPayPalFee(mid);  
+        if (totalC <= targetTotalC) {  
+          bestC = mid;  
+          low = mid;  
         } else {  
-          message = `Bonjour KIRIKOU CRÉATION,\n\n` +  
-                    `Je souhaite faire une ${serviceName}.\n\n` +  
-                    `Service : PAYPAL\n` +  
-                    `Montant Recharge : ${data.usdAmount} $ USD (${data.htgSubtotal.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG)\n` +  
-                    `Valeur reçue : ${data.usdAmount} $ USD\n` +  
-                    `Email PayPal : ${email}\n` +  
-                    `Tel : ${phone}\n\n` +  
-                    `Taux utilisé : 1$ = ${rate} HTG\n` +  
-                    `Frais : ${data.feeUsd} $ USD (${data.feeHtg} HTG)\n` +  
-                    `Total à payer en HTG : ${data.totalHtg.toLocaleString('fr-FR', {maximumFractionDigits: 2})} HTG\n\n` +  
-                    `Paiement : NatCash (+509 40414694)`;  
+          high = mid;  
         }  
-  
-        window.open(`https://wa.me/${WHATSAPP_RECEIVER}?text=${encodeURIComponent(message)}`, '_blank');  
-      });  
+      }  
+      let fee = getPayPalFee(bestC);  
+      return { paypal: bestC, fee: fee, totalHtg: htgVal };  
     }  
-  </script>  </body>  
-</html>  
+
+    // Focus swap buttons  
+    function focusMeruPay() {  
+      document.getElementById('meru-pay-input').focus();  
+    }  
+    function focusPayPalPay() {  
+      document.getElementById('paypal-pay-input').focus();  
+    }  
+
+    // Méru Calculations (Rate: 150 HTG)  
+    function calculateMeruFromReceive() {  
+      let meruAmount = parseFloat(document.getElementById('meru-receive-input').value) || 0;  
+      let feeMeru = getMeruFee(meruAmount);  
+      let totalMeru = meruAmount + feeMeru;  
+      let totalHtg = totalMeru * 150;  
+
+      if (meruAmount > 0) {  
+        document.getElementById('meru-pay-input').value = totalHtg.toFixed(2);  
+      } else {  
+        document.getElementById('meru-pay-input').value = '';  
+      }  
+
+      document.getElementById('res-meru-base').innerText = meruAmount.toFixed(2) + ' MÉRU';  
+      document.getElementById('res-meru-fee').innerText = feeMeru.toFixed(2) + ' MÉRU';  
+      document.getElementById('res-meru-total').innerText = totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' HTG';  
+
+      checkMeruRechForm();  
+    }  
+
+    function calculateMeruFromPay() {  
+      let htgVal = parseFloat(document.getElementById('meru-pay-input').value) || 0;  
+      let res = getMeruFromHtg(htgVal);  
+
+      if (htgVal > 0) {  
+        document.getElementById('meru-receive-input').value = res.meru > 0 ? res.meru.toFixed(2) : '';  
+      } else {  
+        document.getElementById('meru-receive-input').value = '';  
+      }  
+
+      document.getElementById('res-meru-base').innerText = res.meru.toFixed(2) + ' MÉRU';  
+      document.getElementById('res-meru-fee').innerText = res.fee.toFixed(2) + ' MÉRU';  
+      document.getElementById('res-meru-total').innerText = htgVal.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' HTG';  
+
+      checkMeruRechForm();  
+    }  
+
+    function checkMeruRechForm() {  
+      let meruAmount = parseFloat(document.getElementById('meru-receive-input').value) || 0;  
+      let email = document.getElementById('rech-meru-email').value.trim();  
+      let phone = document.getElementById('rech-meru-phone').value.trim();  
+      let btn = document.getElementById('btn-rech-meru');  
+      let isValid = meruAmount > 0 && meruAmount <= 1000 && email !== '' && phone !== '' && phone !== '+509';  
+      if (btn) btn.disabled = !isValid;  
+    }  
+
+    function submitMeruRecharge() {  
+      let meruAmount = parseFloat(document.getElementById('meru-receive-input').value) || 0;  
+      let feeMeru = getMeruFee(meruAmount);  
+      let totalMeru = meruAmount + feeMeru;  
+      let totalHtg = totalMeru * 150;  
+      let email = document.getElementById('rech-meru-email').value.trim();  
+      let phone = document.getElementById('rech-meru-phone').value.trim();  
+
+      let msg = `*COMMANDER RECHARGE MÉRU*%0A` +  
+                `----------------------------------%0A` +  
+                `• Email Compte : ${email}%0A` +  
+                `• Téléphone : ${phone}%0A` +  
+                `• Montant Demandé : ${meruAmount.toFixed(2)} MÉRU%0A` +  
+                `• Frais Appliqués : ${feeMeru.toFixed(2)} MÉRU%0A` +  
+                `• Total à Payer : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG%0A` +  
+                `----------------------------------%0A` +  
+                `Paiement effectué via NatCash.`;  
+
+      window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
+    }  
+
+    // PayPal Calculations (Rate: 145 HTG)  
+    function calculatePayPalFromReceive() {  
+      let paypalAmount = parseFloat(document.getElementById('paypal-receive-input').value) || 0;  
+      let feePaypal = getPayPalFee(paypalAmount);  
+      let totalPaypal = paypalAmount + feePaypal;  
+      let totalHtg = totalPaypal * 145;  
+
+      if (paypalAmount > 0) {  
+        document.getElementById('paypal-pay-input').value = totalHtg.toFixed(2);  
+      } else {  
+        document.getElementById('paypal-pay-input').value = '';  
+      }  
+
+      document.getElementById('res-paypal-base').innerText = paypalAmount.toFixed(2) + ' PAYPAL';  
+      document.getElementById('res-paypal-fee').innerText = feePaypal.toFixed(2) + ' PAYPAL';  
+      document.getElementById('res-paypal-total').innerText = totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' HTG';  
+
+      checkPayPalRechForm();  
+    }  
+
+    function calculatePayPalFromPay() {  
+      let htgVal = parseFloat(document.getElementById('paypal-pay-input').value) || 0;  
+      let res = getPayPalFromHtg(htgVal);  
+
+      if (htgVal > 0) {  
+        document.getElementById('paypal-receive-input').value = res.paypal > 0 ? res.paypal.toFixed(2) : '';  
+      } else {  
+        document.getElementById('paypal-receive-input').value = '';  
+      }  
+
+      document.getElementById('res-paypal-base').innerText = res.paypal.toFixed(2) + ' PAYPAL';  
+      document.getElementById('res-paypal-fee').innerText = res.fee.toFixed(2) + ' PAYPAL';  
+      document.getElementById('res-paypal-total').innerText = htgVal.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' HTG';  
+
+      checkPayPalRechForm();  
+    }  
+
+    function checkPayPalRechForm() {  
+      let paypalAmount = parseFloat(document.getElementById('paypal-receive-input').value) || 0;  
+      let email = document.getElementById('paypal-rech-email').value.trim();  
+      let phone = document.getElementById('paypal-rech-phone').value.trim();  
+      let btn = document.getElementById('btn-rech-paypal');  
+      let isValid = paypalAmount > 0 && paypalAmount <= 1000 && email !== '' && phone !== '' && phone !== '+509';  
+      if (btn) btn.disabled = !isValid;  
+    }  
+
+    function submitPayPalRecharge() {  
+      let paypalAmount = parseFloat(document.getElementById('paypal-receive-input').value) || 0;  
+      let feePaypal = getPayPalFee(paypalAmount);  
+      let totalPaypal = paypalAmount + feePaypal;  
+      let totalHtg = totalPaypal * 145;  
+      let email = document.getElementById('paypal-rech-email').value.trim();  
+      let phone = document.getElementById('paypal-rech-phone').value.trim();  
+
+      let msg = `*COMMANDER RECHARGE PAYPAL*%0A` +  
+                `----------------------------------%0A` +  
+                `• Email Compte : ${email}%0A` +  
+                `• Téléphone : ${phone}%0A` +  
+                `• Montant Demandé : ${paypalAmount.toFixed(2)} PAYPAL%0A` +  
+                `• Frais Appliqués : ${feePaypal.toFixed(2)} PAYPAL%0A` +  
+                `• Total à Payer : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG%0A` +  
+                `----------------------------------%0A` +  
+                `Paiement effectué via NatCash.`;  
+
+      window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
+    }  
+
+    // Lòt sèvis yo  
+    function submitPayPalCreate() {  
+      let name = document.getElementById('paypal-create-name').value;  
+      let email = document.getElementById('paypal-create-email').value;  
+      if(!name || !email) { alert('Ranpli tout chan yo tanpri.'); return; }  
+      let msg = `*KREASYON PAYPAL*%0ANon: ${name}%0AImèl: ${email}`;  
+      window.open(`https://wa.me/50932694670?text=${encodeURIComponent(msg)}`, '_blank');  
+    }  
+  </script>  
+</body>  
+</html>
