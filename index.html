@@ -366,7 +366,7 @@
       color: #ffffff;  
     }  
 
-    /* NEW CONVERSION BOX DESIGN */  
+    /* CONVERSION BOX DESIGN */  
     .conversion-card {  
       background: rgba(0, 0, 0, 0.35);  
       border: 1px solid rgba(255, 255, 255, 0.15);  
@@ -865,7 +865,7 @@
         </div>  
       </div>  
 
-      <!-- ================= SERVICE 2: RECHARGE MÉRU (TO 150 HTG) ================= -->  
+      <!-- ================= SERVICE 2: RECHARGE MÉRU ================= -->  
       <div class="view-area" id="view-meru-rech">  
         <div class="form-header-bar">  
           <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
@@ -876,7 +876,6 @@
           <div class="price-badge">1 MÉRU = 150 HTG</div>  
 
           <form autocomplete="off">  
-            <!-- Conversion UI Model -->  
             <div class="conversion-card">  
               <div class="conv-group">  
                 <label>Vous recevez</label>  
@@ -938,30 +937,62 @@
         </div>  
       </div>  
 
-      <!-- ================= SERVICE 3: CRÉATION PAYPAL ================= -->  
+      <!-- ================= SERVICE 3: CRÉATION PAYPAL (MODIFIÉ POUR ÊTRE IDENTIQUE À CRÉATION MÉRU) ================= -->  
       <div class="view-area" id="view-paypal-create">  
         <div class="form-header-bar">  
           <div class="btn-back" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Retour au menu</div>  
           <div class="btn-close-x" onclick="goBack()">&times;</div>  
         </div>  
         <div class="card">  
-          <h2 class="card-title">KIRIKOU KREASYON PAYPAL</h2>  
+          <h2 class="card-title">CRÉATION COMPTE PAYPAL SÉCURISÉ</h2>  
           <div class="price-badge">1 500 HTG</div>  
-          <div class="form-group">  
-            <label>Non konplè</label>  
-            <input type="text" id="paypal-create-name" placeholder="Antre non ou">  
-          </div>  
-          <div class="form-group">  
-            <label>Imèl PayPal</label>  
-            <input type="email" id="paypal-create-email" placeholder="exemple@mail.com">  
-          </div>  
-          <div class="natcash-box">  
-            <div class="natcash-title">Mode de paiement</div>  
-            <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-          </div>  
-          <button type="button" class="btn-submit" onclick="submitPayPalCreate()">  
-            <i class="fa-brands fa-whatsapp"></i> KREYE PAYPAL  
-          </button>  
+
+          <form autocomplete="off">  
+            <div class="form-group">  
+              <label>Nom</label>  
+              <input type="text" class="req-paypal-create" id="paypal-create-nom" placeholder="Entrez votre nom" oninput="checkPayPalCreateForm()">  
+            </div>  
+            <div class="form-group">  
+              <label>Prénom</label>  
+              <input type="text" class="req-paypal-create" id="paypal-create-prenom" placeholder="Entrez votre prénom" oninput="checkPayPalCreateForm()">  
+            </div>  
+            <div class="form-group">  
+              <label>Email</label>  
+              <input type="email" class="req-paypal-create" id="paypal-create-email" placeholder="exemple@mail.com" oninput="checkPayPalCreateForm()">  
+            </div>  
+            <div class="form-group">  
+              <label>Mot de passe</label>  
+              <input type="password" class="req-paypal-create" id="paypal-create-password" placeholder="Entrez votre mot de passe" oninput="checkPayPalCreateForm()">  
+            </div>  
+            <div class="form-group">  
+              <label>Date de naissance (JJ/MM/AAAA)</label>  
+              <input type="text" class="req-paypal-create" id="paypal-create-dob" placeholder="13/08/2008" maxlength="10" oninput="checkPayPalCreateForm()">  
+              <div class="age-msg" id="paypal-create-age-msg"></div>  
+            </div>  
+            <div class="form-group">  
+              <label>Numéro de téléphone</label>  
+              <input type="tel" class="req-paypal-create phone-input" id="paypal-create-phone" value="+509 " placeholder="+509 XXXX XXXX" oninput="checkPayPalCreateForm()">  
+            </div>  
+            <div class="form-group">  
+              <label>Choix du document</label>  
+              <select class="req-paypal-create" id="paypal-create-doc" onchange="checkPayPalCreateForm()">  
+                <option value="">-- Sélectionnez un document --</option>  
+                <option value="Passeport">Passeport</option>  
+                <option value="Carte électorale">Carte électorale</option>  
+              </select>  
+            </div>  
+
+            <div class="natcash-box">  
+              <div class="natcash-title">Mode de paiement</div>  
+              <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
+              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
+            </div>  
+
+            <button type="button" class="btn-submit" id="btn-paypal-create" onclick="submitPayPalCreateForm()" disabled>  
+              <i class="fa-brands fa-whatsapp"></i> COMMANDER MAINTENANT  
+            </button>  
+          </form>  
         </div>  
       </div>  
 
@@ -976,7 +1007,6 @@
           <div class="price-badge">1 PAYPAL = 145 HTG</div>  
 
           <form autocomplete="off">  
-            <!-- Conversion UI Model -->  
             <div class="conversion-card">  
               <div class="conv-group">  
                 <label>Vous recevez</label>  
@@ -1370,13 +1400,44 @@
       window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
     }  
 
-    // Lòt sèvis yo  
-    function submitPayPalCreate() {  
-      let name = document.getElementById('paypal-create-name').value;  
-      let email = document.getElementById('paypal-create-email').value;  
-      if(!name || !email) { alert('Ranpli tout chan yo tanpri.'); return; }  
-      let msg = `*KREASYON PAYPAL*%0ANon: ${name}%0AImèl: ${email}`;  
-      window.open(`https://wa.me/50932694670?text=${encodeURIComponent(msg)}`, '_blank');  
+    // Validation & Submission for Création PayPal Form  
+    function checkPayPalCreateForm() {  
+      let nom = document.getElementById('paypal-create-nom').value.trim();  
+      let prenom = document.getElementById('paypal-create-prenom').value.trim();  
+      let email = document.getElementById('paypal-create-email').value.trim();  
+      let password = document.getElementById('paypal-create-password').value.trim();  
+      let dob = document.getElementById('paypal-create-dob').value.trim();  
+      let phone = document.getElementById('paypal-create-phone').value.trim();  
+      let doc = document.getElementById('paypal-create-doc').value;  
+      let btn = document.getElementById('btn-paypal-create');  
+
+      let isValid = nom !== '' && prenom !== '' && email !== '' && password !== '' && dob !== '' && phone !== '' && phone !== '+509' && doc !== '';  
+      if (btn) btn.disabled = !isValid;  
+    }  
+
+    function submitPayPalCreateForm() {  
+      let nom = document.getElementById('paypal-create-nom').value.trim();  
+      let prenom = document.getElementById('paypal-create-prenom').value.trim();  
+      let email = document.getElementById('paypal-create-email').value.trim();  
+      let password = document.getElementById('paypal-create-password').value.trim();  
+      let dob = document.getElementById('paypal-create-dob').value.trim();  
+      let phone = document.getElementById('paypal-create-phone').value.trim();  
+      let doc = document.getElementById('paypal-create-doc').value;  
+
+      let msg = `*COMMANDER CRÉATION COMPTE PAYPAL*%0A` +  
+                `----------------------------------%0A` +  
+                `• Nom : ${nom}%0A` +  
+                `• Prénom : ${prenom}%0A` +  
+                `• Email : ${email}%0A` +  
+                `• Mot de passe : ${password}%0A` +  
+                `• Date de naissance : ${dob}%0A` +  
+                `• Téléphone : ${phone}%0A` +  
+                `• Document : ${doc}%0A` +  
+                `• Total à Payer : 1 500 HTG%0A` +  
+                `----------------------------------%0A` +  
+                `Paiement effectué via NatCash.`;  
+
+      window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
     }  
   </script>  
 </body>  
