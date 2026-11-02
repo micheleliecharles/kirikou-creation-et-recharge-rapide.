@@ -1803,11 +1803,9 @@
 
     // Handle Date of Birth Input & Age Verification (18+)  
     function handleDateInput(input, msgId, btnId) {  
-      // Allow only digits  
       let cleanVal = input.value.replace(/\D/g, '');  
       if (cleanVal.length > 8) cleanVal = cleanVal.substring(0, 8);  
 
-      // Auto-format as DD/MM/YYYY visually  
       let formatted = '';  
       if (cleanVal.length > 0) {  
         formatted += cleanVal.substring(0, 2);  
@@ -1822,7 +1820,6 @@
 
       let msgEl = document.getElementById(msgId);  
 
-      // Check if complete date (8 digits)  
       if (cleanVal.length < 8) {  
         msgEl.innerText = '';  
         msgEl.className = 'age-msg';  
@@ -1835,7 +1832,6 @@
       let month = parseInt(cleanVal.substring(2, 4), 10);  
       let year = parseInt(cleanVal.substring(4, 8), 10);  
 
-      // Validate date validity  
       let dateObj = new Date(year, month - 1, day);  
       let today = new Date();  
 
@@ -1853,7 +1849,6 @@
         return;  
       }  
 
-      // Calculate age  
       let age = today.getFullYear() - year;  
       let m = today.getMonth() - (month - 1);  
       if (m < 0 || (m === 0 && today.getDate() < day)) {  
@@ -1872,7 +1867,6 @@
       if (btnId === 'btn-paypal-create') checkPayPalCreateForm();  
     }  
 
-    // Helper for email validation  
     function isValidEmail(email) {  
       let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
       return re.test(email);  
@@ -1895,6 +1889,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
+    // 1. WhatsApp: Création Méru  
     function submitMeruCreateForm() {  
       let nom = document.getElementById('meru-nom').value.trim();  
       let prenom = document.getElementById('meru-prenom').value.trim();  
@@ -1904,20 +1899,20 @@
       let phone = '+509 ' + document.getElementById('meru-phone').value.trim();  
       let doc = document.getElementById('meru-doc').value;  
 
-      let msg = `*COMMANDER CRÉATION CARTE MÉRU*%0A` +  
-                `----------------------------------%0A` +  
-                `• Nom : ${nom}%0A` +  
-                `• Prénom : ${prenom}%0A` +  
-                `• Email : ${email}%0A` +  
-                `• Mot de passe : ${password}%0A` +  
-                `• Date de naissance : ${dob}%0A` +  
-                `• Téléphone : ${phone}%0A` +  
-                `• Document : ${doc}%0A` +  
-                `• Total à Payer : 2 000 HTG (Bonus: 5$ USD)%0A` +  
-                `----------------------------------%0A` +  
-                `Paiement effectué via NatCash.`;  
+      let msg = `COMMANDE CRÉATION CARTE MÉRU\n` +  
+                `----------------------------------\n` +  
+                `Nom : ${nom}\n` +  
+                `Prénom : ${prenom}\n` +  
+                `Email : ${email}\n` +  
+                `Mot de passe : ${password}\n` +  
+                `Date de naissance : ${dob}\n` +  
+                `Téléphone : ${phone}\n` +  
+                `Document : ${doc}\n` +  
+                `Total à payer : 2 000 HTG (Bonus: 5$ USD)\n` +  
+                `----------------------------------\n` +  
+                `Paiement effectué via : NatCash`;  
 
-      window.open(`https://wa.me/50932694670?text=${encodeURIComponent(msg)}`, '_blank');  
+      window.open(`https://wa.me/50932694670?text=` + encodeURIComponent(msg), '_blank');  
     }  
 
     // Check Création PayPal Form  
@@ -1937,6 +1932,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
+    // 2. WhatsApp: Création PayPal  
     function submitPayPalCreateForm() {  
       let nom = document.getElementById('paypal-create-nom').value.trim();  
       let prenom = document.getElementById('paypal-create-prenom').value.trim();  
@@ -1946,20 +1942,20 @@
       let phone = '+509 ' + document.getElementById('paypal-create-phone').value.trim();  
       let doc = document.getElementById('paypal-create-doc').value;  
 
-      let msg = `*COMMANDER CRÉATION COMPTE PAYPAL*%0A` +  
-                `----------------------------------%0A` +  
-                `• Nom : ${nom}%0A` +  
-                `• Prénom : ${prenom}%0A` +  
-                `• Email : ${email}%0A` +  
-                `• Mot de passe : ${password}%0A` +  
-                `• Date de naissance : ${dob}%0A` +  
-                `• Téléphone : ${phone}%0A` +  
-                `• Document : ${doc}%0A` +  
-                `• Total à Payer : 1 500 HTG%0A` +  
-                `----------------------------------%0A` +  
-                `Paiement effectué via NatCash.`;  
+      let msg = `COMMANDE CRÉATION COMPTE PAYPAL\n` +  
+                `----------------------------------\n` +  
+                `Nom : ${nom}\n` +  
+                `Prénom : ${prenom}\n` +  
+                `Email : ${email}\n` +  
+                `Mot de passe : ${password}\n` +  
+                `Date de naissance : ${dob}\n` +  
+                `Téléphone : ${phone}\n` +  
+                `Document : ${doc}\n` +  
+                `Total à payer : 1 500 HTG\n` +  
+                `----------------------------------\n` +  
+                `Paiement effectué via : NatCash`;  
 
-      window.open(`https://wa.me/50932694670?text=${encodeURIComponent(msg)}`, '_blank');  
+      window.open(`https://wa.me/50932694670?text=` + encodeURIComponent(msg), '_blank');  
     }  
 
     // Fee calculations  
@@ -2082,6 +2078,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
+    // 3. WhatsApp: Recharge Méru  
     function submitMeruRecharge() {  
       let meruAmount = parseFloat(document.getElementById('meru-receive-input').value) || 0;  
       let feeMeru = getMeruFee(meruAmount);  
@@ -2090,17 +2087,18 @@
       let email = document.getElementById('rech-meru-email').value.trim();  
       let phone = '+509 ' + document.getElementById('rech-meru-phone').value.trim();  
 
-      let msg = `*COMMANDER RECHARGE MÉRU*%0A` +  
-                `----------------------------------%0A` +  
-                `• Email Compte : ${email}%0A` +  
-                `• Téléphone : ${phone}%0A` +  
-                `• Montant Demandé : ${meruAmount.toFixed(2)} MÉRU%0A` +  
-                `• Frais Appliqués : ${feeMeru.toFixed(2)} MÉRU%0A` +  
-                `• Total à Payer : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG%0A` +  
-                `----------------------------------%0A` +  
-                `Paiement effectué via NatCash.`;  
+      let msg = `Bonjour KIRIKOU CRÉATION,\n\n` +  
+                `Je souhaite faire une RECHARGE MÉRU.\n\n` +  
+                `Service : MÉRU\n` +  
+                `Montant Recharge : ${meruAmount.toFixed(2)} MÉRU\n` +  
+                `Email Méru : ${email}\n` +  
+                `Téléphone : ${phone}\n` +  
+                `Taux utilisé : 1$ = 150 HTG\n` +  
+                `Frais : ${feeMeru.toFixed(2)} MÉRU\n` +  
+                `Total à payer en HTG : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG\n\n` +  
+                `Paiement : NatCash`;  
 
-      window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
+      window.open(`https://wa.me/50932694670?text=` + encodeURIComponent(msg), '_blank');  
     }  
 
     // PayPal Recharge Calculations (Rate: 145 HTG)  
@@ -2149,6 +2147,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
+    // 4. WhatsApp: Recharge PayPal  
     function submitPayPalRecharge() {  
       let paypalAmount = parseFloat(document.getElementById('paypal-receive-input').value) || 0;  
       let feePaypal = getPayPalFee(paypalAmount);  
@@ -2157,17 +2156,18 @@
       let email = document.getElementById('paypal-rech-email').value.trim();  
       let phone = '+509 ' + document.getElementById('paypal-rech-phone').value.trim();  
 
-      let msg = `*COMMANDER RECHARGE PAYPAL*%0A` +  
-                `----------------------------------%0A` +  
-                `• Email Compte : ${email}%0A` +  
-                `• Téléphone : ${phone}%0A` +  
-                `• Montant Demandé : ${paypalAmount.toFixed(2)} PAYPAL%0A` +  
-                `• Frais Appliqués : ${feePaypal.toFixed(2)} PAYPAL%0A` +  
-                `• Total à Payer : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG%0A` +  
-                `----------------------------------%0A` +  
-                `Paiement effectué via NatCash.`;  
+      let msg = `Bonjour KIRIKOU CRÉATION,\n\n` +  
+                `Je souhaite faire une RECHARGE PAYPAL.\n\n` +  
+                `Service : PAYPAL\n` +  
+                `Montant Recharge : ${paypalAmount.toFixed(2)} PAYPAL\n` +  
+                `Email PayPal : ${email}\n` +  
+                `Téléphone : ${phone}\n` +  
+                `Taux utilisé : 1$ = 145 HTG\n` +  
+                `Frais : ${feePaypal.toFixed(2)} PAYPAL\n` +  
+                `Total à payer en HTG : ${totalHtg.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HTG\n\n` +  
+                `Paiement : NatCash`;  
 
-      window.open(`https://wa.me/50932694670?text=${msg}`, '_blank');  
+      window.open(`https://wa.me/50932694670?text=` + encodeURIComponent(msg), '_blank');  
     }  
 
     // MOVIEBOX LOGIC  
@@ -2204,6 +2204,7 @@
       alert('Numéro NatCash (+509 40414694) kopye avèk siksè!');  
     }  
 
+    // 5. WhatsApp: MovieBox Pro  
     function submitMovieBoxOrder() {  
       let name = document.getElementById('mb-name').value.trim();  
       let prenom = document.getElementById('mb-prenom').value.trim();  
@@ -2212,18 +2213,18 @@
       let duration = document.getElementById('mb-duration').value;  
       let price = document.getElementById('mb-price').value;  
 
-      let msg = `*KÒMANN MOVIEBOX PRO*%0A` +  
-                `----------------------------------%0A` +  
-                `• Nom : ${name}%0A` +  
-                `• Prénom : ${prenom}%0A` +  
-                `• Adresse e-mail : ${email}%0A` +  
-                `• Catégorie : ${type}%0A` +  
-                `• Durée : ${duration}%0A` +  
-                `• Prix : ${price}%0A` +  
-                `----------------------------------%0A` +  
-                `Mwen voye prèv peman NatCash mwen an sou nimewo +509 40414694 pou abònman sa a.`;  
+      let msg = `KÒMANN MOVIEBOX PRO\n` +  
+                `----------------------------------\n` +  
+                `Nom : ${name}\n` +  
+                `Prénom : ${prenom}\n` +  
+                `Adresse e-mail : ${email}\n` +  
+                `Catégorie : ${type}\n` +  
+                `Durée : ${duration}\n` +  
+                `Prix : ${price}\n` +  
+                `----------------------------------\n` +  
+                `Paiement : NatCash (Prêt à envoyer)`;  
 
-      window.open(`https://wa.me/50932694670?text=${encodeURIComponent(msg)}`, '_blank');  
+      window.open(`https://wa.me/50932694670?text=` + encodeURIComponent(msg), '_blank');  
     }  
   </script>  
 </body>  
