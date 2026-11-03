@@ -206,6 +206,45 @@
       transform: translateY(-3px);  
       box-shadow: 0 6px 25px rgba(31, 81, 255, 0.6);  
     }  
+
+    /* ==================== FLOATING WHATSAPP BUTTON ==================== */  
+    .whatsapp-float {  
+      position: fixed;  
+      bottom: 25px;  
+      right: 25px;  
+      width: 60px;  
+      height: 60px;  
+      background-color: #25D366;  
+      color: #ffffff;  
+      border-radius: 50%;  
+      text-align: center;  
+      font-size: 32px;  
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);  
+      z-index: 9999;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      text-decoration: none;  
+      transition: transform 0.3s ease, background-color 0.3s ease;  
+      animation: whatsappPulse 2s infinite;  
+    }  
+
+    .whatsapp-float:hover {  
+      background-color: #20ba5a;  
+      transform: scale(1.1);  
+    }  
+
+    @keyframes whatsappPulse {  
+      0% {  
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);  
+      }  
+      70% {  
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);  
+      }  
+      100% {  
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);  
+      }  
+    }  
   
     /* ==================== GRID DOSSIERS (LAYOUT) ==================== */  
     .folder-grid {  
@@ -888,28 +927,31 @@
       font-size: 1.2rem;  
       font-weight: 700;  
       color: #25D366;  
-      margin-bottom: 8px;  
+      margin-bottom: 10px;  
     }  
   
     .moncash-coming {  
       font-size: 0.88rem;  
       font-weight: 600;  
       color: #ff9800;  
-      margin-top: 8px;  
+      margin-top: 10px;  
       padding-top: 8px;  
       border-top: 1px rgba(255, 255, 255, 0.1) solid;  
     }  
   
     .btn-natcash {  
-      display: inline-block;  
+      display: inline-flex;  
+      align-items: center;  
+      justify-content: center;  
+      gap: 8px;  
       width: 100%;  
-      padding: 8px;  
-      background: rgba(37, 211, 102, 0.15);  
+      padding: 10px;  
+      background: rgba(37, 211, 102, 0.2);  
       color: #25D366;  
       border: 1px solid #25D366;  
       border-radius: 8px;  
-      font-size: 0.85rem;  
-      font-weight: 600;  
+      font-size: 0.88rem;  
+      font-weight: 700;  
       text-transform: uppercase;  
       letter-spacing: 1px;  
       cursor: pointer;  
@@ -917,7 +959,8 @@
     }  
 
     .btn-natcash:hover {  
-      background: rgba(37, 211, 102, 0.3);  
+      background: rgba(37, 211, 102, 0.35);  
+      transform: translateY(-1px);  
     }  
   
     /* ==================== BOUTON D'ACTION ==================== */  
@@ -1106,6 +1149,13 @@
         font-size: 0.62rem;  
         padding: 6px 2px;  
       }  
+      .whatsapp-float {  
+        width: 50px;  
+        height: 50px;  
+        font-size: 26px;  
+        bottom: 20px;  
+        right: 20px;  
+      }  
     }  
   </style>  
 </head>  
@@ -1119,6 +1169,11 @@
       </div>  
     </div>  
   </div>    
+
+  <!-- ================= BOUTON FLOTTANT WHATSAPP ================= -->  
+  <a href="https://wa.me/50932694670?text=Bonjour%20KIRIKOU%20CR%C3%89ATION%20%21%20Je%20souhaite%20contacter%20votre%20assistant%20pour%20obtenir%20des%20informations%20et%20de%20l%27aide%20concernant%20vos%20services." target="_blank" class="whatsapp-float" title="Kontakte nou sou WhatsApp">  
+    <i class="fa-brands fa-whatsapp"></i>  
+  </a>  
 
   <div class="container">  
     <header>  
@@ -1245,7 +1300,9 @@
             <div class="natcash-box">  
               <div class="natcash-title">Mode de paiement</div>  
               <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <button type="button" class="btn-natcash" onclick="copyNumber('+50940414694')">  
+                <i class="fa-solid fa-copy"></i> COPIER LE NUMÉRO  
+              </button>  
               <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
             </div>  
 
@@ -1320,7 +1377,9 @@
             <div class="natcash-box">  
               <div class="natcash-title">Mode de paiement</div>  
               <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <button type="button" class="btn-natcash" onclick="copyNumber('+50940414694')">  
+                <i class="fa-solid fa-copy"></i> COPIER LE NUMÉRO  
+              </button>  
               <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
             </div>  
 
@@ -1382,7 +1441,9 @@
             <div class="natcash-box">  
               <div class="natcash-title">Mode de paiement</div>  
               <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <button type="button" class="btn-natcash" onclick="copyNumber('+50940414694')">  
+                <i class="fa-solid fa-copy"></i> COPIER LE NUMÉRO  
+              </button>  
               <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
             </div>  
 
@@ -1457,7 +1518,9 @@
             <div class="natcash-box">  
               <div class="natcash-title">Mode de paiement</div>  
               <div class="natcash-number">💳 Paiement NatCash : +509 40414694</div>  
-              <div class="btn-natcash"><i class="fa-solid fa-wallet"></i> PAYER PAR NATCASH</div>  
+              <button type="button" class="btn-natcash" onclick="copyNumber('+50940414694')">  
+                <i class="fa-solid fa-copy"></i> COPIER LE NUMÉRO  
+              </button>  
               <div class="moncash-coming">🟠 Paiement MonCash : bientôt disponible</div>  
             </div>  
 
@@ -1659,7 +1722,9 @@
                   Tanpri peye montans ki koresponn ak abònman ou chwazi a sou nimewo NatCash ki anba a anvan ou voye kòmann ou.  
                 </div>  
                 <div class="natcash-number">💳 NatCash : +509 40414694</div>  
-                <div class="btn-natcash" onclick="copyNatCash()"><i class="fa-solid fa-copy"></i> KOPYE NIMEWO NATCASH</div>  
+                <button type="button" class="btn-natcash" onclick="copyNumber('+50940414694')">  
+                  <i class="fa-solid fa-copy"></i> COPIER LE NUMÉRO  
+                </button>  
               </div>  
 
               <button type="button" class="btn-submit" id="btn-mb-submit" onclick="submitMovieBoxOrder()" disabled>  
@@ -1772,6 +1837,39 @@
       document.querySelectorAll('.view-area').forEach(el => el.classList.remove('active'));  
       document.getElementById('main-grid').style.display = 'grid';  
       window.scrollTo({ top: 0, behavior: 'smooth' });  
+    }  
+
+    // Universal Copy Number Function with Fallback (Android & PC)  
+    function copyNumber(num) {  
+      if (navigator.clipboard && navigator.clipboard.writeText) {  
+        navigator.clipboard.writeText(num).then(() => {  
+          alert('Numéro copié avec succès !');  
+        }).catch(err => {  
+          fallbackCopyText(num);  
+        });  
+      } else {  
+        fallbackCopyText(num);  
+      }  
+    }  
+
+    function fallbackCopyText(text) {  
+      let textArea = document.createElement("textarea");  
+      textArea.value = text;  
+      textArea.style.position = "fixed";  
+      document.body.appendChild(textArea);  
+      textArea.focus();  
+      textArea.select();  
+      try {  
+        let successful = document.execCommand('copy');  
+        if (successful) {  
+          alert('Numéro copié avec succès !');  
+        } else {  
+          alert('Erreur lors de la copie du numéro.');  
+        }  
+      } catch (err) {  
+        alert('Erreur lors de la copie du numéro.');  
+      }  
+      document.body.removeChild(textArea);  
     }  
 
     // Modal Controls  
@@ -1889,7 +1987,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
-    // 1. WhatsApp: Création Méru  
+    // WhatsApp: Création Méru  
     function submitMeruCreateForm() {  
       let nom = document.getElementById('meru-nom').value.trim();  
       let prenom = document.getElementById('meru-prenom').value.trim();  
@@ -1932,7 +2030,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
-    // 2. WhatsApp: Création PayPal  
+    // WhatsApp: Création PayPal  
     function submitPayPalCreateForm() {  
       let nom = document.getElementById('paypal-create-nom').value.trim();  
       let prenom = document.getElementById('paypal-create-prenom').value.trim();  
@@ -2078,7 +2176,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
-    // 3. WhatsApp: Recharge Méru  
+    // WhatsApp: Recharge Méru  
     function submitMeruRecharge() {  
       let meruAmount = parseFloat(document.getElementById('meru-receive-input').value) || 0;  
       let feeMeru = getMeruFee(meruAmount);  
@@ -2147,7 +2245,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
-    // 4. WhatsApp: Recharge PayPal  
+    // WhatsApp: Recharge PayPal  
     function submitPayPalRecharge() {  
       let paypalAmount = parseFloat(document.getElementById('paypal-receive-input').value) || 0;  
       let feePaypal = getPayPalFee(paypalAmount);  
@@ -2199,12 +2297,7 @@
       if (btn) btn.disabled = !isValid;  
     }  
 
-    function copyNatCash() {  
-      navigator.clipboard.writeText('+50940414694');  
-      alert('Numéro NatCash (+509 40414694) kopye avèk siksè!');  
-    }  
-
-    // 5. WhatsApp: MovieBox Pro  
+    // WhatsApp: MovieBox Pro  
     function submitMovieBoxOrder() {  
       let name = document.getElementById('mb-name').value.trim();  
       let prenom = document.getElementById('mb-prenom').value.trim();  
