@@ -194,17 +194,6 @@
             display: none;
         }
 
-        .security-note {
-            margin-top: 18px;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
-            line-height: 1.45;
-        }
-
         /* ==================== APP LAYOUT ==================== */
         #dashboard-app {
             display: none;
@@ -287,15 +276,6 @@
             overflow-y: auto;
         }
 
-        .sidebar-menu::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar-menu::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-        }
-
         .sidebar-menu li {
             margin-bottom: 4px;
         }
@@ -349,27 +329,6 @@
             gap: 8px;
         }
 
-        .btn-reset-demo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 9px 12px;
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #93c5fd;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.78rem;
-            transition: 0.2s;
-        }
-
-        .btn-reset-demo:hover {
-            background: rgba(59, 130, 246, 0.25);
-        }
-
         .btn-logout {
             display: flex;
             align-items: center;
@@ -399,38 +358,6 @@
             padding: 24px;
             min-height: 100vh;
             width: calc(100% - 275px);
-        }
-
-        .demo-banner {
-            background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(37, 211, 102, 0.12));
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            border-radius: 14px;
-            padding: 12px 18px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            font-size: 0.8rem;
-        }
-
-        .demo-banner-text {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fde68a;
-        }
-
-        .demo-pill {
-            background: var(--warning);
-            color: #000;
-            font-weight: 700;
-            font-size: 0.68rem;
-            padding: 3px 9px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            white-space: nowrap;
         }
 
         /* TOP NAVBAR */
@@ -518,7 +445,7 @@
         /* STATS CARDS GRID */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 18px;
             margin-bottom: 24px;
         }
@@ -555,7 +482,6 @@
         .stat-icon.green { background: rgba(37, 211, 102, 0.15); color: var(--accent-green); }
         .stat-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--info); }
         .stat-icon.yellow { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-        .stat-icon.red { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
         .stat-icon.purple { background: rgba(168, 85, 247, 0.15); color: var(--purple); }
 
         .stat-info h3 {
@@ -665,7 +591,7 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 0.85rem;
-            min-width: 720px;
+            min-width: 750px;
         }
 
         th, td {
@@ -707,22 +633,10 @@
             border: 1px solid rgba(245, 158, 11, 0.35);
         }
 
-        .badge.progress {
-            background: rgba(59, 130, 246, 0.18);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.35);
-        }
-
         .badge.completed {
             background: rgba(37, 211, 102, 0.18);
             color: var(--accent-green);
             border: 1px solid rgba(37, 211, 102, 0.35);
-        }
-
-        .badge.cancelled {
-            background: rgba(239, 68, 68, 0.18);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.35);
         }
 
         /* BUTTONS */
@@ -768,19 +682,12 @@
             white-space: nowrap;
         }
 
-        .btn-validate {
+        .btn-verify {
             background: rgba(37, 211, 102, 0.16);
             color: var(--accent-green);
             border-color: rgba(37, 211, 102, 0.35);
         }
-        .btn-validate:hover { background: rgba(37, 211, 102, 0.32); }
-
-        .btn-edit {
-            background: rgba(59, 130, 246, 0.16);
-            color: #60a5fa;
-            border-color: rgba(59, 130, 246, 0.35);
-        }
-        .btn-edit:hover { background: rgba(59, 130, 246, 0.32); }
+        .btn-verify:hover { background: rgba(37, 211, 102, 0.32); }
 
         .btn-delete {
             background: rgba(239, 68, 68, 0.16);
@@ -789,7 +696,7 @@
         }
         .btn-delete:hover { background: rgba(239, 68, 68, 0.32); }
 
-        /* GRAND BOUTON SWITCH TOGGLE ON/OFF */
+        /* SWITCH TOGGLE ON/OFF */
         .site-control-box {
             background: rgba(6, 10, 18, 0.75);
             border: 1px solid var(--glass-border);
@@ -865,58 +772,6 @@
             color: #041008;
         }
 
-        /* MODALS */
-        .modal-backdrop {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-
-        .modal-backdrop.open {
-            display: flex;
-        }
-
-        .modal-card {
-            background: #0e1726;
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 480px;
-            padding: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .modal-header h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-        }
-
-        .btn-close-modal {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.3rem;
-            cursor: pointer;
-        }
-
         /* TOAST NOTIFICATION */
         #toast-container {
             position: fixed;
@@ -966,13 +821,6 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
-            .stat-card {
-                padding: 15px;
-                gap: 12px;
-            }
-            .stat-info h3 {
-                font-size: 1.2rem;
-            }
         }
 
         @media (max-width: 520px) {
@@ -987,1282 +835,482 @@
 </head>
 <body>
 
-    <!-- ==================== ÉCRAN DE CONNEXION ==================== -->
-    <div id="auth-screen">
-        <div class="auth-card">
-            <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo Kirikou Création" class="auth-logo">
-            <h1>KIRIKOU <span>ADMIN</span></h1>
-            <p class="subtitle">KIRIKOU CRÉATION ET RECHARGE RAPIDE</p>
+<!-- ==================== ÉCRAN DE CONNEXION ==================== -->
+<div id="auth-screen">
+    <div class="auth-card">
+        <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo Kirikou Création" class="auth-logo">
+        <h1>KIRIKOU <span>ADMIN</span></h1>
+        <p class="subtitle">KIRIKOU CRÉATION ET RECHARGE RAPIDE</p>
 
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="admin-username">Nom de l'administrateur</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user-shield"></i>
-                        <input type="text" id="admin-username" placeholder="Entrez le nom administrateur" required autocomplete="username">
-                    </div>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="admin-username">Nom de l'administrateur</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <input type="text" id="admin-username" placeholder="Kirikou" required autocomplete="username">
                 </div>
-
-                <div class="input-group">
-                    <label for="admin-password">Mot de passe</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="admin-password" placeholder="••••••" required autocomplete="current-password">
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-auth">
-                    <i class="fa-solid fa-right-to-bracket"></i> Connexion
-                </button>
-
-                <div id="auth-error-msg" class="auth-error">
-                    <i class="fa-solid fa-circle-exclamation"></i> Nom d'administrateur ou mot de passe incorrect.
-                </div>
-            </form>
-
-            <div class="security-note">
-                <i class="fa-solid fa-shield-halved" style="color: var(--warning);"></i>
-                <strong>Note technique :</strong> Cette authentification JavaScript locale protège l'interface de démonstration, mais ne constitue pas une sécurité serveur réelle pour un site public.
             </div>
-        </div>
+
+            <div class="input-group">
+                <label for="admin-password">Mot de passe</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="admin-password" placeholder="••••••" required autocomplete="current-password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth">
+                <i class="fa-solid fa-right-to-bracket"></i> Connexion
+            </button>
+
+            <div id="auth-error-msg" class="auth-error">
+                <i class="fa-solid fa-circle-exclamation"></i> Identifiant ou mot de passe incorrect.
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- ==================== APPLICATION PRINCIPALE ==================== -->
-    <div id="dashboard-app">
-        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+<!-- ==================== APPLICATION PRINCIPALE ==================== -->
+<div id="dashboard-app">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-        <div class="app-container">
-            <!-- SIDEBAR -->
-            <aside id="sidebar">
-                <div class="sidebar-header">
-                    <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo" class="sidebar-logo">
-                    <div class="sidebar-title">
-                        <h3>KIRIKOU CRÉATION</h3>
-                        <span>& RECHARGE RAPIDE</span>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo" class="sidebar-logo">
+                <div class="sidebar-title">
+                    <h3>KIRIKOU CRÉATION</h3>
+                    <span>& RECHARGE RAPIDE</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#" data-target="view-dashboard">
+                        <span class="menu-left"><i class="fa-solid fa-chart-pie"></i> Tableau de bord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-target="view-orders">
+                        <span class="menu-left"><i class="fa-solid fa-bag-shopping"></i> Gestion des Commandes</span>
+                        <span class="nav-badge" id="badge-orders">0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-target="view-settings">
+                        <span class="menu-left"><i class="fa-solid fa-gear"></i> Paramètres du site</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- TOP NAVBAR -->
+            <div class="top-navbar">
+                <div class="navbar-left">
+                    <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h2 id="current-page-title">Tableau de bord</h2>
+                        <p>Administration centralisée des 5 services</p>
                     </div>
                 </div>
 
-                <ul class="sidebar-menu">
-                    <li class="active">
-                        <a href="#" data-target="view-dashboard">
-                            <span class="menu-left"><i class="fa-solid fa-chart-pie"></i> Tableau de bord</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-orders">
-                            <span class="menu-left"><i class="fa-solid fa-bag-shopping"></i> Commandes</span>
-                            <span class="nav-badge" id="badge-orders">0</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-deposits">
-                            <span class="menu-left"><i class="fa-solid fa-arrow-down-to-line"></i> Dépôts / Rechargements</span>
-                            <span class="nav-badge" id="badge-deposits">0</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-withdrawals">
-                            <span class="menu-left"><i class="fa-solid fa-arrow-up-from-bracket"></i> Retraits</span>
-                            <span class="nav-badge" id="badge-withdrawals">0</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-wallets">
-                            <span class="menu-left"><i class="fa-solid fa-wallet"></i> Portefeuilles / Soldes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-services">
-                            <span class="menu-left"><i class="fa-solid fa-tags"></i> Services et Prix</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-clients">
-                            <span class="menu-left"><i class="fa-solid fa-users"></i> Clients</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-transactions">
-                            <span class="menu-left"><i class="fa-solid fa-clock-rotate-left"></i> Historique transactions</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-target="view-settings">
-                            <span class="menu-left"><i class="fa-solid fa-gear"></i> Paramètres du site</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="sidebar-footer">
-                    <button id="reset-demo-btn" class="btn-reset-demo" title="Réinitialiser les données de démonstration">
-                        <i class="fa-solid fa-rotate-right"></i> Réinitialiser Démo
-                    </button>
-                    <button id="logout-btn" class="btn-logout">
-                        <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
-                    </button>
+                <div class="admin-profile">
+                    <div class="admin-badge-info">
+                        <span>Kirikou</span>
+                        <small><i class="fa-solid fa-circle" style="font-size: 7px;"></i> Session active</small>
+                    </div>
+                    <div class="admin-avatar">K</div>
                 </div>
-            </aside>
+            </div>
 
-            <!-- MAIN CONTENT -->
-            <div class="main-content">
-                <!-- TOP NAVBAR -->
-                <div class="top-navbar">
-                    <div class="navbar-left">
-                        <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
-                            <i class="fa-solid fa-bars"></i>
-                        </button>
-                        <div class="page-title">
-                            <h2 id="current-page-title">Tableau de bord</h2>
-                            <p>Gestion centralisée — KIRIKOU CRÉATION ET RECHARGE RAPIDE</p>
+            <!-- ==================== 1. TABLEAU DE BORD & STATS ==================== -->
+            <div id="view-dashboard" class="admin-view active">
+                <!-- CONTRÔLE ON/OFF DU SITE PUBLIC -->
+                <div class="site-control-box">
+                    <div>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-power-off" style="color: var(--accent-green);"></i> Contrôle d'accès au site public
+                        </h4>
+                        <p style="font-size: 0.82rem; color: var(--text-muted);">
+                            <strong>ON :</strong> Site accessible normalement.<br>
+                            <strong>OFF :</strong> Page de maintenance affichée sur tous les appareils visiteurs.
+                        </p>
+                    </div>
+                    <div>
+                        <label class="switch">
+                            <input type="checkbox" id="dashboard-site-online">
+                            <span class="slider"></span>
+                            <span class="slider-text" id="dashboard-online-label">ON</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fa-solid fa-bag-shopping"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-total">0</h3>
+                            <p>Total Commandes</p>
                         </div>
                     </div>
 
-                    <div class="admin-profile">
-                        <div class="admin-badge-info">
-                            <span>Kirikou</span>
-                            <small><i class="fa-solid fa-circle" style="font-size: 7px;"></i> Session active</small>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-creations">0</h3>
+                            <p>Créations</p>
                         </div>
-                        <div class="admin-avatar">K</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-rotate"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-recharges">0</h3>
+                            <p>Recharges</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fa-solid fa-film"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-moviebox">0</h3>
+                            <p>Abonnements MovieBox</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-pending">0</h3>
+                            <p>En attente</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-verified">0</h3>
+                            <p>Vérifiées / Validées</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- ==================== 1. TABLEAU DE BORD ==================== -->
-                <div id="view-dashboard" class="admin-view active">
-                    <!-- CONTROLE RAPIDE ON/OFF EN HAUT DU TABLEAU DE BORD -->
-                    <div class="site-control-box">
+            <!-- ==================== 2. GESTION DES COMMANDES ==================== -->
+            <div id="view-orders" class="admin-view">
+                <div class="card-box">
+                    <div class="card-box-header">
+                        <h3><i class="fa-solid fa-bag-shopping"></i> Commandes des 5 services</h3>
+                    </div>
+
+                    <div class="filters-bar">
+                        <input type="text" id="filter-order-search" placeholder="Rechercher par nom, téléphone, email..." oninput="renderOrders()">
+                        <select id="filter-order-service" onchange="renderOrders()">
+                            <option value="">Tous les services</option>
+                            <option value="Création Méru">Création Méru</option>
+                            <option value="Création PayPal">Création PayPal</option>
+                            <option value="Recharge Méru">Recharge Méru</option>
+                            <option value="Recharge PayPal">Recharge PayPal</option>
+                            <option value="Abonnement MovieBox">Abonnement MovieBox</option>
+                        </select>
+                        <select id="filter-order-status" onchange="renderOrders()">
+                            <option value="">Tous les statuts</option>
+                            <option value="En attente">En attente</option>
+                            <option value="Vérifiée">Vérifiée</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Client (Nom & Prénom)</th>
+                                    <th>Service</th>
+                                    <th>Email</th>
+                                    <th>Téléphone</th>
+                                    <th>Montant</th>
+                                    <th>Date & Heure</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 3. PARAMÈTRES DU SITE ==================== -->
+            <div id="view-settings" class="admin-view">
+                <div class="card-box">
+                    <div class="card-box-header">
+                        <h3><i class="fa-solid fa-gear"></i> Paramètres généraux & Maintenance</h3>
+                    </div>
+
+                    <div class="site-control-box" style="margin-bottom: 0;">
                         <div>
-                            <h4 style="font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
-                                <i class="fa-solid fa-power-off" style="color: var(--accent-green);"></i> Contrôle d'accès au site public
-                            </h4>
-                            <p style="font-size: 0.82rem; color: var(--text-muted);">
-                                <strong>ON :</strong> Site accessible normalement.<br>
-                                <strong>OFF :</strong> Site fermé aux visiteurs (Affiche la page de maintenance).
-                            </p>
+                            <h4 style="font-size: 1rem; margin-bottom: 4px;">Disponibilité du site public</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Basculez sur OFF pour activer instantanément la page de maintenance.</p>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 12px;">
+                        <div>
                             <label class="switch">
-                                <input type="checkbox" id="dashboard-site-online">
+                                <input type="checkbox" id="setting-site-online">
                                 <span class="slider"></span>
-                                <span class="slider-text" id="dashboard-online-label">ON</span>
+                                <span class="slider-text" id="site-online-label">ON</span>
                             </label>
-                            <button class="btn-primary-custom" onclick="reactiveSiteFromDash()" style="background: var(--accent-green); padding: 8px 14px; font-size: 0.75rem;">
-                                <i class="fa-solid fa-rotate-right"></i> Réactiver
-                            </button>
                         </div>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-clients">0</h3>
-                                <p>Total Clients</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-icon purple"><i class="fa-solid fa-bag-shopping"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-orders">0</h3>
-                                <p>Total Commandes</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-pending">0</h3>
-                                <p>Commandes en attente</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-icon green"><i class="fa-solid fa-circle-arrow-down"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-deposits">0 HTG</h3>
-                                <p>Total des Dépôts</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-icon red"><i class="fa-solid fa-circle-arrow-up"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-withdrawals">0 HTG</h3>
-                                <p>Total des Retraits</p>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-icon green"><i class="fa-solid fa-coins"></i></div>
-                            <div class="stat-info">
-                                <h3 id="stat-revenue">0 HTG</h3>
-                                <p>Chiffre d'affaires (HTG)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-bolt"></i> Dernières activités (Démonstration)</h3>
-                        </div>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Type</th>
-                                        <th>Client</th>
-                                        <th>Détail</th>
-                                        <th>Montant</th>
-                                        <th>Statut</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="dashboard-activities-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 2. COMMANDES ==================== -->
-                <div id="view-orders" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-bag-shopping"></i> Gestion des Commandes</h3>
-                            <button class="btn-primary-custom" onclick="openOrderModal()">
-                                <i class="fa-solid fa-plus"></i> Nouvelle commande
-                            </button>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-order-search" placeholder="Rechercher par ID, nom ou téléphone..." oninput="renderOrders()">
-                            <select id="filter-order-status" onchange="renderOrders()">
-                                <option value="">Tous les statuts</option>
-                                <option value="En attente">En attente</option>
-                                <option value="Validée">Validée</option>
-                                <option value="Annulée">Annulée</option>
-                            </select>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID Commande</th>
-                                        <th>Nom du client</th>
-                                        <th>Téléphone</th>
-                                        <th>Service commandé</th>
-                                        <th>Montant</th>
-                                        <th>Date</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="orders-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 3. DÉPÔTS / RECHARGEMENTS ==================== -->
-                <div id="view-deposits" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-arrow-down-to-line"></i> Gestion des Dépôts / Rechargements</h3>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-deposit-search" placeholder="Rechercher par client, numéro ou référence..." oninput="renderDeposits()">
-                            <select id="filter-deposit-status" onchange="renderDeposits()">
-                                <option value="">Tous les statuts</option>
-                                <option value="En attente">En attente</option>
-                                <option value="Validé">Validé</option>
-                                <option value="Refusé">Refusé</option>
-                            </select>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom du client</th>
-                                        <th>Numéro MonCash / NatCash</th>
-                                        <th>Montant déposé</th>
-                                        <th>Code / Réf. confirmation</th>
-                                        <th>Date</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="deposits-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 4. RETRAITS ==================== -->
-                <div id="view-withdrawals" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-arrow-up-from-bracket"></i> Gestion des Retraits</h3>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-withdrawal-search" placeholder="Rechercher par client ou numéro..." oninput="renderWithdrawals()">
-                            <select id="filter-withdrawal-status" onchange="renderWithdrawals()">
-                                <option value="">Tous les statuts</option>
-                                <option value="En attente">En attente</option>
-                                <option value="Validé">Validé</option>
-                                <option value="Refusé">Refusé</option>
-                            </select>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom du client</th>
-                                        <th>Numéro de téléphone</th>
-                                        <th>Montant demandé</th>
-                                        <th>Méthode de retrait</th>
-                                        <th>Date</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="withdrawals-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 5. PORTEFEUILLES / SOLDES CLIENTS ==================== -->
-                <div id="view-wallets" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-wallet"></i> Portefeuilles & Soldes Clients</h3>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-wallet-search" placeholder="Rechercher un client par nom ou téléphone..." oninput="renderWallets()">
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom et prénom</th>
-                                        <th>Téléphone</th>
-                                        <th>Solde disponible</th>
-                                        <th>Total des dépôts</th>
-                                        <th>Total des commandes</th>
-                                        <th>Opérations</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="wallets-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 6. SERVICES ET PRIX ==================== -->
-                <div id="view-services" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-tags"></i> Services et Prix</h3>
-                            <button class="btn-primary-custom" onclick="openServiceModal()">
-                                <i class="fa-solid fa-plus"></i> Ajouter un service
-                            </button>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom du service</th>
-                                        <th>Catégorie</th>
-                                        <th>Prix (HTG)</th>
-                                        <th>Statut</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="services-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 7. CLIENTS ==================== -->
-                <div id="view-clients" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-users"></i> Base Clients (Démonstration)</h3>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-client-search" placeholder="Rechercher par nom, prénom ou téléphone..." oninput="renderClients()">
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom et prénom</th>
-                                        <th>Téléphone</th>
-                                        <th>Solde actuel</th>
-                                        <th>Total dépôts</th>
-                                        <th>Total commandes</th>
-                                        <th>Historique</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="clients-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 8. HISTORIQUE DES TRANSACTIONS ==================== -->
-                <div id="view-transactions" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique Global des Transactions</h3>
-                        </div>
-
-                        <div class="filters-bar">
-                            <input type="text" id="filter-tx-search" placeholder="Filtrer par client, référence ou libellé..." oninput="renderTransactions()">
-                            <select id="filter-tx-type" onchange="renderTransactions()">
-                                <option value="">Tous les types</option>
-                                <option value="Commande">Commande</option>
-                                <option value="Dépôt">Dépôt</option>
-                                <option value="Retrait">Retrait</option>
-                                <option value="Ajustement">Ajustement Solde</option>
-                            </select>
-                        </div>
-
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Réf.</th>
-                                        <th>Date</th>
-                                        <th>Client</th>
-                                        <th>Type</th>
-                                        <th>Description</th>
-                                        <th>Montant</th>
-                                        <th>Statut</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="transactions-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ==================== 9. PARAMÈTRES DU SITE ==================== -->
-                <div id="view-settings" class="admin-view">
-                    <div class="card-box">
-                        <div class="card-box-header">
-                            <h3><i class="fa-solid fa-gear"></i> Paramètres du Site & Contrôle ON/OFF</h3>
-                        </div>
-
-                        <div class="site-control-box">
-                            <div>
-                                <h4 style="font-size: 1rem; margin-bottom: 4px;">Statut général du site (ON / OFF)</h4>
-                                <p style="font-size: 0.8rem; color: var(--text-muted);">Basculez sur OFF pour afficher la page de maintenance aux visiteurs publics.</p>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="setting-site-online">
-                                    <span class="slider"></span>
-                                    <span class="slider-text" id="site-online-label">ON</span>
-                                </label>
-                                <button class="btn-primary-custom" onclick="reactiveSiteFromSettings()" style="background: var(--accent-green); padding: 8px 14px; font-size: 0.75rem;">
-                                    Réactiver
-                                </button>
-                            </div>
-                        </div>
-
-                        <form id="settings-form">
-                            <div class="input-group">
-                                <label for="setting-maintenance">Message de maintenance personnalisé</label>
-                                <textarea id="setting-maintenance" rows="3" required></textarea>
-                            </div>
-
-                            <div class="input-group">
-                                <label for="setting-announcement">Annonce de la page d'accueil</label>
-                                <input type="text" id="setting-announcement" required>
-                            </div>
-
-                            <div class="input-group">
-                                <label for="setting-whatsapp">Numéro WhatsApp officiel</label>
-                                <input type="text" id="setting-whatsapp" required>
-                            </div>
-
-                            <button type="submit" class="btn-primary-custom">
-                                <i class="fa-solid fa-floppy-disk"></i> Enregistrer les paramètres
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- ==================== MODALS ==================== -->
-    <div class="modal-backdrop" id="order-modal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="order-modal-title">Modifier la commande</h3>
-                <button class="btn-close-modal" onclick="closeModal('order-modal')">&times;</button>
-            </div>
-            <form id="order-form">
-                <input type="hidden" id="edit-order-id">
-                <div class="input-group">
-                    <label>Nom du client</label>
-                    <input type="text" id="edit-order-client" required>
-                </div>
-                <div class="input-group">
-                    <label>Téléphone</label>
-                    <input type="text" id="edit-order-phone" placeholder="+509 ..." required>
-                </div>
-                <div class="input-group">
-                    <label>Service commandé</label>
-                    <input type="text" id="edit-order-service" required>
-                </div>
-                <div class="input-group">
-                    <label>Montant (HTG)</label>
-                    <input type="number" id="edit-order-amount" min="0" required>
-                </div>
-                <div class="input-group">
-                    <label>Statut</label>
-                    <select id="edit-order-status">
-                        <option value="En attente">En attente</option>
-                        <option value="Validée">Validée</option>
-                        <option value="Annulée">Annulée</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-primary-custom" style="width: 100%; justify-content: center;">
-                    Enregistrer la commande
-                </button>
-            </form>
-        </div>
-    </div>
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
 
-    <div class="modal-backdrop" id="service-modal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="service-modal-title">Ajouter un service</h3>
-                <button class="btn-close-modal" onclick="closeModal('service-modal')">&times;</button>
-            </div>
-            <form id="service-form">
-                <input type="hidden" id="edit-service-id">
-                <div class="input-group">
-                    <label>Nom du service</label>
-                    <input type="text" id="edit-service-name" placeholder="Ex: Recharge PayPal 10$" required>
-                </div>
-                <div class="input-group">
-                    <label>Catégorie</label>
-                    <input type="text" id="edit-service-category" placeholder="Ex: Création / Recharge / Streaming" required>
-                </div>
-                <div class="input-group">
-                    <label>Prix (HTG)</label>
-                    <input type="number" id="edit-service-price" min="0" required>
-                </div>
-                <div class="input-group">
-                    <label>Disponibilité</label>
-                    <select id="edit-service-active">
-                        <option value="true">Actif</option>
-                        <option value="false">Désactivé</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-primary-custom" style="width: 100%; justify-content: center;">
-                    Sauvegarder le service
-                </button>
-            </form>
-        </div>
-    </div>
+<!-- ==================== SCRIPT DE GESTION API / LOCALSTORAGE / BACKEND ==================== -->
+<script>
+    // Identifiants sécurisés exigés
+    const ADMIN_CREDENTIALS = {
+        username: "Kirikou",
+        password: "277227"
+    };
+    const SESSION_KEY = "kirikou_admin_session_active";
 
-    <div class="modal-backdrop" id="client-history-modal">
-        <div class="modal-card" style="max-width: 620px;">
-            <div class="modal-header">
-                <h3 id="client-modal-title">Détails & Historique Client</h3>
-                <button class="btn-close-modal" onclick="closeModal('client-history-modal')">&times;</button>
-            </div>
-            <div id="client-modal-summary" style="margin-bottom: 16px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 0.85rem;"></div>
+    // Gestion de l'authentification
+    const authScreen = document.getElementById("auth-screen");
+    const dashboardApp = document.getElementById("dashboard-app");
+    const loginForm = document.getElementById("login-form");
+    const authErrorMsg = document.getElementById("auth-error-msg");
 
-            <form id="wallet-adjust-form" style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
-                <input type="hidden" id="adjust-client-id">
-                <select id="adjust-type" style="padding: 9px; background: #060a12; color: #fff; border: 1px solid var(--glass-border); border-radius: 8px;">
-                    <option value="credit">+ Créditer (HTG)</option>
-                    <option value="debit">- Débiter (HTG)</option>
-                </select>
-                <input type="number" id="adjust-amount" placeholder="Montant HTG" min="1" required style="flex: 1; min-width: 120px; padding: 9px; background: #060a12; color: #fff; border: 1px solid var(--glass-border); border-radius: 8px;">
-                <button type="submit" class="btn-primary-custom">Appliquer</button>
-            </form>
-
-            <h4 style="font-size: 0.85rem; color: var(--accent-green); margin-bottom: 10px; text-transform: uppercase;">Historique des opérations</h4>
-            <div class="table-container">
-                <table style="min-width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Opération</th>
-                            <th>Montant</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-                    <tbody id="client-modal-history-tbody"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- TOASTS -->
-    <div id="toast-container"></div>
-
-    <script>
-        /* ============================================================================
-           1. AUTHENTIFICATION LOCALE
-           ============================================================================ */
-        const ADMIN_CREDENTIALS = {
-            username: "Kirikou",
-            password: "277227"
-        };
-        const SESSION_KEY = "kirikou_admin_session_active";
-
-        const authScreen = document.getElementById("auth-screen");
-        const dashboardApp = document.getElementById("dashboard-app");
-        const loginForm = document.getElementById("login-form");
-        const authErrorMsg = document.getElementById("auth-error-msg");
-
-        function checkSession() {
-            const isLoggedIn = sessionStorage.getItem(SESSION_KEY) === "true";
-            if (isLoggedIn) {
-                authScreen.style.display = "none";
-                dashboardApp.style.display = "block";
-                initApp();
-            } else {
-                authScreen.style.display = "flex";
-                dashboardApp.style.display = "none";
-            }
+    function checkSession() {
+        if (sessionStorage.getItem(SESSION_KEY) === "true") {
+            authScreen.style.display = "none";
+            dashboardApp.style.display = "block";
+            initApp();
+        } else {
+            authScreen.style.display = "flex";
+            dashboardApp.style.display = "none";
         }
+    }
 
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const userInput = document.getElementById("admin-username").value.trim();
-            const passInput = document.getElementById("admin-password").value.trim();
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const userInput = document.getElementById("admin-username").value.trim();
+        const passInput = document.getElementById("admin-password").value.trim();
 
-            if (userInput === ADMIN_CREDENTIALS.username && passInput === ADMIN_CREDENTIALS.password) {
-                authErrorMsg.style.display = "none";
-                sessionStorage.setItem(SESSION_KEY, "true");
-                checkSession();
-                showToast("Bienvenue, Kirikou !");
-            } else {
-                authErrorMsg.style.display = "block";
-            }
-        });
-
-        document.getElementById("logout-btn").addEventListener("click", function () {
-            sessionStorage.removeItem(SESSION_KEY);
-            document.getElementById("admin-password").value = "";
+        if (userInput === ADMIN_CREDENTIALS.username && passInput === ADMIN_CREDENTIALS.password) {
+            authErrorMsg.style.display = "none";
+            sessionStorage.setItem(SESSION_KEY, "true");
             checkSession();
-        });
+            showToast("Connexion réussie. Bienvenue, Kirikou !");
+        } else {
+            authErrorMsg.style.display = "block";
+        }
+    });
 
-        /* ============================================================================
-           2. COUCHE DE DONNÉES PARTAGÉE
-           ============================================================================ */
-        const STORAGE_KEY = "kirikou_admin_demo_db_v1";
+    document.getElementById("logout-btn").addEventListener("click", function () {
+        sessionStorage.removeItem(SESSION_KEY);
+        document.getElementById("admin-password").value = "";
+        checkSession();
+    });
 
-        const DEMO_SEED_DATA = {
-            settings: {
-                siteOnline: true,
-                maintenanceMessage: "Notre site est temporairement indisponible. Nous revenons bientôt. Merci pour votre patience.",
-                homeAnnouncement: "Service rapide 24/7 — Création de comptes, Recharges MonCash, NatCash, PayPal & Méru Visa !",
-                whatsappNumber: "+509 32694670"
-            },
-            clients: [
-                { id: "CLI-01", name: "Jean-Baptiste Marc", phone: "+509 3712-4490", balance: 2500, totalDeposits: 6500, totalOrders: 4000 },
-                { id: "CLI-02", name: "Stéphanie Pierre", phone: "+509 4890-1122", balance: 1200, totalDeposits: 3200, totalOrders: 2000 },
-                { id: "CLI-03", name: "Roody Désir", phone: "+509 3455-8810", balance: 450, totalDeposits: 1950, totalOrders: 1500 },
-                { id: "CLI-04", name: "Mackenson Louis", phone: "+509 4120-9934", balance: 5000, totalDeposits: 8000, totalOrders: 3000 }
-            ],
-            orders: [
-                { id: "CMD-1041", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", service: "Carte Méru Visa Virtuelle", amount: 1500, date: "2026-11-15 14:20", status: "En attente" },
-                { id: "CMD-1040", client: "Stéphanie Pierre", phone: "+509 4890-1122", service: "Abonnement MovieBox Pro VIP (1 an)", amount: 800, date: "2026-11-15 11:05", status: "Validée" }
-            ],
-            deposits: [
-                { id: "DEP-501", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", methodPhone: "MonCash • +509 3712-4490", amount: 3000, reference: "MC-89451203", date: "2026-11-15 14:12", status: "En attente" }
-            ],
-            withdrawals: [
-                { id: "RET-301", client: "Mackenson Louis", phone: "+509 4120-9934", amount: 2000, method: "MonCash", date: "2026-11-15 15:00", status: "En attente" }
-            ],
-            services: [
-                { id: "SRV-01", name: "Carte Méru Visa Virtuelle", category: "Création", price: 1500, active: true },
-                { id: "SRV-02", name: "Compte PayPal Vérifié", category: "Création", price: 1500, active: true }
-            ],
-            transactions: [
-                { ref: "TX-9004", date: "2026-11-15 14:20", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", type: "Commande", description: "Carte Méru Visa Virtuelle", amount: 1500, status: "En attente" }
-            ]
-        };
+    // Base de données partagée (compatible API / Vercel Backend)
+    const STORAGE_KEY = "kirikou_production_db_v2";
 
-        const DataStore = {
-            load() {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (!raw) {
-                    this.save(DEMO_SEED_DATA);
-                    return JSON.parse(JSON.stringify(DEMO_SEED_DATA));
-                }
-                try {
-                    return JSON.parse(raw);
-                } catch (err) {
-                    this.save(DEMO_SEED_DATA);
-                    return JSON.parse(JSON.stringify(DEMO_SEED_DATA));
-                }
-            },
-            save(data) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            },
-            reset() {
-                const fresh = JSON.parse(JSON.stringify(DEMO_SEED_DATA));
-                this.save(fresh);
-                return fresh;
+    const INITIAL_DB = {
+        settings: { siteOnline: true },
+        orders: [] // Vos commandes réelles en provenance de index.html
+    };
+
+    const DataStore = {
+        load() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) {
+                this.save(INITIAL_DB);
+                return JSON.parse(JSON.stringify(INITIAL_DB));
             }
-        };
-
-        let db = DataStore.load();
-
-        /* ============================================================================
-           3. UTILITAIRES
-           ============================================================================ */
-        function formatHTG(val) { return Number(val || 0).toLocaleString("fr-FR") + " HTG"; }
-        function nowFormatted() {
-            const d = new Date();
-            const pad = n => String(n).padStart(2, "0");
-            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+            try { return JSON.parse(raw); } catch(e) { return INITIAL_DB; }
+        },
+        save(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         }
-        function getStatusBadge(status) {
-            const s = (status || "").toLowerCase();
-            if (s.includes("attente")) return `<span class="badge pending"><i class="fa-solid fa-clock"></i> ${status}</span>`;
-            if (s.includes("valid")) return `<span class="badge completed"><i class="fa-solid fa-check"></i> ${status}</span>`;
-            if (s.includes("refus") || s.includes("annul")) return `<span class="badge cancelled"><i class="fa-solid fa-xmark"></i> ${status}</span>`;
-            return `<span class="badge progress">${status}</span>`;
-        }
-        function showToast(message) {
-            const container = document.getElementById("toast-container");
-            const toast = document.createElement("div");
-            toast.className = "toast";
-            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-green); margin-right: 8px;"></i> ${message}`;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3200);
-        }
-        function openModal(id) { document.getElementById(id).classList.add("open"); }
-        function closeModal(id) { document.getElementById(id).classList.remove("open"); }
-        function addTransaction(client, phone, type, description, amount, status) {
-            const ref = "TX-" + Math.floor(1000 + Math.random() * 9000);
-            db.transactions.unshift({ ref, date: nowFormatted(), client, phone, type, description, amount: Number(amount), status });
-        }
+    };
 
-        /* ============================================================================
-           4. NAVIGATION MOBILE / DESKTOP
-           ============================================================================ */
-        const sidebar = document.getElementById("sidebar");
-        const sidebarOverlay = document.getElementById("sidebar-overlay");
-        const menuToggle = document.getElementById("menu-toggle");
-        const menuLinks = document.querySelectorAll(".sidebar-menu a");
-        const adminViews = document.querySelectorAll(".admin-view");
-        const currentPageTitle = document.getElementById("current-page-title");
+    let db = DataStore.load();
 
-        function closeMobileSidebar() {
+    // Utilitaires
+    function formatHTG(val) { return Number(val || 0).toLocaleString("fr-FR") + " HTG"; }
+    function showToast(message) {
+        const container = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-green); margin-right: 8px;"></i> ${message}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3200);
+    }
+    function getStatusBadge(status) {
+        return status === "Vérifiée" 
+            ? `<span class="badge completed"><i class="fa-solid fa-check"></i> Vérifiée</span>`
+            : `<span class="badge pending"><i class="fa-solid fa-clock"></i> En attente</span>`;
+    }
+
+    // Navigation Sidebar
+    const menuLinks = document.querySelectorAll(".sidebar-menu a");
+    const adminViews = document.querySelectorAll(".admin-view");
+    const currentPageTitle = document.getElementById("current-page-title");
+    const sidebar = document.getElementById("sidebar");
+    const sidebarOverlay = document.getElementById("sidebar-overlay");
+    const menuToggle = document.getElementById("menu-toggle");
+
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        sidebarOverlay.classList.toggle("active");
+    });
+    sidebarOverlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        sidebarOverlay.classList.remove("active");
+    });
+
+    menuLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            menuLinks.forEach(l => l.parentElement.classList.remove("active"));
+            this.parentElement.classList.add("active");
+            adminViews.forEach(v => v.classList.remove("active"));
+            document.getElementById(this.getAttribute("data-target")).classList.add("active");
+            currentPageTitle.textContent = this.querySelector(".menu-left").textContent.trim();
             sidebar.classList.remove("open");
             sidebarOverlay.classList.remove("active");
-        }
-        menuToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("open");
-            sidebarOverlay.classList.toggle("active");
         });
-        sidebarOverlay.addEventListener("click", closeMobileSidebar);
+    });
 
-        menuLinks.forEach(link => {
-            link.addEventListener("click", function (e) {
-                e.preventDefault();
-                menuLinks.forEach(l => l.parentElement.classList.remove("active"));
-                this.parentElement.classList.add("active");
-                const targetId = this.getAttribute("data-target");
-                adminViews.forEach(v => v.classList.remove("active"));
-                document.getElementById(targetId).classList.add("active");
-                currentPageTitle.textContent = this.querySelector(".menu-left").textContent.trim();
-                closeMobileSidebar();
-            });
-        });
+    // Synchronisation bouton ON/OFF
+    const dashToggle = document.getElementById("dashboard-site-online");
+    const dashLabel = document.getElementById("dashboard-online-label");
+    const settingsToggle = document.getElementById("setting-site-online");
+    const settingsLabel = document.getElementById("site-online-label");
 
-        /* ============================================================================
-           5. SYNCHRONISATION ET GESTION DU BOUTON ON/OFF
-           ============================================================================ */
-        const dashSiteOnlineToggle = document.getElementById("dashboard-site-online");
-        const dashOnlineLabel = document.getElementById("dashboard-online-label");
-        const settingsSiteOnlineToggle = document.getElementById("setting-site-online");
-        const settingsOnlineLabel = document.getElementById("site-online-label");
+    function updateSiteStatusUI() {
+        const online = db.settings.siteOnline !== false;
+        if(dashToggle) dashToggle.checked = online;
+        if(dashLabel) dashLabel.textContent = online ? "ON" : "OFF";
+        if(settingsToggle) settingsToggle.checked = online;
+        if(settingsLabel) settingsLabel.textContent = online ? "ON" : "OFF";
+    }
 
-        function updateSiteStatusUI() {
-            const isOnline = db.settings.siteOnline !== false;
-            if (dashSiteOnlineToggle) dashSiteOnlineToggle.checked = isOnline;
-            if (dashOnlineLabel) dashOnlineLabel.textContent = isOnline ? "ON" : "OFF";
-            if (settingsSiteOnlineToggle) settingsSiteOnlineToggle.checked = isOnline;
-            if (settingsOnlineLabel) settingsOnlineLabel.textContent = isOnline ? "ON" : "OFF";
-        }
+    function setSiteStatus(status) {
+        db.settings.siteOnline = status;
+        DataStore.save(db);
+        updateSiteStatusUI();
+        showToast(status ? "Site public activé (ON)." : "Site public désactivé (OFF — Mode maintenance).");
+    }
 
-        function handleSiteStatusChange(newStatus) {
-            db.settings.siteOnline = newStatus;
-            DataStore.save(db);
-            updateSiteStatusUI();
-            if (newStatus) {
-                showToast("Le site public est maintenant EN LIGNE (ON).");
-            } else {
-                showToast("Le site public est fermé (OFF) — Page de maintenance active.");
-            }
-        }
+    if(dashToggle) dashToggle.addEventListener("change", function() { setSiteStatus(this.checked); });
+    if(settingsToggle) settingsToggle.addEventListener("change", function() { setSiteStatus(this.checked); });
 
-        if (dashSiteOnlineToggle) {
-            dashSiteOnlineToggle.addEventListener("change", function () {
-                handleSiteStatusChange(this.checked);
-            });
-        }
+    // Rendu des Statistiques
+    function renderStats() {
+        const total = db.orders.length;
+        const creations = db.orders.filter(o => o.service.toLowerCase().includes("création")).length;
+        const recharges = db.orders.filter(o => o.service.toLowerCase().includes("recharge")).length;
+        const moviebox = db.orders.filter(o => o.service.toLowerCase().includes("moviebox")).length;
+        const pending = db.orders.filter(o => o.status === "En attente").length;
+        const verified = db.orders.filter(o => o.status === "Vérifiée").length;
 
-        if (settingsSiteOnlineToggle) {
-            settingsSiteOnlineToggle.addEventListener("change", function () {
-                handleSiteStatusChange(this.checked);
-            });
-        }
+        document.getElementById("stat-total").textContent = total;
+        document.getElementById("stat-creations").textContent = creations;
+        document.getElementById("stat-recharges").textContent = recharges;
+        document.getElementById("stat-moviebox").textContent = moviebox;
+        document.getElementById("stat-pending").textContent = pending;
+        document.getElementById("stat-verified").textContent = verified;
+        document.getElementById("badge-orders").textContent = pending;
+    }
 
-        window.reactiveSiteFromDash = function() {
-            handleSiteStatusChange(true);
-        }
+    // Rendu des Commandes avec Filtres & Actions VÉRIFIER / SUPPRIMER
+    function renderOrders() {
+        const search = document.getElementById("filter-order-search").value.toLowerCase();
+        const serviceFilter = document.getElementById("filter-order-service").value;
+        const statusFilter = document.getElementById("filter-order-status").value;
+        const tbody = document.getElementById("orders-tbody");
 
-        window.reactiveSiteFromSettings = function() {
-            handleSiteStatusChange(true);
-        }
-
-        /* ============================================================================
-           6. RENDU TABLEAU DE BORD & AUTRES SECTIONS
-           ============================================================================ */
-        function renderDashboard() {
-            updateSiteStatusUI();
-            const totalClients = db.clients.length;
-            const totalOrders = db.orders.length;
-            const pendingOrders = db.orders.filter(o => o.status === "En attente").length;
-            const pendingDeposits = db.deposits.filter(d => d.status === "En attente").length;
-            const pendingWithdrawals = db.withdrawals.filter(w => w.status === "En attente").length;
-
-            const totalDepositsAmount = db.deposits.filter(d => d.status === "Validé").reduce((s, d) => s + Number(d.amount), 0);
-            const totalWithdrawalsAmount = db.withdrawals.filter(w => w.status === "Validé").reduce((s, w) => s + Number(w.amount), 0);
-            const totalRevenue = db.orders.filter(o => o.status === "Validée").reduce((s, o) => s + Number(o.amount), 0);
-
-            document.getElementById("stat-clients").textContent = totalClients;
-            document.getElementById("stat-orders").textContent = totalOrders;
-            document.getElementById("stat-pending").textContent = pendingOrders;
-            document.getElementById("stat-deposits").textContent = formatHTG(totalDepositsAmount);
-            document.getElementById("stat-withdrawals").textContent = formatHTG(totalWithdrawalsAmount);
-            document.getElementById("stat-revenue").textContent = formatHTG(totalRevenue);
-
-            document.getElementById("badge-orders").textContent = pendingOrders;
-            document.getElementById("badge-deposits").textContent = pendingDeposits;
-            document.getElementById("badge-withdrawals").textContent = pendingWithdrawals;
-
-            const tbody = document.getElementById("dashboard-activities-tbody");
-            const recent = db.transactions.slice(0, 6);
-            if (recent.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Aucune activité récente.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = recent.map(tx => `
-                <tr>
-                    <td>${tx.date}</td>
-                    <td><strong>${tx.type}</strong></td>
-                    <td>${tx.client}</td>
-                    <td>${tx.description}</td>
-                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(tx.amount)}</td>
-                    <td>${getStatusBadge(tx.status)}</td>
-                </tr>
-            `).join("");
-        }
-
-        function renderOrders() {
-            const search = document.getElementById("filter-order-search").value.toLowerCase();
-            const statusFilter = document.getElementById("filter-order-status").value;
-            const tbody = document.getElementById("orders-tbody");
-            const filtered = db.orders.filter(o => {
-                const matchText = o.id.toLowerCase().includes(search) || o.client.toLowerCase().includes(search) || o.phone.toLowerCase().includes(search) || o.service.toLowerCase().includes(search);
-                const matchStatus = !statusFilter || o.status === statusFilter;
-                return matchText && matchStatus;
-            });
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">Aucune commande trouvée.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = filtered.map(o => `
-                <tr>
-                    <td><strong>${o.id}</strong></td>
-                    <td>${o.client}</td>
-                    <td>${o.phone}</td>
-                    <td>${o.service}</td>
-                    <td style="font-weight: 600;">${formatHTG(o.amount)}</td>
-                    <td>${o.date}</td>
-                    <td>${getStatusBadge(o.status)}</td>
-                    <td>
-                        <div class="action-group">
-                            ${o.status !== "Validée" ? `<button class="btn-action btn-validate" onclick="validateOrder('${o.id}')"><i class="fa-solid fa-check"></i> Valider</button>` : ""}
-                            <button class="btn-action btn-edit" onclick="openOrderModal('${o.id}')"><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn-action btn-delete" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            `).join("");
-        }
-
-        window.validateOrder = function (id) {
-            const order = db.orders.find(o => o.id === id);
-            if (!order) return;
-            order.status = "Validée";
-            addTransaction(order.client, order.phone, "Commande", `Validation ${order.id} (${order.service})`, order.amount, "Validée");
-            DataStore.save(db);
-            refreshAll();
-            showToast(`Commande ${id} validée.`);
-        };
-
-        window.deleteOrder = function (id) {
-            if (!confirm(`Supprimer la commande ${id} ?`)) return;
-            db.orders = db.orders.filter(o => o.id !== id);
-            DataStore.save(db);
-            refreshAll();
-            showToast(`Commande ${id} supprimée.`);
-        };
-
-        window.openOrderModal = function (id = null) {
-            const title = document.getElementById("order-modal-title");
-            if (id) {
-                const order = db.orders.find(o => o.id === id);
-                if (!order) return;
-                title.textContent = `Modifier la commande ${order.id}`;
-                document.getElementById("edit-order-id").value = order.id;
-                document.getElementById("edit-order-client").value = order.client;
-                document.getElementById("edit-order-phone").value = order.phone;
-                document.getElementById("edit-order-service").value = order.service;
-                document.getElementById("edit-order-amount").value = order.amount;
-                document.getElementById("edit-order-status").value = order.status;
-            } else {
-                title.textContent = "Nouvelle commande";
-                document.getElementById("edit-order-id").value = "";
-                document.getElementById("order-form").reset();
-            }
-            openModal("order-modal");
-        };
-
-        document.getElementById("order-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const id = document.getElementById("edit-order-id").value;
-            const client = document.getElementById("edit-order-client").value.trim();
-            const phone = document.getElementById("edit-order-phone").value.trim();
-            const service = document.getElementById("edit-order-service").value.trim();
-            const amount = Number(document.getElementById("edit-order-amount").value);
-            const status = document.getElementById("edit-order-status").value;
-
-            if (id) {
-                const order = db.orders.find(o => o.id === id);
-                if (order) { order.client = client; order.phone = phone; order.service = service; order.amount = amount; order.status = status; }
-                showToast(`Commande ${id} mise à jour.`);
-            } else {
-                const newId = "CMD-" + Math.floor(1042 + Math.random() * 8900);
-                db.orders.unshift({ id: newId, client, phone, service, amount, date: nowFormatted(), status });
-                addTransaction(client, phone, "Commande", `${newId} — ${service}`, amount, status);
-                showToast(`Commande ${newId} ajoutée.`);
-            }
-            DataStore.save(db);
-            closeModal("order-modal");
-            refreshAll();
+        const filtered = db.orders.filter(o => {
+            const matchSearch = (o.client || "").toLowerCase().includes(search) || 
+                                (o.phone || "").toLowerCase().includes(search) || 
+                                (o.email || "").toLowerCase().includes(search);
+            const matchService = !serviceFilter || o.service === serviceFilter;
+            const matchStatus = !statusFilter || o.status === statusFilter;
+            return matchSearch && matchService && matchStatus;
         });
 
-        function renderDeposits() {
-            const search = document.getElementById("filter-deposit-search").value.toLowerCase();
-            const statusFilter = document.getElementById("filter-deposit-status").value;
-            const tbody = document.getElementById("deposits-tbody");
-            const filtered = db.deposits.filter(d => {
-                const matchText = d.client.toLowerCase().includes(search) || d.methodPhone.toLowerCase().includes(search) || d.reference.toLowerCase().includes(search);
-                const matchStatus = !statusFilter || d.status === statusFilter;
-                return matchText && matchStatus;
-            });
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Aucun dépôt trouvé.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = filtered.map(d => `
-                <tr>
-                    <td><strong>${d.client}</strong></td>
-                    <td>${d.methodPhone}</td>
-                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(d.amount)}</td>
-                    <td><code>${d.reference}</code></td>
-                    <td>${d.date}</td>
-                    <td>${getStatusBadge(d.status)}</td>
-                    <td>
-                        ${d.status === "En attente" ? `
-                            <button class="btn-action btn-validate" onclick="processDeposit('${d.id}', 'Validé')">Valider</button>
-                            <button class="btn-action btn-delete" onclick="processDeposit('${d.id}', 'Refusé')">Refuser</button>
-                        ` : `Traité`}
-                    </td>
-                </tr>
-            `).join("");
+        if (filtered.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color: var(--text-muted);">Aucune commande enregistrée pour le moment.</td></tr>`;
+            return;
         }
 
-        window.processDeposit = function (id, status) {
-            const dep = db.deposits.find(d => d.id === id);
-            if (!dep || dep.status !== "En attente") return;
-            dep.status = status;
-            if (status === "Validé") {
-                const c = db.clients.find(cli => cli.phone === dep.phone || cli.name === dep.client);
-                if (c) { c.balance += Number(dep.amount); c.totalDeposits += Number(dep.amount); }
-            }
-            addTransaction(dep.client, dep.phone, "Dépôt", `Dépôt ${dep.reference}`, dep.amount, status);
-            DataStore.save(db);
-            refreshAll();
-            showToast(`Dépôt ${status.toLowerCase()}.`);
-        };
+        tbody.innerHTML = filtered.map(o => `
+            <tr>
+                <td><strong>${o.client || 'Client'}</strong></td>
+                <td><span style="color: var(--accent-green); font-weight: 500;">${o.service}</span></td>
+                <td>${o.email || 'N/A'}</td>
+                <td>${o.phone}</td>
+                <td style="font-weight: 600;">${formatHTG(o.amount)}</td>
+                <td>${o.date}</td>
+                <td>${getStatusBadge(o.status)}</td>
+                <td>
+                    <div class="action-group">
+                        ${o.status !== "Vérifiée" ? `<button class="btn-action btn-verify" onclick="verifyOrder('${o.id}')"><i class="fa-solid fa-check"></i> Vérifier</button>` : ""}
+                        <button class="btn-action btn-delete" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i> Supprimer</button>
+                    </div>
+                </td>
+            </tr>
+        `).join("");
+    }
 
-        function renderWithdrawals() {
-            const search = document.getElementById("filter-withdrawal-search").value.toLowerCase();
-            const statusFilter = document.getElementById("filter-withdrawal-status").value;
-            const tbody = document.getElementById("withdrawals-tbody");
-            const filtered = db.withdrawals.filter(w => {
-                const matchText = w.client.toLowerCase().includes(search) || w.phone.toLowerCase().includes(search);
-                const matchStatus = !statusFilter || w.status === statusFilter;
-                return matchText && matchStatus;
-            });
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Aucun retrait trouvé.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = filtered.map(w => `
-                <tr>
-                    <td><strong>${w.client}</strong></td>
-                    <td>${w.phone}</td>
-                    <td style="font-weight: 600;">${formatHTG(w.amount)}</td>
-                    <td>${w.method}</td>
-                    <td>${w.date}</td>
-                    <td>${getStatusBadge(w.status)}</td>
-                    <td>
-                        ${w.status === "En attente" ? `
-                            <button class="btn-action btn-validate" onclick="processWithdrawal('${w.id}', 'Validé')">Valider</button>
-                            <button class="btn-action btn-delete" onclick="processWithdrawal('${w.id}', 'Refusé')">Refuser</button>
-                        ` : `Traité`}
-                    </td>
-                </tr>
-            `).join("");
-        }
+    window.verifyOrder = function(id) {
+        const order = db.orders.find(o => o.id === id);
+        if(!order) return;
+        order.status = "Vérifiée";
+        DataStore.save(db);
+        renderStats();
+        renderOrders();
+        showToast(`Commande ${id} validée et vérifiée.`);
+    };
 
-        window.processWithdrawal = function (id, status) {
-            const w = db.withdrawals.find(item => item.id === id);
-            if (!w || w.status !== "En attente") return;
-            if (status === "Validé") {
-                const c = db.clients.find(cli => cli.phone === w.phone || cli.name === w.client);
-                if (c && c.balance >= Number(w.amount)) { c.balance -= Number(w.amount); }
-                else { alert("Solde client insuffisant !"); return; }
-            }
-            w.status = status;
-            addTransaction(w.client, w.phone, "Retrait", `Retrait ${w.method}`, w.amount, status);
-            DataStore.save(db);
-            refreshAll();
-            showToast(`Retrait ${status.toLowerCase()}.`);
-        };
+    window.deleteOrder = function(id) {
+        if(!confirm("Êtes-vous sûr de vouloir supprimer cette commande ?")) return;
+        db.orders = db.orders.filter(o => o.id !== id);
+        DataStore.save(db);
+        renderStats();
+        renderOrders();
+        showToast("Commande supprimée.");
+    };
 
-        function renderWallets() {
-            const search = document.getElementById("filter-wallet-search").value.toLowerCase();
-            const tbody = document.getElementById("wallets-tbody");
-            const filtered = db.clients.filter(c => c.name.toLowerCase().includes(search) || c.phone.toLowerCase().includes(search));
-            tbody.innerHTML = filtered.map(c => `
-                <tr>
-                    <td><strong>${c.name}</strong></td>
-                    <td>${c.phone}</td>
-                    <td style="color: var(--accent-green); font-weight: 700;">${formatHTG(c.balance)}</td>
-                    <td>${formatHTG(c.totalDeposits)}</td>
-                    <td>${formatHTG(c.totalOrders)}</td>
-                    <td><button class="btn-action btn-edit" onclick="openClientModal('${c.id}')"><i class="fa-solid fa-eye"></i> Historique</button></td>
-                </tr>
-            `).join("");
-        }
+    function refreshAll() {
+        updateSiteStatusUI();
+        renderStats();
+        renderOrders();
+    }
 
-        function renderClients() {
-            const search = document.getElementById("filter-client-search").value.toLowerCase();
-            const tbody = document.getElementById("clients-tbody");
-            const filtered = db.clients.filter(c => c.name.toLowerCase().includes(search) || c.phone.toLowerCase().includes(search));
-            tbody.innerHTML = filtered.map(c => `
-                <tr>
-                    <td><strong>${c.name}</strong></td>
-                    <td>${c.phone}</td>
-                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(c.balance)}</td>
-                    <td>${formatHTG(c.totalDeposits)}</td>
-                    <td>${formatHTG(c.totalOrders)}</td>
-                    <td><button class="btn-action btn-validate" onclick="openClientModal('${c.id}')">Voir</button></td>
-                </tr>
-            `).join("");
-        }
+    function initApp() {
+        db = DataStore.load();
+        refreshAll();
+    }
 
-        window.openClientModal = function (id) {
-            const client = db.clients.find(c => c.id === id);
-            if (!client) return;
-            document.getElementById("adjust-client-id").value = client.id;
-            document.getElementById("client-modal-title").textContent = `${client.name} (${client.phone})`;
-            document.getElementById("client-modal-summary").innerHTML = `
-                <span>Solde : <strong style="color:var(--accent-green);">${formatHTG(client.balance)}</strong></span> |
-                <span>Dépôts : <strong>${formatHTG(client.totalDeposits)}</strong></span>
-            `;
-            const txs = db.transactions.filter(t => t.client === client.name || t.phone === client.phone);
-            const tbody = document.getElementById("client-modal-history-tbody");
-            tbody.innerHTML = txs.length === 0 ? `<tr><td colspan="4" style="text-align:center;">Aucune opération.</td></tr>` : txs.map(t => `
-                <tr><td>${t.date}</td><td>${t.description}</td><td>${formatHTG(t.amount)}</td><td>${getStatusBadge(t.status)}</td></tr>
-            `).join("");
-            openModal("client-history-modal");
-        };
+    checkSession();
+</script>
 
-        document.getElementById("wallet-adjust-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const id = document.getElementById("adjust-client-id").value;
-            const type = document.getElementById("adjust-type").value;
-            const amount = Number(document.getElementById("adjust-amount").value);
-            const client = db.clients.find(c => c.id === id);
-            if (!client || amount <= 0) return;
-            if (type === "credit") {
-                client.balance += amount;
-                addTransaction(client.name, client.phone, "Ajustement", "Crédit administrateur", amount, "Validé");
-            } else {
-                if (client.balance < amount) { alert("Solde insuffisant."); return; }
-                client.balance -= amount;
-                addTransaction(client.name, client.phone, "Ajustement", "Débit administrateur", amount, "Validé");
-            }
-            document.getElementById("adjust-amount").value = "";
-            DataStore.save(db);
-            refreshAll();
-            openClientModal(id);
-            showToast("Solde mis à jour.");
-        });
-
-        function renderServices() {
-            const tbody = document.getElementById("services-tbody");
-            tbody.innerHTML = db.services.map(s => `
-                <tr>
-                    <td><strong>${s.name}</strong></td>
-                    <td>${s.category}</td>
-                    <td style="color: var(--accent-green); font-weight: 700;">${formatHTG(s.price)}</td>
-                    <td>${s.active ? `<span class="badge completed">Actif</span>` : `<span class="badge cancelled">Inactif</span>`}</td>
-                    <td>
-                        <button class="btn-action btn-edit" onclick="openServiceModal('${s.id}')">Éditer</button>
-                        <button class="btn-action btn-validate" onclick="toggleService('${s.id}')">${s.active ? "Désactiver" : "Activer"}</button>
-                    </td>
-                </tr>
-            `).join("");
-        }
-
-        window.openServiceModal = function (id = null) {
-            const title = document.getElementById("service-modal-title");
-            if (id) {
-                const srv = db.services.find(s => s.id === id);
-                if (!srv) return;
-                title.textContent = "Modifier le service";
-                document.getElementById("edit-service-id").value = srv.id;
-                document.getElementById("edit-service-name").value = srv.name;
-                document.getElementById("edit-service-category").value = srv.category;
-                document.getElementById("edit-service-price").value = srv.price;
-                document.getElementById("edit-service-active").value = String(srv.active);
-            } else {
-                title.textContent = "Ajouter un service";
-                document.getElementById("edit-service-id").value = "";
-                document.getElementById("service-form").reset();
-            }
-            openModal("service-modal");
-        };
-
-        document.getElementById("service-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const id = document.getElementById("edit-service-id").value;
-            const name = document.getElementById("edit-service-name").value.trim();
-            const category = document.getElementById("edit-service-category").value.trim();
-            const price = Number(document.getElementById("edit-service-price").value);
-            const active = document.getElementById("edit-service-active").value === "true";
-
-            if (id) {
-                const srv = db.services.find(s => s.id === id);
-                if (srv) { srv.name = name; srv.category = category; srv.price = price; srv.active = active; }
-                showToast("Service mis à jour.");
-            } else {
-                db.services.push({ id: "SRV-" + Math.floor(10 + Math.random() * 90), name, category, price, active });
-                showToast("Service ajouté.");
-            }
-            DataStore.save(db);
-            closeModal("service-modal");
-            renderServices();
-        });
-
-        window.toggleService = function (id) {
-            const srv = db.services.find(s => s.id === id);
-            if (!srv) return;
-            srv.active = !srv.active;
-            DataStore.save(db);
-            renderServices();
-            showToast("Statut du service modifié.");
-        };
-
-        function renderTransactions() {
-            const search = document.getElementById("filter-tx-search").value.toLowerCase();
-            const typeFilter = document.getElementById("filter-tx-type").value;
-            const tbody = document.getElementById("transactions-tbody");
-            const filtered = db.transactions.filter(t => {
-                const matchText = t.ref.toLowerCase().includes(search) || t.client.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
-                const matchType = !typeFilter || t.type === typeFilter;
-                return matchText && matchType;
-            });
-            tbody.innerHTML = filtered.length === 0 ? `<tr><td colspan="7" style="text-align:center;">Aucune transaction.</td></tr>` : filtered.map(t => `
-                <tr><td><strong>${t.ref}</strong></td><td>${t.date}</td><td>${t.client}</td><td>${t.type}</td><td>${t.description}</td><td>${formatHTG(t.amount)}</td><td>${getStatusBadge(t.status)}</td></tr>
-            `).join("");
-        }
-
-        function renderSettings() {
-            updateSiteStatusUI();
-            document.getElementById("setting-maintenance").value = db.settings.maintenanceMessage;
-            document.getElementById("setting-announcement").value = db.settings.homeAnnouncement;
-            document.getElementById("setting-whatsapp").value = db.settings.whatsappNumber;
-        }
-
-        document.getElementById("settings-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            db.settings.maintenanceMessage = document.getElementById("setting-maintenance").value.trim();
-            db.settings.homeAnnouncement = document.getElementById("setting-announcement").value.trim();
-            db.settings.whatsappNumber = document.getElementById("setting-whatsapp").value.trim();
-            DataStore.save(db);
-            showToast("Paramètres enregistrés.");
-        });
-
-        document.getElementById("reset-demo-btn").addEventListener("click", function () {
-            if (confirm("Réinitialiser les données ?")) {
-                db = DataStore.reset();
-                refreshAll();
-                showToast("Données réinitialisées.");
-            }
-        });
-
-        function refreshAll() {
-            renderDashboard();
-            renderOrders();
-            renderDeposits();
-            renderWithdrawals();
-            renderWallets();
-            renderServices();
-            renderClients();
-            renderTransactions();
-            renderSettings();
-        }
-
-        function initApp() {
-            db = DataStore.load();
-            refreshAll();
-        }
-
-        checkSession();
-    </script>
 </body>
 </html>
