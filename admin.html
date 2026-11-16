@@ -1,1216 +1,2268 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KIRIKOU CRÉATION | Panneau d'Administration</title>
-  
-  <!-- Google Fonts: Bebas Neue & Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Firebase SDKs (Compat v9) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
-  <style>
-    :root {
-      --bg-color: #0a0f14;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --accent-green: #25D366;
-      --accent-green-hover: #20ba5a;
-      --text-main: #ffffff;
-      --text-muted: #9ca3af;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --info: #3b82f6;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      overflow-x: hidden;
-    }
-
-    /* ==================== LOGIN SCREEN ==================== */
-    #auth-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(10, 15, 20, 0.92), rgba(10, 15, 20, 0.95)), url('https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      padding: 20px;
-    }
-
-    .auth-card {
-      background: rgba(18, 24, 31, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 40px 30px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-      text-align: center;
-    }
-
-    .auth-logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-green);
-      margin-bottom: 15px;
-      box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-    }
-
-    .auth-card h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .auth-card h2 span {
-      color: var(--accent-green);
-    }
-
-    .auth-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 25px;
-    }
-
-    .input-group {
-      margin-bottom: 18px;
-      text-align: left;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 0.8rem;
-      margin-bottom: 6px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 12px 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      color: #fff;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    .input-group input:focus {
-      border-color: var(--accent-green);
-    }
-
-    .btn-auth {
-      width: 100%;
-      padding: 12px;
-      background: var(--accent-green);
-      color: #000;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: background 0.3s, transform 0.2s;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-      margin-top: 10px;
-    }
-
-    .btn-auth:hover {
-      background: var(--accent-green-hover);
-      transform: translateY(-2px);
-    }
-
-    .auth-error {
-      color: var(--danger);
-      font-size: 0.8rem;
-      margin-top: 15px;
-      display: none;
-    }
-
-    /* ==================== MAIN DASHBOARD LAYOUT ==================== */
-    #dashboard-app {
-      display: none;
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    .app-container {
-      display: flex;
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    /* SIDEBAR */
-    aside {
-      width: 260px;
-      background: rgba(13, 18, 24, 0.95);
-      border-right: 1px solid var(--card-border);
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      z-index: 100;
-      transition: transform 0.3s ease;
-    }
-
-    .sidebar-header {
-      padding: 25px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .sidebar-logo {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent-green);
-    }
-
-    .sidebar-title h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .sidebar-title span {
-      font-size: 0.7rem;
-      color: var(--accent-green);
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .sidebar-menu {
-      list-style: none;
-      padding: 20px 10px;
-      flex: 1;
-      overflow-y: auto;
-    }
-
-    .sidebar-menu li {
-      margin-bottom: 5px;
-    }
-
-    .sidebar-menu a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 15px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-radius: 10px;
-      transition: all 0.3s;
-    }
-
-    .sidebar-menu a:hover, .sidebar-menu li.active a {
-      background: rgba(37, 211, 102, 0.1);
-      color: var(--accent-green);
-    }
-
-    .sidebar-menu a i {
-      font-size: 1.1rem;
-      width: 20px;
-      text-align: center;
-    }
-
-    .sidebar-footer {
-      padding: 15px 20px;
-      border-top: 1px solid var(--card-border);
-    }
-
-    .btn-logout {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 10px 15px;
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: var(--danger);
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: background 0.3s;
-    }
-
-    .btn-logout:hover {
-      background: rgba(239, 68, 68, 0.25);
-    }
-
-    /* MAIN CONTENT */
-    .main-content {
-      flex: 1;
-      margin-left: 260px;
-      padding: 30px;
-      background: var(--bg-color);
-      min-height: 100vh;
-    }
-
-    /* TOP NAVBAR */
-    .top-navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      padding: 15px 25px;
-      border-radius: 16px;
-    }
-
-    .page-title h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .page-title p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .admin-profile {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .admin-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      color: #000;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    /* SITE STATUS CONTROL WIDGET (ON/OFF) */
-    .site-control-card {
-      background: linear-gradient(135deg, rgba(20, 30, 40, 0.9), rgba(10, 15, 20, 0.95));
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px 25px;
-      margin-bottom: 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    }
-
-    .site-control-info h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .site-control-info p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Switch toggle */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 70px;
-      height: 36px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--danger);
-      transition: .4s;
-      border-radius: 36px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 28px;
-      width: 28px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: var(--accent-green);
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(34px);
-    }
-
-    .slider-text {
-      position: absolute;
-      color: white;
-      font-weight: 700;
-      font-size: 0.7rem;
-      top: 10px;
-      right: 10px;
-      transition: 0.4s;
-    }
-
-    input:checked ~ .slider-text {
-      left: 12px;
-      right: auto;
-    }
-
-    /* STATS CARDS GRID */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    .stat-icon {
-      width: 55px;
-      height: 55px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-    }
-
-    .stat-icon.green { background: rgba(37, 211, 102, 0.15); color: var(--accent-green); }
-    .stat-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--info); }
-    .stat-icon.yellow { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-    .stat-icon.red { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
-
-    .stat-info h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .stat-info p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* CONTENT SECTIONS & VIEWS */
-    .admin-view {
-      display: none;
-    }
-
-    .admin-view.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-box {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-
-    .card-box-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .card-box-header h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* TABLES STYLING */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.88rem;
-    }
-
-    th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    th {
-      color: var(--accent-green);
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.02);
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.5px;
-    }
-
-    td {
-      color: #e5e7eb;
-    }
-
-    tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 50px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .badge.pending { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.4); }
-    .badge.progress { background: rgba(59, 130, 246, 0.2); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.4); }
-    .badge.completed { background: rgba(37, 211, 102, 0.2); color: var(--accent-green); border: 1px solid rgba(37, 211, 102, 0.4); }
-    .badge.cancelled { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.4); }
-
-    /* FILTERS & SEARCH BAR */
-    .filters-bar {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .filters-bar input, .filters-bar select {
-      flex: 1;
-      min-width: 200px;
-      padding: 10px 15px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      color: #fff;
-      font-size: 0.88rem;
-      outline: none;
-    }
-
-    .filters-bar input:focus, .filters-bar select:focus {
-      border-color: var(--accent-green);
-    }
-
-    .filters-bar select option {
-      background: #12181f;
-    }
-
-    /* ACTION BUTTONS */
-    .btn-action {
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: 0.3s;
-      margin-right: 5px;
-    }
-
-    .btn-edit { background: rgba(59, 130, 246, 0.2); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.4); }
-    .btn-edit:hover { background: rgba(59, 130, 246, 0.4); }
-
-    .btn-delete { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.4); }
-    .btn-delete:hover { background: rgba(239, 68, 68, 0.4); }
-
-    .btn-primary-custom {
-      padding: 10px 20px;
-      background: var(--accent-green);
-      color: #000;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: 0.3s;
-    }
-
-    .btn-primary-custom:hover {
-      background: var(--accent-green-hover);
-    }
-
-    /* RESPONSIVE DESIGN */
-    .mobile-menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-main);
-    }
-
-    @media (max-width: 992px) {
-      aside {
-        transform: translateX(-100%);
-      }
-      aside.open {
-        transform: translateX(0);
-      }
-      .main-content {
-        margin-left: 0;
-        padding: 20px 15px;
-      }
-      .mobile-menu-toggle {
-        display: block;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Titre de la page</title>
+</head>
+<body>
+    
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KIRIKOU CRÉATION ET RECHARGE RAPIDE | Panneau d'Administration</title>
+    <!-- Google Fonts: Poppins & Bebas Neue -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #06090e;
+            --bg-deep-blue: #0b1320;
+            --glass-bg: rgba(16, 25, 40, 0.65);
+            --glass-bg-hover: rgba(24, 36, 56, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-green: #25D366;
+            --accent-green-hover: #1ebe5b;
+            --accent-green-glow: rgba(37, 211, 102, 0.25);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --purple: #a855f7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #0f1e36 0%, var(--bg-deep-blue) 45%, var(--bg-dark) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .brand-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        /* ==================== LOGIN SCREEN ==================== */
+        #auth-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6, 9, 14, 0.94), rgba(11, 19, 32, 0.96)),
+                        url('https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: rgba(13, 21, 34, 0.82);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 38px 28px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(37, 211, 102, 0.08);
+            text-align: center;
+        }
+
+        .auth-logo {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-green);
+            margin-bottom: 14px;
+            box-shadow: 0 0 25px var(--accent-green-glow);
+        }
+
+        .auth-card h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .auth-card h1 span {
+            color: var(--accent-green);
+        }
+
+        .auth-card p.subtitle {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(6, 10, 18, 0.65);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.92rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .input-wrapper input {
+            padding-left: 40px;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent-green);
+            color: #041008;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px var(--accent-green-glow);
+            margin-top: 8px;
+        }
+
+        .btn-auth:hover {
+            background: var(--accent-green-hover);
+            transform: translateY(-2px);
+        }
+
+        .auth-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+            font-size: 0.8rem;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .security-note {
+            margin-top: 18px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            line-height: 1.45;
+        }
+
+        /* ==================== APP LAYOUT ==================== */
+        #dashboard-app {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* SIDEBAR */
+        aside {
+            width: 275px;
+            background: rgba(9, 15, 26, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .sidebar-title h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .sidebar-title span {
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 14px 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-menu::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-menu a .menu-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu li.active a {
+            background: rgba(37, 211, 102, 0.14);
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .sidebar-menu a i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-badge {
+            background: var(--warning);
+            color: #000;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
+
+        .sidebar-footer {
+            padding: 14px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-reset-demo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #93c5fd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.78rem;
+            transition: 0.2s;
+        }
+
+        .btn-reset-demo:hover {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        .btn-logout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(239, 68, 68, 0.14);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.28);
+            color: #fff;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            margin-left: 275px;
+            padding: 24px;
+            min-height: 100vh;
+            width: calc(100% - 275px);
+        }
+
+        .demo-banner {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(37, 211, 102, 0.12));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+        }
+
+        .demo-banner-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fde68a;
+        }
+
+        .demo-pill {
+            background: var(--warning);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* TOP NAVBAR */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            padding: 14px 22px;
+            border-radius: 18px;
+            gap: 12px;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .page-title h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.65rem;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .page-title p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-badge-info {
+            text-align: right;
+        }
+
+        .admin-badge-info span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .admin-badge-info small {
+            font-size: 0.7rem;
+            color: var(--accent-green);
+        }
+
+        .admin-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            color: #041008;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            box-shadow: 0 0 15px var(--accent-green-glow);
+        }
+
+        /* STATS CARDS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(37, 211, 102, 0.35);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.green { background: rgba(37, 211, 102, 0.15); color: var(--accent-green); }
+        .stat-icon.blue { background: rgba(59, 130, 246, 0.15); color: var(--info); }
+        .stat-icon.yellow { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .stat-icon.red { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .stat-icon.purple { background: rgba(168, 85, 247, 0.15); color: var(--purple); }
+
+        .stat-info h3 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .stat-info p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* VIEWS & GLASS CARDS */
+        .admin-view {
+            display: none;
+        }
+
+        .admin-view.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--glass-border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .card-box-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-box-header h3 i {
+            color: var(--accent-green);
+            font-size: 1.05rem;
+        }
+
+        /* FILTERS BAR */
+        .filters-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .filters-bar input,
+        .filters-bar select {
+            flex: 1;
+            min-width: 180px;
+            padding: 10px 14px;
+            background: rgba(6, 10, 18, 0.65);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .filters-bar input:focus,
+        .filters-bar select:focus {
+            border-color: var(--accent-green);
+        }
+
+        .filters-bar select option {
+            background: #0b1320;
+            color: #fff;
+        }
+
+        /* TABLES */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+            min-width: 720px;
+        }
+
+        th, td {
+            padding: 13px 14px;
+            border-bottom: 1px solid var(--glass-border);
+            vertical-align: middle;
+        }
+
+        th {
+            color: var(--accent-green);
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.03);
+            text-transform: uppercase;
+            font-size: 0.74rem;
+            letter-spacing: 0.6px;
+            white-space: nowrap;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .badge.pending {
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+
+        .badge.progress {
+            background: rgba(59, 130, 246, 0.18);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.35);
+        }
+
+        .badge.completed {
+            background: rgba(37, 211, 102, 0.18);
+            color: var(--accent-green);
+            border: 1px solid rgba(37, 211, 102, 0.35);
+        }
+
+        .badge.cancelled {
+            background: rgba(239, 68, 68, 0.18);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+        }
+
+        /* BUTTONS */
+        .btn-primary-custom {
+            padding: 10px 18px;
+            background: var(--accent-green);
+            color: #041008;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            background: var(--accent-green-hover);
+            transform: translateY(-1px);
+        }
+
+        .action-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: nowrap;
+        }
+
+        .btn-action {
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .btn-validate {
+            background: rgba(37, 211, 102, 0.16);
+            color: var(--accent-green);
+            border-color: rgba(37, 211, 102, 0.35);
+        }
+        .btn-validate:hover { background: rgba(37, 211, 102, 0.32); }
+
+        .btn-edit {
+            background: rgba(59, 130, 246, 0.16);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+        .btn-edit:hover { background: rgba(59, 130, 246, 0.32); }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.16);
+            color: #f87171;
+            border-color: rgba(239, 68, 68, 0.35);
+        }
+        .btn-delete:hover { background: rgba(239, 68, 68, 0.32); }
+
+        /* GRAND BOUTON SWITCH TOGGLE ON/OFF */
+        .site-control-box {
+            background: rgba(6, 10, 18, 0.75);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 86px;
+            height: 42px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: var(--danger);
+            transition: 0.3s;
+            border-radius: 42px;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 34px;
+            width: 34px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-green);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(44px);
+        }
+
+        .slider-text {
+            position: absolute;
+            color: white;
+            font-weight: 800;
+            font-size: 0.8rem;
+            top: 12px;
+            right: 12px;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+
+        input:checked ~ .slider-text {
+            left: 14px;
+            right: auto;
+            color: #041008;
+        }
+
+        /* MODALS */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #0e1726;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 480px;
+            padding: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .modal-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* TOAST NOTIFICATION */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: rgba(14, 23, 38, 0.95);
+            border-left: 4px solid var(--accent-green);
+            border-top: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.25s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @media (max-width: 992px) {
+            aside {
+                transform: translateX(-100%);
+            }
+            aside.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 16px 14px;
+            }
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 15px;
+                gap: 12px;
+            }
+            .stat-info h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-badge-info {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ==================== AUTHENTIFICATION SCREEN ==================== -->
-  <div id="auth-screen">
-    <div class="auth-card">
-      <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo" class="auth-logo">
-      <h2>Kirikou <span>Admin</span></h2>
-      <p>Connectez-vous pour gérer votre plateforme</p>
-      
-      <form id="login-form">
-        <div class="input-group">
-          <label>Email Administrateur</label>
-          <input type="email" id="admin-email" placeholder="admin@kirikou.com" required>
-        </div>
-        <div class="input-group">
-          <label>Mot de passe</label>
-          <input type="password" id="admin-password" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="btn-auth">Connexion Sécurisée</button>
-        <div id="auth-error-msg" class="auth-error">Identifiants incorrects ou accès refusé.</div>
-      </form>
-    </div>
-  </div>
+    <!-- ==================== ÉCRAN DE CONNEXION ==================== -->
+    <div id="auth-screen">
+        <div class="auth-card">
+            <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo Kirikou Création" class="auth-logo">
+            <h1>KIRIKOU <span>ADMIN</span></h1>
+            <p class="subtitle">KIRIKOU CRÉATION ET RECHARGE RAPIDE</p>
 
-  <!-- ==================== MAIN ADMIN DASHBOARD ==================== -->
-  <div id="dashboard-app">
-    <div class="app-container">
-      
-      <!-- SIDEBAR -->
-      <aside id="sidebar">
-        <div class="sidebar-header">
-          <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo" class="sidebar-logo">
-          <div class="sidebar-title">
-            <h3>KIRIKOU CRÉATION</h3>
-            <span>Panel Admin v2.0</span>
-          </div>
-        </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="admin-username">Nom de l'administrateur</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <input type="text" id="admin-username" placeholder="Entrez le nom administrateur" required autocomplete="username">
+                    </div>
+                </div>
 
-        <ul class="sidebar-menu">
-          <li class="active"><a href="#" data-target="view-dashboard"><i class="fa-solid fa-chart-pie"></i> Tableau de bord</a></li>
-          <li><a href="#" data-target="view-orders"><i class="fa-solid fa-shopping-cart"></i> Commandes</a></li>
-          <li><a href="#" data-target="view-services"><i class="fa-solid fa-tags"></i> Services & Prix</a></li>
-          <li><a href="#" data-target="view-clients"><i class="fa-solid fa-users"></i> Clients</a></li>
-          <li><a href="#" data-target="view-settings"><i class="fa-solid fa-gear"></i> Paramètres du site</a></li>
-        </ul>
+                <div class="input-group">
+                    <label for="admin-password">Mot de passe</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="admin-password" placeholder="••••••" required autocomplete="current-password">
+                    </div>
+                </div>
 
-        <div class="sidebar-footer">
-          <button id="logout-btn" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
-        </div>
-      </aside>
+                <button type="submit" class="btn-auth">
+                    <i class="fa-solid fa-right-to-bracket"></i> Connexion
+                </button>
 
-      <!-- MAIN CONTENT AREA -->
-      <div class="main-content">
-        
-        <!-- TOP NAVBAR -->
-        <div class="top-navbar">
-          <div style="display: flex; align-items: center; gap: 15px;">
-            <i class="fa-solid fa-bars mobile-menu-toggle" id="menu-toggle"></i>
-            <div class="page-title">
-              <h2 id="current-page-title">Tableau de bord</h2>
-              <p>Bienvenue sur votre espace de gestion centralisé</p>
-            </div>
-          </div>
-          <div class="admin-profile">
-            <div class="admin-avatar">K</div>
-          </div>
-        </div>
-
-        <!-- SITE CONTROL ON/OFF WIDGET -->
-        <div class="site-control-card">
-          <div class="site-control-info">
-            <h4>Statut du site web principal</h4>
-            <p>Activez ou désactivez l'accès public au site (Page de maintenance)</p>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="site-status-toggle">
-            <span class="slider"></span>
-            <span class="slider-text" id="status-label-text">ON</span>
-          </label>
-        </div>
-
-        <!-- ==================== VIEW 1: TABLEAU DE BORD ==================== -->
-        <div id="view-dashboard" class="admin-view active">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-icon green"><i class="fa-solid fa-users"></i></div>
-              <div class="stat-info">
-                <h3 id="stat-clients">0</h3>
-                <p>Total Clients</p>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon blue"><i class="fa-solid fa-shopping-bag"></i></div>
-              <div class="stat-info">
-                <h3 id="stat-orders">0</h3>
-                <p>Total Commandes</p>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon yellow"><i class="fa-solid fa-clock"></i></div>
-              <div class="stat-info">
-                <h3 id="stat-pending">0</h3>
-                <p>En Attente</p>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-icon green"><i class="fa-solid fa-money-bill-wave"></i></div>
-              <div class="stat-info">
-                <h3 id="stat-revenue">0 HTG</h3>
-                <p>Chiffre d'Affaires</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-box">
-            <div class="card-box-header">
-              <h3>Dernières Activités & Commandes Récentes</h3>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Service</th>
-                    <th>Montant</th>
-                    <th>Statut</th>
-                  </tr>
-                </thead>
-                <tbody id="recent-orders-tbody">
-                  <tr>
-                    <td colspan="5" style="text-align: center; color: var(--text-muted);">Chargement des données en cours...</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================== VIEW 2: GESTION DES COMMANDES ==================== -->
-        <div id="view-orders" class="admin-view">
-          <div class="card-box">
-            <div class="card-box-header">
-              <h3>Gestion des Commandes</h3>
-            </div>
-            <div class="filters-bar">
-              <input type="text" id="search-order" placeholder="Rechercher par nom ou téléphone...">
-              <select id="filter-service">
-                <option value="">Tous les services</option>
-                <option value="Meru Visa">Carte Méru Visa</option>
-                <option value="PayPal">Compte PayPal</option>
-                <option value="Rechaj Meru">Recharge Méru</option>
-                <option value="Rechaj PayPal">Recharge PayPal</option>
-                <option value="MovieBox Pro">MovieBox Pro</option>
-              </select>
-              <select id="filter-status">
-                <option value="">Tous les statuts</option>
-                <option value="En attente">En attente</option>
-                <option value="En cours">En cours</option>
-                <option value="Terminée">Terminée</option>
-                <option value="Annulée">Annulée</option>
-              </select>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID / Date</th>
-                    <th>Client</th>
-                    <th>Téléphone</th>
-                    <th>Service</th>
-                    <th>Détails / Infos</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="all-orders-tbody">
-                  <!-- Dynamically populated -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================== VIEW 3: GESTION DES SERVICES & PRIX ==================== -->
-        <div id="view-services" class="admin-view">
-          <div class="card-box">
-            <div class="card-box-header">
-              <h3>Services et Tarification Actifs</h3>
-              <button class="btn-primary-custom" id="btn-add-service"><i class="fa-solid fa-plus"></i> Nouveau Service</button>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nom du Service</th>
-                    <th>Prix / Tarification</th>
-                    <th>Description</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="services-tbody">
-                  <!-- Populated from Firestore or default configuration -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================== VIEW 4: GESTION DES CLIENTS ==================== -->
-        <div id="view-clients" class="admin-view">
-          <div class="card-box">
-            <div class="card-box-header">
-              <h3>Liste des Clients Enregistrés</h3>
-              <input type="text" id="search-client" placeholder="Rechercher un client..." style="max-width: 250px; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--card-border); border-radius: 8px; color: #fff; outline: none;">
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nom / Prénom</th>
-                    <th>Téléphone (+509)</th>
-                    <th>Total Commandes</th>
-                    <th>Dernière Activité</th>
-                  </tr>
-                </thead>
-                <tbody id="clients-tbody">
-                  <!-- Dynamically populated -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- ==================== VIEW 5: PARAMÈTRES DU SITE ==================== -->
-        <div id="view-settings" class="admin-view">
-          <div class="card-box">
-            <div class="card-box-header">
-              <h3>Paramètres Généraux du Site</h3>
-            </div>
-            <form id="settings-form">
-              <div class="input-group" style="margin-bottom: 20px;">
-                <label>Message de Maintenance personnalisé</label>
-                <input type="text" id="setting-maintenance-msg" value="Le site KIRIKOU CRÉATION est actuellement en maintenance pour mise à jour. Revenez bientôt !">
-              </div>
-              <div class="input-group" style="margin-bottom: 20px;">
-                <label>Annonce / Message sur la Page d'Accueil</label>
-                <input type="text" id="setting-announcement" value="Sèvis rapid, disponib 24/7 sou MonCash ak NatCash !">
-              </div>
-              <div class="input-group" style="margin-bottom: 20px;">
-                <label>Numéro WhatsApp de Contact officiel</label>
-                <input type="text" id="setting-whatsapp" value="+50932694670">
-              </div>
-              <button type="submit" class="btn-primary-custom">Enregistrer les Modifications</button>
+                <div id="auth-error-msg" class="auth-error">
+                    <i class="fa-solid fa-circle-exclamation"></i> Nom d'administrateur ou mot de passe incorrect.
+                </div>
             </form>
-          </div>
+
+            <div class="security-note">
+                <i class="fa-solid fa-shield-halved" style="color: var(--warning);"></i>
+                <strong>Note technique :</strong> Cette authentification JavaScript locale protège l'interface de démonstration, mais ne constitue pas une sécurité serveur réelle pour un site public.
+            </div>
         </div>
-
-      </div>
     </div>
-  </div>
 
-  <!-- ==================== FIREBASE CONFIG & ADMIN LOGIC ==================== -->
-  <script>
-    // Configuration Firebase (Utilisez les mêmes clés que votre site principal)
-    const firebaseConfig = {
-      apiKey: "VOTRE_FIREBASE_API_KEY",
-      authDomain: "votre-projet.firebaseapp.com",
-      projectId: "votre-projet",
-      storageBucket: "votre-projet.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123456789:web:abcdef"
-    };
+    <!-- ==================== APPLICATION PRINCIPALE ==================== -->
+    <div id="dashboard-app">
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    // Initialisation Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    const auth = firebase.auth();
-    const db = firebase.firestore();
+        <div class="app-container">
+            <!-- SIDEBAR -->
+            <aside id="sidebar">
+                <div class="sidebar-header">
+                    <img src="https://i.ibb.co/6R106VPg/IMG-20260815-WA0002.jpg" alt="Logo" class="sidebar-logo">
+                    <div class="sidebar-title">
+                        <h3>KIRIKOU CRÉATION</h3>
+                        <span>& RECHARGE RAPIDE</span>
+                    </div>
+                </div>
 
-    // DOM Elements
-    const authScreen = document.getElementById('auth-screen');
-    const dashboardApp = document.getElementById('dashboard-app');
-    const loginForm = document.getElementById('login-form');
-    const authErrorMsg = document.getElementById('auth-error-msg');
-    const logoutBtn = document.getElementById('logout-btn');
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    const siteStatusToggle = document.getElementById('site-status-toggle');
-    const statusLabelText = document.getElementById('status-label-text');
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a href="#" data-target="view-dashboard">
+                            <span class="menu-left"><i class="fa-solid fa-chart-pie"></i> Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-orders">
+                            <span class="menu-left"><i class="fa-solid fa-bag-shopping"></i> Commandes</span>
+                            <span class="nav-badge" id="badge-orders">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-deposits">
+                            <span class="menu-left"><i class="fa-solid fa-arrow-down-to-line"></i> Dépôts / Rechargements</span>
+                            <span class="nav-badge" id="badge-deposits">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-withdrawals">
+                            <span class="menu-left"><i class="fa-solid fa-arrow-up-from-bracket"></i> Retraits</span>
+                            <span class="nav-badge" id="badge-withdrawals">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-wallets">
+                            <span class="menu-left"><i class="fa-solid fa-wallet"></i> Portefeuilles / Soldes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-services">
+                            <span class="menu-left"><i class="fa-solid fa-tags"></i> Services et Prix</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-clients">
+                            <span class="menu-left"><i class="fa-solid fa-users"></i> Clients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-transactions">
+                            <span class="menu-left"><i class="fa-solid fa-clock-rotate-left"></i> Historique transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="view-settings">
+                            <span class="menu-left"><i class="fa-solid fa-gear"></i> Paramètres du site</span>
+                        </a>
+                    </li>
+                </ul>
 
-    // Navigation Sidebar
-    const menuLinks = document.querySelectorAll('.sidebar-menu a');
-    const adminViews = document.querySelectorAll('.admin-view');
-    const currentPageTitle = document.getElementById('current-page-title');
+                <div class="sidebar-footer">
+                    <button id="reset-demo-btn" class="btn-reset-demo" title="Réinitialiser les données de démonstration">
+                        <i class="fa-solid fa-rotate-right"></i> Réinitialiser Démo
+                    </button>
+                    <button id="logout-btn" class="btn-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
+                    </button>
+                </div>
+            </aside>
 
-    menuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        menuLinks.forEach(l => l.parentElement.classList.remove('active'));
-        link.parentElement.classList.add('active');
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+                <!-- TOP NAVBAR -->
+                <div class="top-navbar">
+                    <div class="navbar-left">
+                        <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <div class="page-title">
+                            <h2 id="current-page-title">Tableau de bord</h2>
+                            <p>Gestion centralisée — KIRIKOU CRÉATION ET RECHARGE RAPIDE</p>
+                        </div>
+                    </div>
 
-        const targetViewId = link.getAttribute('data-target');
-        adminViews.forEach(v => v.classList.remove('active'));
-        document.getElementById(targetViewId).classList.add('active');
-        currentPageTitle.textContent = link.textContent.trim();
+                    <div class="admin-profile">
+                        <div class="admin-badge-info">
+                            <span>Kirikou</span>
+                            <small><i class="fa-solid fa-circle" style="font-size: 7px;"></i> Session active</small>
+                        </div>
+                        <div class="admin-avatar">K</div>
+                    </div>
+                </div>
 
-        if (window.innerWidth <= 992) {
-          sidebar.classList.remove('open');
-        }
-      });
-    });
+                <!-- ==================== 1. TABLEAU DE BORD ==================== -->
+                <div id="view-dashboard" class="admin-view active">
+                    <!-- CONTROLE RAPIDE ON/OFF EN HAUT DU TABLEAU DE BORD -->
+                    <div class="site-control-box">
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-power-off" style="color: var(--accent-green);"></i> Contrôle d'accès au site public
+                            </h4>
+                            <p style="font-size: 0.82rem; color: var(--text-muted);">
+                                <strong>ON :</strong> Site accessible normalement.<br>
+                                <strong>OFF :</strong> Site fermé aux visiteurs (Affiche la page de maintenance).
+                            </p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <label class="switch">
+                                <input type="checkbox" id="dashboard-site-online">
+                                <span class="slider"></span>
+                                <span class="slider-text" id="dashboard-online-label">ON</span>
+                            </label>
+                            <button class="btn-primary-custom" onclick="reactiveSiteFromDash()" style="background: var(--accent-green); padding: 8px 14px; font-size: 0.75rem;">
+                                <i class="fa-solid fa-rotate-right"></i> Réactiver
+                            </button>
+                        </div>
+                    </div>
 
-    menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-    });
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-clients">0</h3>
+                                <p>Total Clients</p>
+                            </div>
+                        </div>
 
-    // Authentication State Observer
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        authScreen.style.display = 'none';
-        dashboardApp.style.display = 'block';
-        initAdminDashboard();
-      } else {
-        authScreen.style.display = 'flex';
-        dashboardApp.style.display = 'none';
-      }
-    });
+                        <div class="stat-card">
+                            <div class="stat-icon purple"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-orders">0</h3>
+                                <p>Total Commandes</p>
+                            </div>
+                        </div>
 
-    // Login Form Submission
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('admin-email').value;
-      const password = document.getElementById('admin-password').value;
+                        <div class="stat-card">
+                            <div class="stat-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-pending">0</h3>
+                                <p>Commandes en attente</p>
+                            </div>
+                        </div>
 
-      auth.signInWithEmailAndPassword(email, password)
-        .catch(error => {
-          authErrorMsg.style.display = 'block';
-          authErrorMsg.textContent = "Erreur: " + error.message;
-        });
-    });
+                        <div class="stat-card">
+                            <div class="stat-icon green"><i class="fa-solid fa-circle-arrow-down"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-deposits">0 HTG</h3>
+                                <p>Total des Dépôts</p>
+                            </div>
+                        </div>
 
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-      auth.signOut();
-    });
+                        <div class="stat-card">
+                            <div class="stat-icon red"><i class="fa-solid fa-circle-arrow-up"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-withdrawals">0 HTG</h3>
+                                <p>Total des Retraits</p>
+                            </div>
+                        </div>
 
-    // Initialize Dashboard Data & Listeners
-    function initAdminDashboard() {
-      loadSiteStatus();
-      loadDashboardStats();
-      loadOrders();
-      loadServices();
-      loadClients();
-      loadSettings();
-    }
+                        <div class="stat-card">
+                            <div class="stat-icon green"><i class="fa-solid fa-coins"></i></div>
+                            <div class="stat-info">
+                                <h3 id="stat-revenue">0 HTG</h3>
+                                <p>Chiffre d'affaires (HTG)</p>
+                            </div>
+                        </div>
+                    </div>
 
-    // 1. SITE ON/OFF STATUS CONTROL
-    function loadSiteStatus() {
-      db.collection('settings').doc('site_control').get().then(doc => {
-        if (doc.exists) {
-          const isActive = doc.data().active !== false;
-          siteStatusToggle.checked = isActive;
-          statusLabelText.textContent = isActive ? "ON" : "OFF";
-        }
-      });
-    }
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-bolt"></i> Dernières activités (Démonstration)</h3>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Client</th>
+                                        <th>Détail</th>
+                                        <th>Montant</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashboard-activities-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-    siteStatusToggle.addEventListener('change', () => {
-      const isActive = siteStatusToggle.checked;
-      statusLabelText.textContent = isActive ? "ON" : "OFF";
-      db.collection('settings').doc('site_control').set({
-        active: isActive,
-        updatedAt: new Date()
-      }, { merge: true }).catch(err => {
-        alert("Erreur lors de la mise à jour du statut: " + err.message);
-      });
-    });
+                <!-- ==================== 2. COMMANDES ==================== -->
+                <div id="view-orders" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-bag-shopping"></i> Gestion des Commandes</h3>
+                            <button class="btn-primary-custom" onclick="openOrderModal()">
+                                <i class="fa-solid fa-plus"></i> Nouvelle commande
+                            </button>
+                        </div>
 
-    // 2. DASHBOARD STATS & ORDERS
-    function loadDashboardStats() {
-      db.collection('orders').onSnapshot(snapshot => {
-        let totalOrders = snapshot.size;
-        let pendingOrders = 0;
-        let revenue = 0;
-        let clientsSet = new Set();
-        let ordersHtml = '';
-        let allOrdersData = [];
+                        <div class="filters-bar">
+                            <input type="text" id="filter-order-search" placeholder="Rechercher par ID, nom ou téléphone..." oninput="renderOrders()">
+                            <select id="filter-order-status" onchange="renderOrders()">
+                                <option value="">Tous les statuts</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Validée">Validée</option>
+                                <option value="Annulée">Annulée</option>
+                            </select>
+                        </div>
 
-        snapshot.forEach(doc => {
-          let data = doc.data();
-          allOrdersData.push({ id: doc.id, ...data });
-          if (data.status === 'En attente') pendingOrders++;
-          if (data.amount) revenue += Number(data.amount) || 0;
-          if (data.phone) clientsSet.add(data.phone);
-        });
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID Commande</th>
+                                        <th>Nom du client</th>
+                                        <th>Téléphone</th>
+                                        <th>Service commandé</th>
+                                        <th>Montant</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-        document.getElementById('stat-clients').textContent = clientsSet.size;
-        document.getElementById('stat-orders').textContent = totalOrders;
-        document.getElementById('stat-pending').textContent = pendingOrders;
-        document.getElementById('stat-revenue').textContent = revenue.toLocaleString() + " HTG";
+                <!-- ==================== 3. DÉPÔTS / RECHARGEMENTS ==================== -->
+                <div id="view-deposits" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-arrow-down-to-line"></i> Gestion des Dépôts / Rechargements</h3>
+                        </div>
 
-        // Render Recent Orders (Top 5)
-        let recent = allOrdersData.slice(0, 5);
-        if (recent.length === 0) {
-          document.getElementById('recent-orders-tbody').innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Aucune commande enregistrée pour le moment.</td></tr>`;
-        } else {
-          recent.forEach(ord => {
-            let badgeClass = getBadgeClass(ord.status);
-            recent.innerHTML += `
-              <tr>
-                <td>${ord.date ? new Date(ord.date.toDate()).toLocaleDateString() : 'Récemment'}</td>
-                <td>${ord.name || 'Client'}</td>
-                <td>${ord.service || 'Service'}</td>
-                <td>${ord.amount || '0'} HTG</td>
-                <td><span class="badge ${badgeClass}">${ord.status || 'En attente'}</span></td>
-              </tr>
-            `;
-          });
-        }
-      });
-    }
+                        <div class="filters-bar">
+                            <input type="text" id="filter-deposit-search" placeholder="Rechercher par client, numéro ou référence..." oninput="renderDeposits()">
+                            <select id="filter-deposit-status" onchange="renderDeposits()">
+                                <option value="">Tous les statuts</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Validé">Validé</option>
+                                <option value="Refusé">Refusé</option>
+                            </select>
+                        </div>
 
-    function getBadgeClass(status) {
-      if (status === 'En attente') return 'pending';
-      if (status === 'En cours') return 'progress';
-      if (status === 'Terminée') return 'completed';
-      if (status === 'Annulée') return 'cancelled';
-      return 'pending';
-    }
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom du client</th>
+                                        <th>Numéro MonCash / NatCash</th>
+                                        <th>Montant déposé</th>
+                                        <th>Code / Réf. confirmation</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="deposits-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-    // 3. GESTION DES COMMANDES
-    function loadOrders() {
-      db.collection('orders').orderBy('date', 'desc').onSnapshot(snapshot => {
-        let tbody = document.getElementById('all-orders-tbody');
-        tbody.innerHTML = '';
-        if (snapshot.empty) {
-          tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Aucune commande trouvée.</td></tr>`;
-          return;
-        }
+                <!-- ==================== 4. RETRAITS ==================== -->
+                <div id="view-withdrawals" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-arrow-up-from-bracket"></i> Gestion des Retraits</h3>
+                        </div>
 
-        snapshot.forEach(doc => {
-          let ord = doc.id;
-          let data = doc.data();
-          tbody.innerHTML += `
-            <tr>
-              <td>#${doc.id.substring(0,6)}</td>
-              <td>${data.name || 'N/A'}</td>
-              <td>+509 ${data.phone || 'N/A'}</td>
-              <td>${data.service || 'N/A'}</td>
-              <td>${data.details || 'Aucun détail'}</td>
-              <td>
-                <select onchange="updateOrderStatus('${doc.id}', this.value)" style="padding: 4px; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid var(--card-border); border-radius: 6px;">
-                  <option value="En attente" ${data.status === 'En attente' ? 'selected' : ''}>En attente</option>
-                  <option value="En cours" ${data.status === 'En cours' ? 'selected' : ''}>En cours</option>
-                  <option value="Terminée" ${data.status === 'Terminée' ? 'selected' : ''}>Terminée</option>
-                  <option value="Annulée" ${data.status === 'Annulée' ? 'selected' : ''}>Annulée</option>
+                        <div class="filters-bar">
+                            <input type="text" id="filter-withdrawal-search" placeholder="Rechercher par client ou numéro..." oninput="renderWithdrawals()">
+                            <select id="filter-withdrawal-status" onchange="renderWithdrawals()">
+                                <option value="">Tous les statuts</option>
+                                <option value="En attente">En attente</option>
+                                <option value="Validé">Validé</option>
+                                <option value="Refusé">Refusé</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom du client</th>
+                                        <th>Numéro de téléphone</th>
+                                        <th>Montant demandé</th>
+                                        <th>Méthode de retrait</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="withdrawals-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== 5. PORTEFEUILLES / SOLDES CLIENTS ==================== -->
+                <div id="view-wallets" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-wallet"></i> Portefeuilles & Soldes Clients</h3>
+                        </div>
+
+                        <div class="filters-bar">
+                            <input type="text" id="filter-wallet-search" placeholder="Rechercher un client par nom ou téléphone..." oninput="renderWallets()">
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom et prénom</th>
+                                        <th>Téléphone</th>
+                                        <th>Solde disponible</th>
+                                        <th>Total des dépôts</th>
+                                        <th>Total des commandes</th>
+                                        <th>Opérations</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="wallets-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== 6. SERVICES ET PRIX ==================== -->
+                <div id="view-services" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-tags"></i> Services et Prix</h3>
+                            <button class="btn-primary-custom" onclick="openServiceModal()">
+                                <i class="fa-solid fa-plus"></i> Ajouter un service
+                            </button>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom du service</th>
+                                        <th>Catégorie</th>
+                                        <th>Prix (HTG)</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="services-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== 7. CLIENTS ==================== -->
+                <div id="view-clients" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-users"></i> Base Clients (Démonstration)</h3>
+                        </div>
+
+                        <div class="filters-bar">
+                            <input type="text" id="filter-client-search" placeholder="Rechercher par nom, prénom ou téléphone..." oninput="renderClients()">
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom et prénom</th>
+                                        <th>Téléphone</th>
+                                        <th>Solde actuel</th>
+                                        <th>Total dépôts</th>
+                                        <th>Total commandes</th>
+                                        <th>Historique</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clients-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== 8. HISTORIQUE DES TRANSACTIONS ==================== -->
+                <div id="view-transactions" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique Global des Transactions</h3>
+                        </div>
+
+                        <div class="filters-bar">
+                            <input type="text" id="filter-tx-search" placeholder="Filtrer par client, référence ou libellé..." oninput="renderTransactions()">
+                            <select id="filter-tx-type" onchange="renderTransactions()">
+                                <option value="">Tous les types</option>
+                                <option value="Commande">Commande</option>
+                                <option value="Dépôt">Dépôt</option>
+                                <option value="Retrait">Retrait</option>
+                                <option value="Ajustement">Ajustement Solde</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Réf.</th>
+                                        <th>Date</th>
+                                        <th>Client</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Montant</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== 9. PARAMÈTRES DU SITE ==================== -->
+                <div id="view-settings" class="admin-view">
+                    <div class="card-box">
+                        <div class="card-box-header">
+                            <h3><i class="fa-solid fa-gear"></i> Paramètres du Site & Contrôle ON/OFF</h3>
+                        </div>
+
+                        <div class="site-control-box">
+                            <div>
+                                <h4 style="font-size: 1rem; margin-bottom: 4px;">Statut général du site (ON / OFF)</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-muted);">Basculez sur OFF pour afficher la page de maintenance aux visiteurs publics.</p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-site-online">
+                                    <span class="slider"></span>
+                                    <span class="slider-text" id="site-online-label">ON</span>
+                                </label>
+                                <button class="btn-primary-custom" onclick="reactiveSiteFromSettings()" style="background: var(--accent-green); padding: 8px 14px; font-size: 0.75rem;">
+                                    Réactiver
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="settings-form">
+                            <div class="input-group">
+                                <label for="setting-maintenance">Message de maintenance personnalisé</label>
+                                <textarea id="setting-maintenance" rows="3" required></textarea>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="setting-announcement">Annonce de la page d'accueil</label>
+                                <input type="text" id="setting-announcement" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="setting-whatsapp">Numéro WhatsApp officiel</label>
+                                <input type="text" id="setting-whatsapp" required>
+                            </div>
+
+                            <button type="submit" class="btn-primary-custom">
+                                <i class="fa-solid fa-floppy-disk"></i> Enregistrer les paramètres
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+    <div class="modal-backdrop" id="order-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="order-modal-title">Modifier la commande</h3>
+                <button class="btn-close-modal" onclick="closeModal('order-modal')">&times;</button>
+            </div>
+            <form id="order-form">
+                <input type="hidden" id="edit-order-id">
+                <div class="input-group">
+                    <label>Nom du client</label>
+                    <input type="text" id="edit-order-client" required>
+                </div>
+                <div class="input-group">
+                    <label>Téléphone</label>
+                    <input type="text" id="edit-order-phone" placeholder="+509 ..." required>
+                </div>
+                <div class="input-group">
+                    <label>Service commandé</label>
+                    <input type="text" id="edit-order-service" required>
+                </div>
+                <div class="input-group">
+                    <label>Montant (HTG)</label>
+                    <input type="number" id="edit-order-amount" min="0" required>
+                </div>
+                <div class="input-group">
+                    <label>Statut</label>
+                    <select id="edit-order-status">
+                        <option value="En attente">En attente</option>
+                        <option value="Validée">Validée</option>
+                        <option value="Annulée">Annulée</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary-custom" style="width: 100%; justify-content: center;">
+                    Enregistrer la commande
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="service-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="service-modal-title">Ajouter un service</h3>
+                <button class="btn-close-modal" onclick="closeModal('service-modal')">&times;</button>
+            </div>
+            <form id="service-form">
+                <input type="hidden" id="edit-service-id">
+                <div class="input-group">
+                    <label>Nom du service</label>
+                    <input type="text" id="edit-service-name" placeholder="Ex: Recharge PayPal 10$" required>
+                </div>
+                <div class="input-group">
+                    <label>Catégorie</label>
+                    <input type="text" id="edit-service-category" placeholder="Ex: Création / Recharge / Streaming" required>
+                </div>
+                <div class="input-group">
+                    <label>Prix (HTG)</label>
+                    <input type="number" id="edit-service-price" min="0" required>
+                </div>
+                <div class="input-group">
+                    <label>Disponibilité</label>
+                    <select id="edit-service-active">
+                        <option value="true">Actif</option>
+                        <option value="false">Désactivé</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary-custom" style="width: 100%; justify-content: center;">
+                    Sauvegarder le service
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="client-history-modal">
+        <div class="modal-card" style="max-width: 620px;">
+            <div class="modal-header">
+                <h3 id="client-modal-title">Détails & Historique Client</h3>
+                <button class="btn-close-modal" onclick="closeModal('client-history-modal')">&times;</button>
+            </div>
+            <div id="client-modal-summary" style="margin-bottom: 16px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 12px; font-size: 0.85rem;"></div>
+
+            <form id="wallet-adjust-form" style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+                <input type="hidden" id="adjust-client-id">
+                <select id="adjust-type" style="padding: 9px; background: #060a12; color: #fff; border: 1px solid var(--glass-border); border-radius: 8px;">
+                    <option value="credit">+ Créditer (HTG)</option>
+                    <option value="debit">- Débiter (HTG)</option>
                 </select>
-              </td>
-              <td>
-                <button class="btn-action btn-delete" onclick="deleteOrder('${doc.id}')"><i class="fa-solid fa-trash"></i></button>
-              </td>
-            </tr>
-          `;
-        });
-      });
-    }
+                <input type="number" id="adjust-amount" placeholder="Montant HTG" min="1" required style="flex: 1; min-width: 120px; padding: 9px; background: #060a12; color: #fff; border: 1px solid var(--glass-border); border-radius: 8px;">
+                <button type="submit" class="btn-primary-custom">Appliquer</button>
+            </form>
 
-    window.updateOrderStatus = function(orderId, newStatus) {
-      db.collection('orders').doc(orderId).update({ status: newStatus }).catch(err => alert("Erreur: " + err.message));
-    }
+            <h4 style="font-size: 0.85rem; color: var(--accent-green); margin-bottom: 10px; text-transform: uppercase;">Historique des opérations</h4>
+            <div class="table-container">
+                <table style="min-width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Opération</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="client-modal-history-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    window.deleteOrder = function(orderId) {
-      if (confirm("Voulez-vous vraiment supprimer cette commande ?")) {
-        db.collection('orders').doc(orderId).delete().catch(err => alert("Erreur: " + err.message));
-      }
-    }
+    <!-- TOASTS -->
+    <div id="toast-container"></div>
 
-    // 4. GESTION DES SERVICES
-    function loadServices() {
-      db.collection('services').onSnapshot(snapshot => {
-        let tbody = document.getElementById('services-tbody');
-        tbody.innerHTML = '';
-        if (snapshot.empty) {
-          // Default initial services of Kirikou Creation if empty
-          tbody.innerHTML = `
-            <tr><td>Carte Méru Visa Virtuelle</td><td>1,500 HTG</td><td>Création rapide et sécurisée</td><td><span class="badge completed">Actif</span></td><td><button class="btn-action btn-edit">Modifier</button></td></tr>
-            <tr><td>Compte PayPal Vérifié</td><td>1,200 HTG</td><td>Compte fonctionnel avec accès immédiat</td><td><span class="badge completed">Actif</span></td><td><button class="btn-action btn-edit">Modifier</button></td></tr>
-            <tr><td>MovieBox Pro VIP</td><td>500 HTG</td><td>Abonnement films & séries HD</td><td><span class="badge completed">Actif</span></td><td><button class="btn-action btn-edit">Modifier</button></td></tr>
-          `;
-          return;
-        }
-        snapshot.forEach(doc => {
-          let s = doc.data();
-          tbody.innerHTML += `
-            <tr>
-              <td>${s.name}</td>
-              <td>${s.price}</td>
-              <td>${s.description || ''}</td>
-              <td><span class="badge ${s.active !== false ? 'completed' : 'cancelled'}">${s.active !== false ? 'Actif' : 'Inactif'}</span></td>
-              <td><button class="btn-action btn-edit" onclick="editService('${doc.id}')">Éditer</button></td>
-            </tr>
-          `;
-        });
-      });
-    }
+    <script>
+        /* ============================================================================
+           1. AUTHENTIFICATION LOCALE
+           ============================================================================ */
+        const ADMIN_CREDENTIALS = {
+            username: "Kirikou",
+            password: "277227"
+        };
+        const SESSION_KEY = "kirikou_admin_session_active";
 
-    // 5. CLIENTS MANAGEMENT
-    function loadClients() {
-      db.collection('orders').onSnapshot(snapshot => {
-        let clientsMap = {};
-        snapshot.forEach(doc => {
-          let data = doc.data();
-          if (data.phone) {
-            if (!clientsMap[data.phone]) {
-              clientsMap[data.phone] = { name: data.name || 'Client', phone: data.phone, count: 0, lastDate: data.date };
+        const authScreen = document.getElementById("auth-screen");
+        const dashboardApp = document.getElementById("dashboard-app");
+        const loginForm = document.getElementById("login-form");
+        const authErrorMsg = document.getElementById("auth-error-msg");
+
+        function checkSession() {
+            const isLoggedIn = sessionStorage.getItem(SESSION_KEY) === "true";
+            if (isLoggedIn) {
+                authScreen.style.display = "none";
+                dashboardApp.style.display = "block";
+                initApp();
+            } else {
+                authScreen.style.display = "flex";
+                dashboardApp.style.display = "none";
             }
-            clientsMap[data.phone].count++;
-          }
-        });
-
-        let tbody = document.getElementById('clients-tbody');
-        tbody.innerHTML = '';
-        let clientsArr = Object.values(clientsMap);
-        if (clientsArr.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Aucun client enregistré.</td></tr>`;
-          return;
         }
 
-        clientsArr.forEach(c => {
-          tbody.innerHTML += `
-            <tr>
-              <td>${c.name}</td>
-              <td>+509 ${c.phone}</td>
-              <td>${c.count} commande(s)</td>
-              <td>${c.lastDate ? new Date(c.lastDate.toDate()).toLocaleDateString() : 'Récemment'}</td>
-            </tr>
-          `;
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const userInput = document.getElementById("admin-username").value.trim();
+            const passInput = document.getElementById("admin-password").value.trim();
+
+            if (userInput === ADMIN_CREDENTIALS.username && passInput === ADMIN_CREDENTIALS.password) {
+                authErrorMsg.style.display = "none";
+                sessionStorage.setItem(SESSION_KEY, "true");
+                checkSession();
+                showToast("Bienvenue, Kirikou !");
+            } else {
+                authErrorMsg.style.display = "block";
+            }
         });
-      });
-    }
 
-    // 6. SETTINGS MANAGEMENT
-    function loadSettings() {
-      db.collection('settings').doc('general').get().then(doc => {
-        if (doc.exists) {
-          let data = doc.data();
-          if (data.maintenanceMsg) document.getElementById('setting-maintenance-msg').value = data.maintenanceMsg;
-          if (data.announcement) document.getElementById('setting-announcement').value = data.announcement;
-          if (data.whatsapp) document.getElementById('setting-whatsapp').value = data.whatsapp;
+        document.getElementById("logout-btn").addEventListener("click", function () {
+            sessionStorage.removeItem(SESSION_KEY);
+            document.getElementById("admin-password").value = "";
+            checkSession();
+        });
+
+        /* ============================================================================
+           2. COUCHE DE DONNÉES PARTAGÉE
+           ============================================================================ */
+        const STORAGE_KEY = "kirikou_admin_demo_db_v1";
+
+        const DEMO_SEED_DATA = {
+            settings: {
+                siteOnline: true,
+                maintenanceMessage: "Notre site est temporairement indisponible. Nous revenons bientôt. Merci pour votre patience.",
+                homeAnnouncement: "Service rapide 24/7 — Création de comptes, Recharges MonCash, NatCash, PayPal & Méru Visa !",
+                whatsappNumber: "+509 32694670"
+            },
+            clients: [
+                { id: "CLI-01", name: "Jean-Baptiste Marc", phone: "+509 3712-4490", balance: 2500, totalDeposits: 6500, totalOrders: 4000 },
+                { id: "CLI-02", name: "Stéphanie Pierre", phone: "+509 4890-1122", balance: 1200, totalDeposits: 3200, totalOrders: 2000 },
+                { id: "CLI-03", name: "Roody Désir", phone: "+509 3455-8810", balance: 450, totalDeposits: 1950, totalOrders: 1500 },
+                { id: "CLI-04", name: "Mackenson Louis", phone: "+509 4120-9934", balance: 5000, totalDeposits: 8000, totalOrders: 3000 }
+            ],
+            orders: [
+                { id: "CMD-1041", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", service: "Carte Méru Visa Virtuelle", amount: 1500, date: "2026-11-15 14:20", status: "En attente" },
+                { id: "CMD-1040", client: "Stéphanie Pierre", phone: "+509 4890-1122", service: "Abonnement MovieBox Pro VIP (1 an)", amount: 800, date: "2026-11-15 11:05", status: "Validée" }
+            ],
+            deposits: [
+                { id: "DEP-501", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", methodPhone: "MonCash • +509 3712-4490", amount: 3000, reference: "MC-89451203", date: "2026-11-15 14:12", status: "En attente" }
+            ],
+            withdrawals: [
+                { id: "RET-301", client: "Mackenson Louis", phone: "+509 4120-9934", amount: 2000, method: "MonCash", date: "2026-11-15 15:00", status: "En attente" }
+            ],
+            services: [
+                { id: "SRV-01", name: "Carte Méru Visa Virtuelle", category: "Création", price: 1500, active: true },
+                { id: "SRV-02", name: "Compte PayPal Vérifié", category: "Création", price: 1500, active: true }
+            ],
+            transactions: [
+                { ref: "TX-9004", date: "2026-11-15 14:20", client: "Jean-Baptiste Marc", phone: "+509 3712-4490", type: "Commande", description: "Carte Méru Visa Virtuelle", amount: 1500, status: "En attente" }
+            ]
+        };
+
+        const DataStore = {
+            load() {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) {
+                    this.save(DEMO_SEED_DATA);
+                    return JSON.parse(JSON.stringify(DEMO_SEED_DATA));
+                }
+                try {
+                    return JSON.parse(raw);
+                } catch (err) {
+                    this.save(DEMO_SEED_DATA);
+                    return JSON.parse(JSON.stringify(DEMO_SEED_DATA));
+                }
+            },
+            save(data) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            },
+            reset() {
+                const fresh = JSON.parse(JSON.stringify(DEMO_SEED_DATA));
+                this.save(fresh);
+                return fresh;
+            }
+        };
+
+        let db = DataStore.load();
+
+        /* ============================================================================
+           3. UTILITAIRES
+           ============================================================================ */
+        function formatHTG(val) { return Number(val || 0).toLocaleString("fr-FR") + " HTG"; }
+        function nowFormatted() {
+            const d = new Date();
+            const pad = n => String(n).padStart(2, "0");
+            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
         }
-      });
-    }
+        function getStatusBadge(status) {
+            const s = (status || "").toLowerCase();
+            if (s.includes("attente")) return `<span class="badge pending"><i class="fa-solid fa-clock"></i> ${status}</span>`;
+            if (s.includes("valid")) return `<span class="badge completed"><i class="fa-solid fa-check"></i> ${status}</span>`;
+            if (s.includes("refus") || s.includes("annul")) return `<span class="badge cancelled"><i class="fa-solid fa-xmark"></i> ${status}</span>`;
+            return `<span class="badge progress">${status}</span>`;
+        }
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-green); margin-right: 8px;"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3200);
+        }
+        function openModal(id) { document.getElementById(id).classList.add("open"); }
+        function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+        function addTransaction(client, phone, type, description, amount, status) {
+            const ref = "TX-" + Math.floor(1000 + Math.random() * 9000);
+            db.transactions.unshift({ ref, date: nowFormatted(), client, phone, type, description, amount: Number(amount), status });
+        }
 
-    document.getElementById('settings-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      let maintenanceMsg = document.getElementById('setting-maintenance-msg').value;
-      let announcement = document.getElementById('setting-announcement').value;
-      let whatsapp = document.getElementById('setting-whatsapp').value;
+        /* ============================================================================
+           4. NAVIGATION MOBILE / DESKTOP
+           ============================================================================ */
+        const sidebar = document.getElementById("sidebar");
+        const sidebarOverlay = document.getElementById("sidebar-overlay");
+        const menuToggle = document.getElementById("menu-toggle");
+        const menuLinks = document.querySelectorAll(".sidebar-menu a");
+        const adminViews = document.querySelectorAll(".admin-view");
+        const currentPageTitle = document.getElementById("current-page-title");
 
-      db.collection('settings').doc('general').set({
-        maintenanceMsg,
-        announcement,
-        whatsapp,
-        updatedAt: new Date()
-      }).then(() => {
-        alert("Paramètres enregistrés avec succès !");
-      }).catch(err => {
-        alert("Erreur lors de l'enregistrement: " + err.message);
-      });
-    });
-  </script>
+        function closeMobileSidebar() {
+            sidebar.classList.remove("open");
+            sidebarOverlay.classList.remove("active");
+        }
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            sidebarOverlay.classList.toggle("active");
+        });
+        sidebarOverlay.addEventListener("click", closeMobileSidebar);
+
+        menuLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                menuLinks.forEach(l => l.parentElement.classList.remove("active"));
+                this.parentElement.classList.add("active");
+                const targetId = this.getAttribute("data-target");
+                adminViews.forEach(v => v.classList.remove("active"));
+                document.getElementById(targetId).classList.add("active");
+                currentPageTitle.textContent = this.querySelector(".menu-left").textContent.trim();
+                closeMobileSidebar();
+            });
+        });
+
+        /* ============================================================================
+           5. SYNCHRONISATION ET GESTION DU BOUTON ON/OFF
+           ============================================================================ */
+        const dashSiteOnlineToggle = document.getElementById("dashboard-site-online");
+        const dashOnlineLabel = document.getElementById("dashboard-online-label");
+        const settingsSiteOnlineToggle = document.getElementById("setting-site-online");
+        const settingsOnlineLabel = document.getElementById("site-online-label");
+
+        function updateSiteStatusUI() {
+            const isOnline = db.settings.siteOnline !== false;
+            if (dashSiteOnlineToggle) dashSiteOnlineToggle.checked = isOnline;
+            if (dashOnlineLabel) dashOnlineLabel.textContent = isOnline ? "ON" : "OFF";
+            if (settingsSiteOnlineToggle) settingsSiteOnlineToggle.checked = isOnline;
+            if (settingsOnlineLabel) settingsOnlineLabel.textContent = isOnline ? "ON" : "OFF";
+        }
+
+        function handleSiteStatusChange(newStatus) {
+            db.settings.siteOnline = newStatus;
+            DataStore.save(db);
+            updateSiteStatusUI();
+            if (newStatus) {
+                showToast("Le site public est maintenant EN LIGNE (ON).");
+            } else {
+                showToast("Le site public est fermé (OFF) — Page de maintenance active.");
+            }
+        }
+
+        if (dashSiteOnlineToggle) {
+            dashSiteOnlineToggle.addEventListener("change", function () {
+                handleSiteStatusChange(this.checked);
+            });
+        }
+
+        if (settingsSiteOnlineToggle) {
+            settingsSiteOnlineToggle.addEventListener("change", function () {
+                handleSiteStatusChange(this.checked);
+            });
+        }
+
+        window.reactiveSiteFromDash = function() {
+            handleSiteStatusChange(true);
+        }
+
+        window.reactiveSiteFromSettings = function() {
+            handleSiteStatusChange(true);
+        }
+
+        /* ============================================================================
+           6. RENDU TABLEAU DE BORD & AUTRES SECTIONS
+           ============================================================================ */
+        function renderDashboard() {
+            updateSiteStatusUI();
+            const totalClients = db.clients.length;
+            const totalOrders = db.orders.length;
+            const pendingOrders = db.orders.filter(o => o.status === "En attente").length;
+            const pendingDeposits = db.deposits.filter(d => d.status === "En attente").length;
+            const pendingWithdrawals = db.withdrawals.filter(w => w.status === "En attente").length;
+
+            const totalDepositsAmount = db.deposits.filter(d => d.status === "Validé").reduce((s, d) => s + Number(d.amount), 0);
+            const totalWithdrawalsAmount = db.withdrawals.filter(w => w.status === "Validé").reduce((s, w) => s + Number(w.amount), 0);
+            const totalRevenue = db.orders.filter(o => o.status === "Validée").reduce((s, o) => s + Number(o.amount), 0);
+
+            document.getElementById("stat-clients").textContent = totalClients;
+            document.getElementById("stat-orders").textContent = totalOrders;
+            document.getElementById("stat-pending").textContent = pendingOrders;
+            document.getElementById("stat-deposits").textContent = formatHTG(totalDepositsAmount);
+            document.getElementById("stat-withdrawals").textContent = formatHTG(totalWithdrawalsAmount);
+            document.getElementById("stat-revenue").textContent = formatHTG(totalRevenue);
+
+            document.getElementById("badge-orders").textContent = pendingOrders;
+            document.getElementById("badge-deposits").textContent = pendingDeposits;
+            document.getElementById("badge-withdrawals").textContent = pendingWithdrawals;
+
+            const tbody = document.getElementById("dashboard-activities-tbody");
+            const recent = db.transactions.slice(0, 6);
+            if (recent.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">Aucune activité récente.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = recent.map(tx => `
+                <tr>
+                    <td>${tx.date}</td>
+                    <td><strong>${tx.type}</strong></td>
+                    <td>${tx.client}</td>
+                    <td>${tx.description}</td>
+                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(tx.amount)}</td>
+                    <td>${getStatusBadge(tx.status)}</td>
+                </tr>
+            `).join("");
+        }
+
+        function renderOrders() {
+            const search = document.getElementById("filter-order-search").value.toLowerCase();
+            const statusFilter = document.getElementById("filter-order-status").value;
+            const tbody = document.getElementById("orders-tbody");
+            const filtered = db.orders.filter(o => {
+                const matchText = o.id.toLowerCase().includes(search) || o.client.toLowerCase().includes(search) || o.phone.toLowerCase().includes(search) || o.service.toLowerCase().includes(search);
+                const matchStatus = !statusFilter || o.status === statusFilter;
+                return matchText && matchStatus;
+            });
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--text-muted);">Aucune commande trouvée.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = filtered.map(o => `
+                <tr>
+                    <td><strong>${o.id}</strong></td>
+                    <td>${o.client}</td>
+                    <td>${o.phone}</td>
+                    <td>${o.service}</td>
+                    <td style="font-weight: 600;">${formatHTG(o.amount)}</td>
+                    <td>${o.date}</td>
+                    <td>${getStatusBadge(o.status)}</td>
+                    <td>
+                        <div class="action-group">
+                            ${o.status !== "Validée" ? `<button class="btn-action btn-validate" onclick="validateOrder('${o.id}')"><i class="fa-solid fa-check"></i> Valider</button>` : ""}
+                            <button class="btn-action btn-edit" onclick="openOrderModal('${o.id}')"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action btn-delete" onclick="deleteOrder('${o.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        window.validateOrder = function (id) {
+            const order = db.orders.find(o => o.id === id);
+            if (!order) return;
+            order.status = "Validée";
+            addTransaction(order.client, order.phone, "Commande", `Validation ${order.id} (${order.service})`, order.amount, "Validée");
+            DataStore.save(db);
+            refreshAll();
+            showToast(`Commande ${id} validée.`);
+        };
+
+        window.deleteOrder = function (id) {
+            if (!confirm(`Supprimer la commande ${id} ?`)) return;
+            db.orders = db.orders.filter(o => o.id !== id);
+            DataStore.save(db);
+            refreshAll();
+            showToast(`Commande ${id} supprimée.`);
+        };
+
+        window.openOrderModal = function (id = null) {
+            const title = document.getElementById("order-modal-title");
+            if (id) {
+                const order = db.orders.find(o => o.id === id);
+                if (!order) return;
+                title.textContent = `Modifier la commande ${order.id}`;
+                document.getElementById("edit-order-id").value = order.id;
+                document.getElementById("edit-order-client").value = order.client;
+                document.getElementById("edit-order-phone").value = order.phone;
+                document.getElementById("edit-order-service").value = order.service;
+                document.getElementById("edit-order-amount").value = order.amount;
+                document.getElementById("edit-order-status").value = order.status;
+            } else {
+                title.textContent = "Nouvelle commande";
+                document.getElementById("edit-order-id").value = "";
+                document.getElementById("order-form").reset();
+            }
+            openModal("order-modal");
+        };
+
+        document.getElementById("order-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const id = document.getElementById("edit-order-id").value;
+            const client = document.getElementById("edit-order-client").value.trim();
+            const phone = document.getElementById("edit-order-phone").value.trim();
+            const service = document.getElementById("edit-order-service").value.trim();
+            const amount = Number(document.getElementById("edit-order-amount").value);
+            const status = document.getElementById("edit-order-status").value;
+
+            if (id) {
+                const order = db.orders.find(o => o.id === id);
+                if (order) { order.client = client; order.phone = phone; order.service = service; order.amount = amount; order.status = status; }
+                showToast(`Commande ${id} mise à jour.`);
+            } else {
+                const newId = "CMD-" + Math.floor(1042 + Math.random() * 8900);
+                db.orders.unshift({ id: newId, client, phone, service, amount, date: nowFormatted(), status });
+                addTransaction(client, phone, "Commande", `${newId} — ${service}`, amount, status);
+                showToast(`Commande ${newId} ajoutée.`);
+            }
+            DataStore.save(db);
+            closeModal("order-modal");
+            refreshAll();
+        });
+
+        function renderDeposits() {
+            const search = document.getElementById("filter-deposit-search").value.toLowerCase();
+            const statusFilter = document.getElementById("filter-deposit-status").value;
+            const tbody = document.getElementById("deposits-tbody");
+            const filtered = db.deposits.filter(d => {
+                const matchText = d.client.toLowerCase().includes(search) || d.methodPhone.toLowerCase().includes(search) || d.reference.toLowerCase().includes(search);
+                const matchStatus = !statusFilter || d.status === statusFilter;
+                return matchText && matchStatus;
+            });
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Aucun dépôt trouvé.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = filtered.map(d => `
+                <tr>
+                    <td><strong>${d.client}</strong></td>
+                    <td>${d.methodPhone}</td>
+                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(d.amount)}</td>
+                    <td><code>${d.reference}</code></td>
+                    <td>${d.date}</td>
+                    <td>${getStatusBadge(d.status)}</td>
+                    <td>
+                        ${d.status === "En attente" ? `
+                            <button class="btn-action btn-validate" onclick="processDeposit('${d.id}', 'Validé')">Valider</button>
+                            <button class="btn-action btn-delete" onclick="processDeposit('${d.id}', 'Refusé')">Refuser</button>
+                        ` : `Traité`}
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        window.processDeposit = function (id, status) {
+            const dep = db.deposits.find(d => d.id === id);
+            if (!dep || dep.status !== "En attente") return;
+            dep.status = status;
+            if (status === "Validé") {
+                const c = db.clients.find(cli => cli.phone === dep.phone || cli.name === dep.client);
+                if (c) { c.balance += Number(dep.amount); c.totalDeposits += Number(dep.amount); }
+            }
+            addTransaction(dep.client, dep.phone, "Dépôt", `Dépôt ${dep.reference}`, dep.amount, status);
+            DataStore.save(db);
+            refreshAll();
+            showToast(`Dépôt ${status.toLowerCase()}.`);
+        };
+
+        function renderWithdrawals() {
+            const search = document.getElementById("filter-withdrawal-search").value.toLowerCase();
+            const statusFilter = document.getElementById("filter-withdrawal-status").value;
+            const tbody = document.getElementById("withdrawals-tbody");
+            const filtered = db.withdrawals.filter(w => {
+                const matchText = w.client.toLowerCase().includes(search) || w.phone.toLowerCase().includes(search);
+                const matchStatus = !statusFilter || w.status === statusFilter;
+                return matchText && matchStatus;
+            });
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Aucun retrait trouvé.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = filtered.map(w => `
+                <tr>
+                    <td><strong>${w.client}</strong></td>
+                    <td>${w.phone}</td>
+                    <td style="font-weight: 600;">${formatHTG(w.amount)}</td>
+                    <td>${w.method}</td>
+                    <td>${w.date}</td>
+                    <td>${getStatusBadge(w.status)}</td>
+                    <td>
+                        ${w.status === "En attente" ? `
+                            <button class="btn-action btn-validate" onclick="processWithdrawal('${w.id}', 'Validé')">Valider</button>
+                            <button class="btn-action btn-delete" onclick="processWithdrawal('${w.id}', 'Refusé')">Refuser</button>
+                        ` : `Traité`}
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        window.processWithdrawal = function (id, status) {
+            const w = db.withdrawals.find(item => item.id === id);
+            if (!w || w.status !== "En attente") return;
+            if (status === "Validé") {
+                const c = db.clients.find(cli => cli.phone === w.phone || cli.name === w.client);
+                if (c && c.balance >= Number(w.amount)) { c.balance -= Number(w.amount); }
+                else { alert("Solde client insuffisant !"); return; }
+            }
+            w.status = status;
+            addTransaction(w.client, w.phone, "Retrait", `Retrait ${w.method}`, w.amount, status);
+            DataStore.save(db);
+            refreshAll();
+            showToast(`Retrait ${status.toLowerCase()}.`);
+        };
+
+        function renderWallets() {
+            const search = document.getElementById("filter-wallet-search").value.toLowerCase();
+            const tbody = document.getElementById("wallets-tbody");
+            const filtered = db.clients.filter(c => c.name.toLowerCase().includes(search) || c.phone.toLowerCase().includes(search));
+            tbody.innerHTML = filtered.map(c => `
+                <tr>
+                    <td><strong>${c.name}</strong></td>
+                    <td>${c.phone}</td>
+                    <td style="color: var(--accent-green); font-weight: 700;">${formatHTG(c.balance)}</td>
+                    <td>${formatHTG(c.totalDeposits)}</td>
+                    <td>${formatHTG(c.totalOrders)}</td>
+                    <td><button class="btn-action btn-edit" onclick="openClientModal('${c.id}')"><i class="fa-solid fa-eye"></i> Historique</button></td>
+                </tr>
+            `).join("");
+        }
+
+        function renderClients() {
+            const search = document.getElementById("filter-client-search").value.toLowerCase();
+            const tbody = document.getElementById("clients-tbody");
+            const filtered = db.clients.filter(c => c.name.toLowerCase().includes(search) || c.phone.toLowerCase().includes(search));
+            tbody.innerHTML = filtered.map(c => `
+                <tr>
+                    <td><strong>${c.name}</strong></td>
+                    <td>${c.phone}</td>
+                    <td style="color: var(--accent-green); font-weight: 600;">${formatHTG(c.balance)}</td>
+                    <td>${formatHTG(c.totalDeposits)}</td>
+                    <td>${formatHTG(c.totalOrders)}</td>
+                    <td><button class="btn-action btn-validate" onclick="openClientModal('${c.id}')">Voir</button></td>
+                </tr>
+            `).join("");
+        }
+
+        window.openClientModal = function (id) {
+            const client = db.clients.find(c => c.id === id);
+            if (!client) return;
+            document.getElementById("adjust-client-id").value = client.id;
+            document.getElementById("client-modal-title").textContent = `${client.name} (${client.phone})`;
+            document.getElementById("client-modal-summary").innerHTML = `
+                <span>Solde : <strong style="color:var(--accent-green);">${formatHTG(client.balance)}</strong></span> |
+                <span>Dépôts : <strong>${formatHTG(client.totalDeposits)}</strong></span>
+            `;
+            const txs = db.transactions.filter(t => t.client === client.name || t.phone === client.phone);
+            const tbody = document.getElementById("client-modal-history-tbody");
+            tbody.innerHTML = txs.length === 0 ? `<tr><td colspan="4" style="text-align:center;">Aucune opération.</td></tr>` : txs.map(t => `
+                <tr><td>${t.date}</td><td>${t.description}</td><td>${formatHTG(t.amount)}</td><td>${getStatusBadge(t.status)}</td></tr>
+            `).join("");
+            openModal("client-history-modal");
+        };
+
+        document.getElementById("wallet-adjust-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const id = document.getElementById("adjust-client-id").value;
+            const type = document.getElementById("adjust-type").value;
+            const amount = Number(document.getElementById("adjust-amount").value);
+            const client = db.clients.find(c => c.id === id);
+            if (!client || amount <= 0) return;
+            if (type === "credit") {
+                client.balance += amount;
+                addTransaction(client.name, client.phone, "Ajustement", "Crédit administrateur", amount, "Validé");
+            } else {
+                if (client.balance < amount) { alert("Solde insuffisant."); return; }
+                client.balance -= amount;
+                addTransaction(client.name, client.phone, "Ajustement", "Débit administrateur", amount, "Validé");
+            }
+            document.getElementById("adjust-amount").value = "";
+            DataStore.save(db);
+            refreshAll();
+            openClientModal(id);
+            showToast("Solde mis à jour.");
+        });
+
+        function renderServices() {
+            const tbody = document.getElementById("services-tbody");
+            tbody.innerHTML = db.services.map(s => `
+                <tr>
+                    <td><strong>${s.name}</strong></td>
+                    <td>${s.category}</td>
+                    <td style="color: var(--accent-green); font-weight: 700;">${formatHTG(s.price)}</td>
+                    <td>${s.active ? `<span class="badge completed">Actif</span>` : `<span class="badge cancelled">Inactif</span>`}</td>
+                    <td>
+                        <button class="btn-action btn-edit" onclick="openServiceModal('${s.id}')">Éditer</button>
+                        <button class="btn-action btn-validate" onclick="toggleService('${s.id}')">${s.active ? "Désactiver" : "Activer"}</button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        window.openServiceModal = function (id = null) {
+            const title = document.getElementById("service-modal-title");
+            if (id) {
+                const srv = db.services.find(s => s.id === id);
+                if (!srv) return;
+                title.textContent = "Modifier le service";
+                document.getElementById("edit-service-id").value = srv.id;
+                document.getElementById("edit-service-name").value = srv.name;
+                document.getElementById("edit-service-category").value = srv.category;
+                document.getElementById("edit-service-price").value = srv.price;
+                document.getElementById("edit-service-active").value = String(srv.active);
+            } else {
+                title.textContent = "Ajouter un service";
+                document.getElementById("edit-service-id").value = "";
+                document.getElementById("service-form").reset();
+            }
+            openModal("service-modal");
+        };
+
+        document.getElementById("service-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const id = document.getElementById("edit-service-id").value;
+            const name = document.getElementById("edit-service-name").value.trim();
+            const category = document.getElementById("edit-service-category").value.trim();
+            const price = Number(document.getElementById("edit-service-price").value);
+            const active = document.getElementById("edit-service-active").value === "true";
+
+            if (id) {
+                const srv = db.services.find(s => s.id === id);
+                if (srv) { srv.name = name; srv.category = category; srv.price = price; srv.active = active; }
+                showToast("Service mis à jour.");
+            } else {
+                db.services.push({ id: "SRV-" + Math.floor(10 + Math.random() * 90), name, category, price, active });
+                showToast("Service ajouté.");
+            }
+            DataStore.save(db);
+            closeModal("service-modal");
+            renderServices();
+        });
+
+        window.toggleService = function (id) {
+            const srv = db.services.find(s => s.id === id);
+            if (!srv) return;
+            srv.active = !srv.active;
+            DataStore.save(db);
+            renderServices();
+            showToast("Statut du service modifié.");
+        };
+
+        function renderTransactions() {
+            const search = document.getElementById("filter-tx-search").value.toLowerCase();
+            const typeFilter = document.getElementById("filter-tx-type").value;
+            const tbody = document.getElementById("transactions-tbody");
+            const filtered = db.transactions.filter(t => {
+                const matchText = t.ref.toLowerCase().includes(search) || t.client.toLowerCase().includes(search) || t.description.toLowerCase().includes(search);
+                const matchType = !typeFilter || t.type === typeFilter;
+                return matchText && matchType;
+            });
+            tbody.innerHTML = filtered.length === 0 ? `<tr><td colspan="7" style="text-align:center;">Aucune transaction.</td></tr>` : filtered.map(t => `
+                <tr><td><strong>${t.ref}</strong></td><td>${t.date}</td><td>${t.client}</td><td>${t.type}</td><td>${t.description}</td><td>${formatHTG(t.amount)}</td><td>${getStatusBadge(t.status)}</td></tr>
+            `).join("");
+        }
+
+        function renderSettings() {
+            updateSiteStatusUI();
+            document.getElementById("setting-maintenance").value = db.settings.maintenanceMessage;
+            document.getElementById("setting-announcement").value = db.settings.homeAnnouncement;
+            document.getElementById("setting-whatsapp").value = db.settings.whatsappNumber;
+        }
+
+        document.getElementById("settings-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            db.settings.maintenanceMessage = document.getElementById("setting-maintenance").value.trim();
+            db.settings.homeAnnouncement = document.getElementById("setting-announcement").value.trim();
+            db.settings.whatsappNumber = document.getElementById("setting-whatsapp").value.trim();
+            DataStore.save(db);
+            showToast("Paramètres enregistrés.");
+        });
+
+        document.getElementById("reset-demo-btn").addEventListener("click", function () {
+            if (confirm("Réinitialiser les données ?")) {
+                db = DataStore.reset();
+                refreshAll();
+                showToast("Données réinitialisées.");
+            }
+        });
+
+        function refreshAll() {
+            renderDashboard();
+            renderOrders();
+            renderDeposits();
+            renderWithdrawals();
+            renderWallets();
+            renderServices();
+            renderClients();
+            renderTransactions();
+            renderSettings();
+        }
+
+        function initApp() {
+            db = DataStore.load();
+            refreshAll();
+        }
+
+        checkSession();
+    </script>
 </body>
 </html>
